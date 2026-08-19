@@ -4,7 +4,12 @@ on:
   schedule:
     # 21:00 UTC = 06:00 JST, daily
     - cron: "0 21 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      lookback_days:
+        description: "取得対象日数(何日前まで遡るか)。空欄なら35日(通常運用時の既定値)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -29,6 +34,7 @@ jobs:
         env:
           DEVLOG_READ_TOKEN: ${{ secrets.DEVLOG_READ_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEVLOG_LOOKBACK_DAYS: ${{ github.event.inputs.lookback_days }}
         run: python3 scripts/collect.py
 
       - name: Commit and push if logs changed
