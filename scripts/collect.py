@@ -17,10 +17,15 @@ Design notes:
     so a daily cron only ever re-scans a small, recent slice of history. It
     can be overridden per-run (e.g. for a one-off historical backfill) via
     the DEVLOG_LOOKBACK_DAYS environment variable / workflow_dispatch input.
-  - GitHub timestamps are UTC. Log entries are dated by Asia/Tokyo local
-    date (JST), since this is a development *diary* meant to read naturally
-    for a JST-based team: an event just after midnight JST should land on
-    that JST day, not the previous UTC day.
+  - GitHub timestamps are UTC. Log entries are dated by Japan Standard Time
+    (JST), since this is a development *diary* meant to read naturally for
+    a JST-based team: an event just after midnight JST should land on that
+    JST day, not the previous UTC day. JST is a fixed UTC+9 offset with no
+    DST, so a plain `timezone(timedelta(hours=9))` is used instead of
+    `zoneinfo.ZoneInfo("Asia/Tokyo")` - the latter depends on the IANA tz
+    database being installed on the host OS (fine on GitHub Actions' Ubuntu
+    runners, but not guaranteed e.g. on Windows), and a fixed offset needs
+    no such external data.
 """
 
 from __future__ import annotations
@@ -35,7 +40,6 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT / "config" / "repositories.yml"
@@ -43,7 +47,9 @@ LOGS_DIR = ROOT / "logs"
 
 API_ROOT = "https://api.github.com"
 LOOKBACK_DAYS = 35
-JST = ZoneInfo("Asia/Tokyo")
+JST = timezone(timedelta(hours=9))
+PAGINATION_SAFETY_MAX_PAGES = 200  # backstop only; fetch functions normally
+                                    # stop earlier once they pass `since`
 
 
 class GitHubError(RuntimeError):
@@ -108,9 +114,25 @@ def api_request(path: str, token: str | None, params: dict | None = None):
             raise GitHubError(f"GET {url} -> {e.code}: {body[:300]}") from e
 
 
-def paginate(path: str, token: str | None, params: dict | None = None, max_pages: int = 10):
+def paginate(
+    path: str,
+    token: str | None,
+    params: dict | None = None,
+    max_pages: int = PAGINATION_SAFETY_MAX_PAGES,
+):
+    """Yield items across all pages.
+
+    There is no small fixed page cap here: callers that only want a bounded
+    time range (e.g. "events since X") are expected to stop consuming the
+    generator (via `break`) once they see an item older than their cutoff,
+    which is what every fetch_* function below does. `max_pages` is only a
+    safety backstop against unbounded pagination (e.g. `since` not being
+    reached because a repo has more history than any caller expected); if
+    it is hit, a warning is printed so an incomplete backfill is never
+    silent.
+    """
     params = dict(params or {})
-    params.setdefault("per_page", 50)
+    params.setdefault("per_page", 100)
     page = 1
     while page <= max_pages:
         data = api_request(path, token, {**params, "page": page})
@@ -121,6 +143,11 @@ def paginate(path: str, token: str | None, params: dict | None = None, max_pages
         if len(data) < params["per_page"]:
             return
         page += 1
+    print(
+        f"warning: pagination safety limit ({max_pages} pages) reached for {path}; "
+        "results may be incomplete - consider narrowing lookback_days",
+        file=sys.stderr,
+    )
 
 
 def parse_dt(s: str) -> datetime:
@@ -198,7 +225,6 @@ def fetch_direct_commits(owner: str, repo: str, token: str | None, since: dateti
         f"/repos/{owner}/{repo}/commits",
         token,
         {"sha": branch, "since": since_param},
-        max_pages=5,
     ):
         sha = commit["sha"]
         associated_prs = api_request(f"/repos/{owner}/{repo}/commits/{sha}/pulls", token) or []
