@@ -8,7 +8,21 @@
 # 読み取りアクセス権を持っている必要があります。設定方法は README を参照。
 
 repositories:
-  - YanTKYS/nestsuite
   - YanTKYS/benri
+  - YanTKYS/chouseisan
+  - YanTKYS/clock
+  - YanTKYS/desknets_noticer
+  - YanTKYS/devlog
+  - YanTKYS/fusen
+  - YanTKYS/giin_iinkai
+  - YanTKYS/giin_zaiseki
+  - YanTKYS/kanban
+  - YanTKYS/lgpwmng
   - YanTKYS/markdownutil
+  - YanTKYS/nestsuite
+  - YanTKYS/nonpaper
+  - YanTKYS/quotaplayer
+  - YanTKYS/signage
   - YanTKYS/since
+  - YanTKYS/slide
+  - YanTKYS/whiteboard
