@@ -1,0 +1,14 @@
+# devlog が収集対象とするリポジトリ一覧。
+#
+# 新しいリポジトリを追加するときは、下の `repositories:` リストに
+# `owner/repo` の形式で1行追記するだけで構いません。
+#
+# 収集対象にするには、対象リポジトリが public であるか、あるいは
+# DEVLOG_READ_TOKEN (Secrets) の Fine-grained PAT がそのリポジトリへの
+# 読み取りアクセス権を持っている必要があります。設定方法は README を参照。
+
+repositories:
+  - YanTKYS/nestsuite
+  - YanTKYS/benri
+  - YanTKYS/markdownutil
+  - YanTKYS/since
