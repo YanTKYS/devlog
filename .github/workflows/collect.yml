@@ -41,10 +41,13 @@ jobs:
         run: |
           git config user.name "devlog-bot"
           git config user.email "devlog-bot@users.noreply.github.com"
-          if git diff --quiet -- logs; then
+
+          git add logs
+
+          if git diff --cached --quiet; then
             echo "No changes in logs/, skipping commit."
             exit 0
           fi
-          git add logs
+
           git commit -m "chore(logs): update devlog entries"
           git push
