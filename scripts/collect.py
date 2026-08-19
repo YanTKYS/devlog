@@ -14,7 +14,13 @@ Design notes:
     single source of truth (self-healing if a run is skipped or a line is
     edited by hand) instead of a state file that can drift out of sync.
   - A lookback window (LOOKBACK_DAYS) bounds how far back each run looks,
-    so a daily cron only ever re-scans a small, recent slice of history.
+    so a daily cron only ever re-scans a small, recent slice of history. It
+    can be overridden per-run (e.g. for a one-off historical backfill) via
+    the DEVLOG_LOOKBACK_DAYS environment variable / workflow_dispatch input.
+  - GitHub timestamps are UTC. Log entries are dated by Asia/Tokyo local
+    date (JST), since this is a development *diary* meant to read naturally
+    for a JST-based team: an event just after midnight JST should land on
+    that JST day, not the previous UTC day.
 """
 
 from __future__ import annotations
@@ -29,6 +35,7 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT / "config" / "repositories.yml"
@@ -36,6 +43,7 @@ LOGS_DIR = ROOT / "logs"
 
 API_ROOT = "https://api.github.com"
 LOOKBACK_DAYS = 35
+JST = ZoneInfo("Asia/Tokyo")
 
 
 class GitHubError(RuntimeError):
@@ -119,6 +127,11 @@ def parse_dt(s: str) -> datetime:
     return datetime.strptime(s, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
 
 
+def to_jst_date(dt: datetime) -> str:
+    """Log entries are dated by JST local date, not the raw UTC date."""
+    return dt.astimezone(JST).date().isoformat()
+
+
 # ---------------------------------------------------------------------------
 # Event collection
 # ---------------------------------------------------------------------------
@@ -141,7 +154,7 @@ def fetch_merged_prs(owner: str, repo: str, token: str | None, since: datetime) 
         events.append(
             {
                 "type": "pr",
-                "date": merged_at.date().isoformat(),
+                "date": to_jst_date(merged_at),
                 "repo": repo,
                 "number": pr["number"],
                 "title": pr["title"],
@@ -165,7 +178,7 @@ def fetch_releases(owner: str, repo: str, token: str | None, since: datetime) ->
         events.append(
             {
                 "type": "release",
-                "date": published_dt.date().isoformat(),
+                "date": to_jst_date(published_dt),
                 "repo": repo,
                 "tag": rel.get("tag_name") or "release",
                 "name": rel.get("name") or "",
@@ -202,7 +215,7 @@ def fetch_direct_commits(owner: str, repo: str, token: str | None, since: dateti
         events.append(
             {
                 "type": "commit",
-                "date": dt.date().isoformat(),
+                "date": to_jst_date(dt),
                 "repo": repo,
                 "short_sha": sha[:7],
                 "message": first_line,
@@ -348,9 +361,28 @@ def add_events_to_logs(events: list[dict]) -> list[Path]:
 # ---------------------------------------------------------------------------
 
 
+def get_lookback_days() -> int:
+    """Normal runs use LOOKBACK_DAYS. A manual run (workflow_dispatch) may
+    override this via DEVLOG_LOOKBACK_DAYS, e.g. to backfill history."""
+    raw = os.environ.get("DEVLOG_LOOKBACK_DAYS", "").strip()
+    if not raw:
+        return LOOKBACK_DAYS
+    try:
+        days = int(raw)
+    except ValueError:
+        print(
+            f"warning: invalid DEVLOG_LOOKBACK_DAYS={raw!r}, using default {LOOKBACK_DAYS}",
+            file=sys.stderr,
+        )
+        return LOOKBACK_DAYS
+    return max(1, days)
+
+
 def main() -> None:
     token = os.environ.get("DEVLOG_READ_TOKEN") or os.environ.get("GITHUB_TOKEN")
-    since = datetime.now(timezone.utc) - timedelta(days=LOOKBACK_DAYS)
+    lookback_days = get_lookback_days()
+    since = datetime.now(timezone.utc) - timedelta(days=lookback_days)
+    print(f"Looking back {lookback_days} day(s), since {since.isoformat()}")
 
     repos = load_repositories()
     if not repos:
