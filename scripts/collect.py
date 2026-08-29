@@ -3,9 +3,9 @@
 repositories listed in config/repositories.yml, and append them to the
 monthly devlog files under logs/YYYY/YYYY-MM.md.
 
-The monthly files are the canonical record. logs/today.md and
-logs/yesterday.md are read-only convenience views regenerated from them on
-every run (see "Daily views" below).
+The monthly files are the canonical record. logs/today.md,
+logs/yesterday.md and logs/latest.md are read-only convenience views
+regenerated from them on every run (see "Daily views" / "Latest view" below).
 
 Design notes:
   - Standard library only (urllib, json, re, datetime). This script runs on
@@ -447,6 +447,142 @@ def write_daily_views(now: datetime | None = None) -> list[Path]:
 
 
 # ---------------------------------------------------------------------------
+# Latest view: logs/latest.md
+# ---------------------------------------------------------------------------
+#
+# A whole-fleet overview: one row per repository listed in
+# config/repositories.yml, showing the most recent event devlog has already
+# collected for it. Like the daily views this is derived - it reads only
+# repositories.yml and the monthly logs, never the GitHub API, so it says
+# "latest as recorded in devlog", not "latest on GitHub right now".
+#
+# Entries are read back with parse_month_file() (the same parser the monthly
+# files are written through) and then split into their fields by inverting
+# render_entry(); the marker line (`merged` / `release` / `direct commit`) is
+# what identifies the event type.
+
+LATEST_PATH = LOGS_DIR / "latest.md"
+NO_RECORD_TEXT = "記録なし"
+
+_MONTH_STEM_RE = re.compile(r"^\d{4}-\d{2}$")
+_ENTRY_PR_RE = re.compile(r"^- PR (#\d+(?: .*)?)$")
+_ENTRY_RELEASE_RE = re.compile(r"^- Release (.*)$")
+_ENTRY_COMMIT_RE = re.compile(r"^- Commit (`[0-9a-f]+`(?: .*)?)$")
+_ENTRY_KIND_RE = re.compile(r"^  - (merged|release|direct commit)\s*$")
+_ENTRY_URL_RE = re.compile(r"^  - (https?://\S+)\s*$")
+
+_KIND_LABELS = {"merged": "PR", "release": "Release", "direct commit": "direct commit"}
+
+
+def iter_month_files() -> list[Path]:
+    """All logs/YYYY/YYYY-MM.md files, oldest first.
+
+    Deliberately a plain glob over logs/: at devlog's scale (a handful of
+    month files) reading them all is cheap, and it avoids an index or state
+    file that could drift away from the logs themselves.
+    """
+    return sorted(
+        p
+        for p in LOGS_DIR.glob("*/*.md")
+        if _MONTH_STEM_RE.match(p.stem) and p.parent.name == p.stem[:4]
+    )
+
+
+def parse_log_entry(entry: str) -> dict:
+    """Split a rendered log entry back into {kind, label, url}.
+
+    The inverse of render_entry(). Anything that doesn't match (e.g. a
+    hand-written line) still yields a usable row rather than being dropped.
+    """
+    lines = entry.strip().splitlines()
+    first = lines[0] if lines else ""
+    kind, url = "", None
+    for line in lines[1:]:
+        kind_m = _ENTRY_KIND_RE.match(line)
+        if kind_m:
+            kind = kind_m.group(1)
+        url_m = _ENTRY_URL_RE.match(line)
+        if url_m:
+            url = url_m.group(1)
+
+    for regex in (_ENTRY_PR_RE, _ENTRY_RELEASE_RE, _ENTRY_COMMIT_RE):
+        m = regex.match(first)
+        if m:
+            label = m.group(1).strip()
+            break
+    else:
+        label = first[2:].strip() if first.startswith("- ") else first.strip()
+
+    return {"kind": _KIND_LABELS.get(kind, kind or "-"), "label": label, "url": url}
+
+
+def collect_latest_events() -> dict[str, dict]:
+    """Return {repo_name: {"date": ..., "entry": ...}} across every month file.
+
+    "Latest" is the event on the newest JST date recorded for that repo. The
+    monthly logs carry no intra-day time, so when a repo has several entries
+    on that date the last one recorded is used.
+    """
+    latest: dict[str, dict] = {}
+    for path in iter_month_files():
+        sections = parse_month_file(path.read_text(encoding="utf-8"))
+        for date, repos in sections.items():
+            for repo, entries in repos.items():
+                if not entries:
+                    continue
+                if repo not in latest or date > latest[repo]["date"]:
+                    latest[repo] = {"date": date, "entry": entries[-1]}
+    return latest
+
+
+def _cell(text: str) -> str:
+    """Escape what would otherwise break a Markdown table cell / link text."""
+    return text.replace("|", "\\|").replace("[", "\\[").replace("]", "\\]")
+
+
+def render_latest_view(repositories: list[str], latest: dict[str, dict]) -> str:
+    lines = [
+        AUTOGEN_NOTICE,
+        "",
+        "# Latest",
+        "",
+        "`config/repositories.yml` の全リポジトリについて、devlog に収集済みの最新イベントを"
+        "1件ずつ並べたものです（GitHub 上の最終更新をその場で問い合わせるものではありません）。",
+        "",
+        "| Repository | 最新記録 | 種別 | 内容 |",
+        "| --- | --- | --- | --- |",
+    ]
+    for full_name in repositories:
+        name = full_name.split("/", 1)[1] if "/" in full_name else full_name
+        found = latest.get(name)
+        if not found:
+            lines.append(f"| {_cell(name)} | - | - | {NO_RECORD_TEXT} |")
+            continue
+        parsed = parse_log_entry(found["entry"])
+        label = _cell(parsed["label"])
+        content = f"[{label}]({parsed['url']})" if parsed["url"] else label
+        lines.append(f"| {_cell(name)} | {found['date']} | {_cell(parsed['kind'])} | {content} |")
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def write_latest_view() -> list[Path]:
+    """(Re)generate logs/latest.md. Returns [path] if it changed, else [].
+
+    The page carries no "generated at" stamp: it would only ever record when
+    the table last *changed* (an unchanged run rewrites nothing, by design),
+    which is what the dates in the table already say.
+    """
+    content = render_latest_view(load_repositories(), collect_latest_events())
+    current = LATEST_PATH.read_text(encoding="utf-8") if LATEST_PATH.exists() else None
+    if current == content:
+        return []  # nothing moved: leave the file - and the commit - alone
+
+    LATEST_PATH.parent.mkdir(parents=True, exist_ok=True)
+    LATEST_PATH.write_text(content, encoding="utf-8")
+    return [LATEST_PATH]
+
+
+# ---------------------------------------------------------------------------
 # main
 # ---------------------------------------------------------------------------
 
@@ -497,9 +633,10 @@ def main() -> None:
     if not changed:
         print("No new events; nothing to update.")
 
-    # Always regenerate the derived daily views, even when no new event was
+    # Always regenerate the derived views, even when no new event was
     # collected: "today" and "yesterday" move with the calendar.
     changed += write_daily_views()
+    changed += write_latest_view()
 
     if changed:
         print("Updated files:")
