@@ -19,7 +19,8 @@ devlog/
 ├─ logs/
 │  ├─ YYYY/YYYY-MM.md    # 自動収集ログ（月単位・正本）
 │  ├─ today.md           # 今日の記録だけを抜き出した閲覧用（自動生成）
-│  └─ yesterday.md       # 昨日の記録だけを抜き出した閲覧用（自動生成）
+│  ├─ yesterday.md       # 昨日の記録だけを抜き出した閲覧用（自動生成）
+│  └─ latest.md          # 全リポジトリの最新1件を一覧化した閲覧用（自動生成）
 ├─ projects/              # プロジェクトごとの判断・メモ（人間が記録）
 ├─ notes/                 # プロジェクト横断の知見（人間が記録）
 ├─ scripts/
@@ -57,14 +58,21 @@ devlog/
   `datetime.timezone(timedelta(hours=9))` のみを使っています
 - `logs/` は自動生成物です。人間が残したい内容は `projects/` `notes/` に書いてください（詳細は各ディレクトリの README を参照）
 
-#### `today.md` / `yesterday.md`
+#### `today.md` / `yesterday.md` / `latest.md`
 
-`logs/YYYY/YYYY-MM.md` が正本です。`logs/today.md` と `logs/yesterday.md` は、そこから
-JST 基準の今日・昨日の記録だけを抜き出して毎回作り直す閲覧用の自動生成ファイルです
-（該当する記録がない日でも生成されます）。手で編集しても次回実行時に上書きされます。
+`logs/YYYY/YYYY-MM.md` が正本です。`logs/today.md` `logs/yesterday.md` `logs/latest.md` は、
+そこから抜き出して毎回作り直す閲覧用の自動生成ファイルで、手で編集しても次回実行時に
+上書きされます。
 
-内容は最後に自動収集が走った時点までのものです。収集は1日1回（JST 06:00）なので、
-`today.md` は「たった今」ではなく「最後の収集時点までの今日」を表します。
+- `today.md` / `yesterday.md`: JST 基準の今日・昨日の記録だけを表示します
+  （該当する記録がない日でも生成されます）
+- `latest.md`: `config/repositories.yml` の全リポジトリについて、devlog に収集済みの
+  最新イベント（merged PR / Release / direct commit のいずれか）1件を一覧にします。
+  記録が一度もないリポジトリも `記録なし` として必ず表示します
+
+いずれも内容は最後に自動収集が走った時点までのものです。収集は1日1回（JST 06:00）なので、
+`today.md` は「たった今」ではなく「最後の収集時点までの今日」を表し、`latest.md` も
+GitHub 上の最終更新をその場で問い合わせた結果ではありません。
 
 ## 自動収集の仕組み
 
