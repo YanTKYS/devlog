@@ -3,6 +3,10 @@
 repositories listed in config/repositories.yml, and append them to the
 monthly devlog files under logs/YYYY/YYYY-MM.md.
 
+The monthly files are the canonical record. logs/today.md and
+logs/yesterday.md are read-only convenience views regenerated from them on
+every run (see "Daily views" below).
+
 Design notes:
   - Standard library only (urllib, json, re, datetime). This script runs on
     every GitHub Actions run, so it deliberately avoids extra dependencies
@@ -383,6 +387,66 @@ def add_events_to_logs(events: list[dict]) -> list[Path]:
 
 
 # ---------------------------------------------------------------------------
+# Daily views: logs/today.md and logs/yesterday.md
+# ---------------------------------------------------------------------------
+#
+# These two files are *derived* views, never a source of truth: the monthly
+# files under logs/YYYY/ remain canonical, and each run rewrites today.md /
+# yesterday.md from scratch out of them (no appending, no merging). They are
+# regenerated on every run - not only when new events arrive - because "today"
+# and "yesterday" move even on days where nothing was collected.
+
+TODAY_PATH = LOGS_DIR / "today.md"
+YESTERDAY_PATH = LOGS_DIR / "yesterday.md"
+AUTOGEN_NOTICE = "<!-- このファイルは自動生成されます。手で編集しないでください。 -->"
+NO_ENTRIES_TEXT = "記録はありません。"
+
+
+def render_daily_view(heading: str, date_str: str) -> str:
+    """Render the single `## <date_str>` section of its month file as a page.
+
+    The month file is resolved from the date itself, so month and year
+    boundaries need no special casing (2027-01-01's "yesterday" reads
+    logs/2026/2026-12.md).
+    """
+    path = month_path(date_str)
+    text = path.read_text(encoding="utf-8") if path.exists() else ""
+    day = parse_month_file(text).get(date_str, {})
+
+    lines = [AUTOGEN_NOTICE, "", f"# {heading} - {date_str}", ""]
+    if not day:
+        lines.append(NO_ENTRIES_TEXT)
+    else:
+        for repo in sorted(day):
+            lines.append(f"### {repo}")
+            lines.append("")
+            for entry in day[repo]:
+                lines.append(entry.rstrip())
+                lines.append("")
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def write_daily_views(now: datetime | None = None) -> list[Path]:
+    """(Re)generate logs/today.md and logs/yesterday.md. Returns changed files."""
+    today = (now or datetime.now(timezone.utc)).astimezone(JST).date()
+    targets = [
+        (TODAY_PATH, "Today", today.isoformat()),
+        (YESTERDAY_PATH, "Yesterday", (today - timedelta(days=1)).isoformat()),
+    ]
+
+    changed: list[Path] = []
+    for path, heading, date_str in targets:
+        content = render_daily_view(heading, date_str)
+        current = path.read_text(encoding="utf-8") if path.exists() else None
+        if current == content:
+            continue  # byte-identical: leave the file alone so no empty commit
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content, encoding="utf-8")
+        changed.append(path)
+    return changed
+
+
+# ---------------------------------------------------------------------------
 # main
 # ---------------------------------------------------------------------------
 
@@ -412,8 +476,9 @@ def main() -> None:
 
     repos = load_repositories()
     if not repos:
+        # Not fatal: the daily views below are still regenerated so that
+        # today.md / yesterday.md keep tracking the calendar.
         print("No repositories configured in config/repositories.yml", file=sys.stderr)
-        return
 
     all_events: list[dict] = []
     for full_name in repos:
@@ -429,12 +494,17 @@ def main() -> None:
                 print(f"warning: {full_name}: {fetch_fn.__name__} failed: {e}", file=sys.stderr)
 
     changed = add_events_to_logs(all_events)
+    if not changed:
+        print("No new events; nothing to update.")
+
+    # Always regenerate the derived daily views, even when no new event was
+    # collected: "today" and "yesterday" move with the calendar.
+    changed += write_daily_views()
+
     if changed:
         print("Updated files:")
         for p in changed:
             print(f"  {p.relative_to(ROOT)}")
-    else:
-        print("No new events; nothing to update.")
 
 
 if __name__ == "__main__":
