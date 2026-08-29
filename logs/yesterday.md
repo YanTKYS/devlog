@@ -1,27 +1,51 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-08-28
+# Yesterday - 2026-08-29
 
 ### benri
 
-- PR #127 ファイルを読み込む主な機能をドラッグ＆ドロップ入力へ対応
+- PR #128 画像加工に、加工結果を次の画像加工へ渡す「続けて加工」を追加
   - merged
-  - https://github.com/YanTKYS/benri/pull/127
+  - https://github.com/YanTKYS/benri/pull/128
 
-- PR #126 画像加工・費用計算の不具合修正と重複整理
+- PR #134 docs: Update UX review and library assessment with new proposals
   - merged
-  - https://github.com/YanTKYS/benri/pull/126
+  - https://github.com/YanTKYS/benri/pull/134
 
-- PR #125 画像加工の全タブでクリップボード画像のCtrl+V貼り付けに対応
+- PR #133 Fix lease calculation copy buttons and refactor result handling
   - merged
-  - https://github.com/YanTKYS/benri/pull/125
+  - https://github.com/YanTKYS/benri/pull/133
 
-- PR #124 Implement calculation basis display for lease payment calculator
+- PR #132 文章比較がWord・PDF等をそのまま受け取れるようにした（UX-4）
   - merged
-  - https://github.com/YanTKYS/benri/pull/124
+  - https://github.com/YanTKYS/benri/pull/132
+
+- PR #131 計算結果の1行ごとに「コピー」を追加（UX-1）
+  - merged
+  - https://github.com/YanTKYS/benri/pull/131
+
+- PR #130 Fix file drop and text paste handling in image tools
+  - merged
+  - https://github.com/YanTKYS/benri/pull/130
+
+- PR #129 UXレビュー文書 docs/ux-review.md を新設し、docs/README.md へ追加
+  - merged
+  - https://github.com/YanTKYS/benri/pull/129
 
 ### devlog
 
-- Commit `87e1fb9` chore(logs): update devlog entries
+- Commit `1a0189a` chore(logs): update devlog entries
   - direct commit
-  - https://github.com/YanTKYS/devlog/commit/87e1fb9d09b70a74a582cffc387c771e0de409b0
+  - https://github.com/YanTKYS/devlog/commit/1a0189af43b16c38a118bf9165ca55656c8931e8
+
+- PR #3 Add daily convenience views (today.md and yesterday.md)
+  - merged
+  - https://github.com/YanTKYS/devlog/pull/3
+
+- Commit `3a70afd` chore(logs): update devlog entries
+  - direct commit
+  - https://github.com/YanTKYS/devlog/commit/3a70afdfebc015ef5cff4314971ef5620a801264
+
+- PR #4 feat(logs): add latest.md fleet overview
+  - merged
+  - https://github.com/YanTKYS/devlog/pull/4
