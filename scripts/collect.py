@@ -463,7 +463,6 @@ def write_daily_views(now: datetime | None = None) -> list[Path]:
 
 LATEST_PATH = LOGS_DIR / "latest.md"
 NO_RECORD_TEXT = "記録なし"
-_GENERATED_AT_RE = re.compile(r"^最終生成: .*\n\n", re.MULTILINE)
 
 _MONTH_STEM_RE = re.compile(r"^\d{4}-\d{2}$")
 _ENTRY_PR_RE = re.compile(r"^- PR (#\d+(?: .*)?)$")
@@ -541,15 +540,12 @@ def _cell(text: str) -> str:
     return text.replace("|", "\\|").replace("[", "\\[").replace("]", "\\]")
 
 
-def render_latest_view(
-    repositories: list[str], latest: dict[str, dict], generated_at: str | None = None
-) -> str:
-    """Render the table. Called once without `generated_at` to compare against
-    the file on disk (see write_latest_view), once with it to write."""
-    lines = [AUTOGEN_NOTICE, "", "# Latest", ""]
-    if generated_at:
-        lines += [f"最終生成: {generated_at} JST", ""]
-    lines += [
+def render_latest_view(repositories: list[str], latest: dict[str, dict]) -> str:
+    lines = [
+        AUTOGEN_NOTICE,
+        "",
+        "# Latest",
+        "",
         "`config/repositories.yml` の全リポジトリについて、devlog に収集済みの最新イベントを"
         "1件ずつ並べたものです（GitHub 上の最終更新をその場で問い合わせるものではありません）。",
         "",
@@ -569,22 +565,20 @@ def render_latest_view(
     return "\n".join(lines).rstrip() + "\n"
 
 
-def write_latest_view(now: datetime | None = None) -> list[Path]:
+def write_latest_view() -> list[Path]:
     """(Re)generate logs/latest.md. Returns [path] if it changed, else [].
 
-    The "generated at" stamp is ignored when deciding whether anything
-    changed, so a run that finds nothing new leaves the file - and therefore
-    the commit - untouched instead of churning the timestamp daily.
+    The page carries no "generated at" stamp: it would only ever record when
+    the table last *changed* (an unchanged run rewrites nothing, by design),
+    which is what the dates in the table already say.
     """
-    repositories, latest = load_repositories(), collect_latest_events()
-    unstamped = render_latest_view(repositories, latest)
+    content = render_latest_view(load_repositories(), collect_latest_events())
     current = LATEST_PATH.read_text(encoding="utf-8") if LATEST_PATH.exists() else None
-    if current is not None and _GENERATED_AT_RE.sub("", current) == unstamped:
-        return []  # only the stamp would move: leave the file (and the commit) alone
+    if current == content:
+        return []  # nothing moved: leave the file - and the commit - alone
 
-    stamp = (now or datetime.now(timezone.utc)).astimezone(JST).strftime("%Y-%m-%d %H:%M")
     LATEST_PATH.parent.mkdir(parents=True, exist_ok=True)
-    LATEST_PATH.write_text(render_latest_view(repositories, latest, stamp), encoding="utf-8")
+    LATEST_PATH.write_text(content, encoding="utf-8")
     return [LATEST_PATH]
 
 

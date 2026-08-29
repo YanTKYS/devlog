@@ -2,8 +2,6 @@
 
 # Latest
 
-最終生成: 2026-08-29 23:21 JST
-
 `config/repositories.yml` の全リポジトリについて、devlog に収集済みの最新イベントを1件ずつ並べたものです（GitHub 上の最終更新をその場で問い合わせるものではありません）。
 
 | Repository | 最新記録 | 種別 | 内容 |
