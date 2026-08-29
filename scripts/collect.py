@@ -23,6 +23,10 @@ Design notes:
     the DEVLOG_LOOKBACK_DAYS environment variable / workflow_dispatch input.
   - devlog is one of the repositories it collects, so its own log commit is
     skipped as a direct commit; see SELF_AUTO_COMMIT_SUBJECT below.
+  - Listing commits, pull requests and releases uses the REST API. The one
+    exception is deciding which commits already belong to a merged pull
+    request: asking REST costs one request per commit, so that single
+    question is asked for a batch of commits at a time over GraphQL.
   - Every run prints per-repository timings and API request counts, so a run
     that gets slow can be diagnosed from the workflow log alone.
   - GitHub timestamps are UTC. Log entries are dated by Japan Standard Time
@@ -54,7 +58,17 @@ CONFIG_PATH = ROOT / "config" / "repositories.yml"
 LOGS_DIR = ROOT / "logs"
 
 API_ROOT = "https://api.github.com"
+GRAPHQL_URL = f"{API_ROOT}/graphql"
 LOOKBACK_DAYS = 7  # the cron runs daily; a week of overlap is plenty of slack
+
+# How many commits are resolved per GraphQL request when deciding which ones
+# belong to a merged PR. Each commit in the query pulls up to
+# ASSOCIATED_PRS_PER_COMMIT pull request nodes, so the batch size trades query
+# size (and GitHub's node limit) against the number of round trips; 30 x 30
+# nodes is comfortably inside the limits while turning a week of commits in a
+# busy repository into one or two requests.
+COMMITS_PER_GRAPHQL_BATCH = 30
+ASSOCIATED_PRS_PER_COMMIT = 30  # matches the REST endpoint's default page size
 JST = timezone(timedelta(hours=9))
 
 # devlog collects itself, so the workflow's own log commit would come back as a
@@ -133,6 +147,46 @@ def api_request(path: str, token: str | None, params: dict | None = None):
                 continue
             body = e.read().decode("utf-8", "replace")
             raise GitHubError(f"GET {url} -> {e.code}: {body[:300]}") from e
+
+
+def graphql_request(query: str, variables: dict, token: str | None):
+    """POST one GraphQL query, using the same token as the REST calls.
+
+    GraphQL needs authentication even for public data, so an unauthenticated
+    run cannot use it - the caller turns that into a warning rather than
+    silently reporting fewer direct commits.
+    """
+    if not token:
+        raise GitHubError(
+            "GraphQL requires authentication; set DEVLOG_READ_TOKEN (or GITHUB_TOKEN)"
+        )
+
+    body = json.dumps({"query": query, "variables": variables}).encode("utf-8")
+    req = urllib.request.Request(GRAPHQL_URL, data=body, method="POST")
+    req.add_header("Accept", "application/vnd.github+json")
+    req.add_header("Content-Type", "application/json")
+    req.add_header("Authorization", f"Bearer {token}")
+
+    global API_REQUEST_COUNT
+    for attempt in range(2):
+        API_REQUEST_COUNT += 1
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                payload = json.loads(resp.read().decode("utf-8"))
+            break
+        except urllib.error.HTTPError as e:
+            if e.code in (403, 502, 503) and attempt == 0:
+                time.sleep(2)
+                continue
+            detail = e.read().decode("utf-8", "replace")
+            raise GitHubError(f"POST {GRAPHQL_URL} -> {e.code}: {detail[:300]}") from e
+
+    # A GraphQL error arrives with HTTP 200 and (possibly partial) data; treat
+    # it as a failure rather than reading an incomplete answer as "no PR".
+    if payload.get("errors"):
+        messages = "; ".join(str(err.get("message", err)) for err in payload["errors"])
+        raise GitHubError(f"GraphQL error: {messages[:300]}")
+    return payload.get("data") or {}
 
 
 def paginate(
@@ -241,18 +295,64 @@ def is_self_log_commit(owner: str, repo: str, subject: str) -> bool:
     return f"{owner}/{repo}" == SELF_REPO and subject == SELF_AUTO_COMMIT_SUBJECT
 
 
+def build_associated_prs_query(count: int) -> str:
+    """A query asking, for `count` commits of one repository, whether each has
+    an associated pull request that was merged.
+
+    One aliased `object(oid: ...)` field per commit (c0, c1, ...), with the
+    SHAs passed as variables rather than interpolated into the query text.
+    Only `merged` is requested: whether to skip the commit is the only thing
+    the caller decides.
+    """
+    var_defs = ", ".join(f"$s{i}: GitObjectID!" for i in range(count))
+    fields = "\n".join(
+        f"    c{i}: object(oid: $s{i}) {{ ... on Commit {{ "
+        f"associatedPullRequests(first: {ASSOCIATED_PRS_PER_COMMIT}) {{ nodes {{ merged }} }} }} }}"
+        for i in range(count)
+    )
+    return (
+        f"query($owner: String!, $name: String!, {var_defs}) {{\n"
+        f"  repository(owner: $owner, name: $name) {{\n{fields}\n  }}\n}}"
+    )
+
+
+def fetch_shas_in_merged_prs(
+    owner: str, repo: str, token: str | None, shas: list[str]
+) -> set[str]:
+    """Of `shas`, the ones that belong to a merged pull request.
+
+    This replaces the old per-commit REST call to
+    /repos/{owner}/{repo}/commits/{sha}/pulls: the same question is asked for
+    COMMITS_PER_GRAPHQL_BATCH commits at a time, so the number of requests no
+    longer grows with the number of commits. An empty list asks nothing.
+    """
+    in_merged_pr: set[str] = set()
+    for start in range(0, len(shas), COMMITS_PER_GRAPHQL_BATCH):
+        batch = shas[start : start + COMMITS_PER_GRAPHQL_BATCH]
+        variables = {"owner": owner, "name": repo}
+        variables.update({f"s{i}": sha for i, sha in enumerate(batch)})
+        data = graphql_request(build_associated_prs_query(len(batch)), variables, token)
+
+        repository = data.get("repository") or {}
+        for i, sha in enumerate(batch):
+            commit_node = repository.get(f"c{i}") or {}
+            nodes = (commit_node.get("associatedPullRequests") or {}).get("nodes") or []
+            if any(pr.get("merged") for pr in nodes):
+                in_merged_pr.add(sha)
+    return in_merged_pr
+
+
 def fetch_direct_commits(owner: str, repo: str, token: str | None, since: datetime) -> list[dict]:
     # No `sha` parameter and no /repos/{owner}/{repo} lookup to find one: the
     # commits API already defaults to the repository's default branch.
     since_param = since.strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    events = []
+    candidates = []
     for commit in paginate(
         f"/repos/{owner}/{repo}/commits",
         token,
         {"since": since_param},
     ):
-        sha = commit["sha"]
         commit_info = commit.get("commit", {})
         message = commit_info.get("message") or ""
         first_line = message.splitlines()[0] if message else ""
@@ -260,24 +360,29 @@ def fetch_direct_commits(owner: str, repo: str, token: str | None, since: dateti
         if not date_field:
             continue
         if is_self_log_commit(owner, repo, first_line):
-            continue  # checked before the /pulls call below, so it costs no request
+            continue  # excluded before the query below, so it costs no request
 
-        associated_prs = api_request(f"/repos/{owner}/{repo}/commits/{sha}/pulls", token) or []
-        if any(p.get("merged_at") for p in associated_prs):
-            continue  # already recorded as part of its merged PR
-
-        dt = parse_dt(date_field)
-        events.append(
+        candidates.append(
             {
                 "type": "commit",
-                "date": to_jst_date(dt),
+                "date": to_jst_date(parse_dt(date_field)),
                 "repo": repo,
-                "short_sha": sha[:7],
+                "short_sha": commit["sha"][:7],
                 "message": first_line,
                 "url": commit["html_url"],
+                "_sha": commit["sha"],
             }
         )
-    return events
+
+    # Whether each candidate belongs to a merged PR is asked in batches, not
+    # once per commit. Commit messages are never used for this: a commit is
+    # skipped only because GitHub reports a merged PR containing it.
+    in_merged_pr = fetch_shas_in_merged_prs(owner, repo, token, [c["_sha"] for c in candidates])
+    return [
+        {k: v for k, v in c.items() if k != "_sha"}
+        for c in candidates
+        if c["_sha"] not in in_merged_pr
+    ]
 
 
 # Ordered as they run, with the label used in the per-repository timing report.
