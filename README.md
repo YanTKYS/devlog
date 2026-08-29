@@ -49,6 +49,9 @@ devlog/
 - 同じ変更が PR 経由で既に記録されている場合、直接コミットとしては重複記録しません
 - Release・直接コミットも、それぞれ `release` / `direct commit` として区別できる形で記録します
 - 内容は GitHub API から取得できる事実のみです。AI による要約・推測は行いません
+- devlog 自身の収集では、このワークフローが push する `chore(logs): update devlog entries`
+  は direct commit として記録しません（自動 commit を再収集する自己循環を避けるため。
+  他リポジトリの同名 commit は通常どおり記録します）
 - 日付は GitHub API が返す UTC 時刻を JST（UTC+9 固定オフセット、DST なし）に変換して
   決定します。例えば JST 8/20 01:00 にマージされた PR は `2026-08-20` に記録されます
   （UTC のまま `.date()` を取ると `2026-08-19` になってしまうため、開発日誌として
@@ -107,7 +110,9 @@ private リポジトリを追加する場合は、下記の Secret 設定も必�
 ## GitHub Actions の実行方法
 
 - **定期実行**: 毎日 1 回（UTC 21:00 = JST 06:00）自動実行されます。この場合、取得対象は
-  直近 35 日分（`LOOKBACK_DAYS`）です
+  直近 7 日分（`LOOKBACK_DAYS`）です。毎日走る前提での重複分を含んだ日数で、Actions が
+  数日止まっても取りこぼしません。それ以上長く止まった場合は、下記の手動実行で
+  `lookback_days` に任意の日数を指定して取り込めます
 - **手動実行**: GitHub の Actions タブから `Collect devlog` ワークフローを選び、
   `Run workflow` を押すことで即時実行できます（`workflow_dispatch`）
 - 収集結果に変更があった場合のみ `logs/` の変更を commit・push します。
@@ -116,10 +121,10 @@ private リポジトリを追加する場合は、下記の Secret 設定も必�
 ### 過去分のバックフィル（初回導入時など）
 
 手動実行時のみ、`lookback_days`（取得対象日数）を指定できます。空欄なら通常運用と同じ
-35日です。導入初回に過去の履歴もまとめて取り込みたい場合は、`Run workflow` 実行時に
-`lookback_days` へ `365` や `730` など大きめの値を指定してください。一度に全履歴を
-取り込む必要はなく、必要な範囲だけ何度でも指定し直せます（`logs/` への重複記録は
-発生しません）。
+7日です。導入初回に過去の履歴をまとめて取り込みたい場合や、Actions が長期間止まって
+いた場合は、`Run workflow` 実行時に `lookback_days` へ `35` `365` `730` など必要な日数を
+指定してください。一度に全履歴を取り込む必要はなく、必要な範囲だけ何度でも指定し直せます
+（`logs/` への重複記録は発生しません）。
 
 ページネーションは指定した `lookback_days` の範囲を実際に走査し終えるまで続く実装なので、
 `730` 日のように長い期間を指定しても、途中で黙って取得を打ち切ることはありません
@@ -150,7 +155,7 @@ Python 3.8 以降があれば、依存ライブラリのインストールなし
 
 ```bash
 export DEVLOG_READ_TOKEN=ghp_xxxxxxxx   # private を含めるならセット。public のみなら未設定でも可
-export DEVLOG_LOOKBACK_DAYS=365          # 省略可。省略時は35日(通常運用と同じ)
+export DEVLOG_LOOKBACK_DAYS=365          # 省略可。省略時は7日(通常運用と同じ)
 python3 scripts/collect.py
 ```
 

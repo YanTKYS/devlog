@@ -21,6 +21,10 @@ Design notes:
     so a daily cron only ever re-scans a small, recent slice of history. It
     can be overridden per-run (e.g. for a one-off historical backfill) via
     the DEVLOG_LOOKBACK_DAYS environment variable / workflow_dispatch input.
+  - devlog is one of the repositories it collects, so its own log commit is
+    skipped as a direct commit; see SELF_AUTO_COMMIT_SUBJECT below.
+  - Every run prints per-repository timings and API request counts, so a run
+    that gets slow can be diagnosed from the workflow log alone.
   - GitHub timestamps are UTC. Log entries are dated by Japan Standard Time
     (JST), since this is a development *diary* meant to read naturally for
     a JST-based team: an event just after midnight JST should land on that
@@ -50,8 +54,19 @@ CONFIG_PATH = ROOT / "config" / "repositories.yml"
 LOGS_DIR = ROOT / "logs"
 
 API_ROOT = "https://api.github.com"
-LOOKBACK_DAYS = 35
+LOOKBACK_DAYS = 7  # the cron runs daily; a week of overlap is plenty of slack
 JST = timezone(timedelta(hours=9))
+
+# devlog collects itself, so the workflow's own log commit would come back as a
+# direct commit on the next run and keep re-triggering the workflow. That one
+# commit is skipped - matched on this repository *and* this exact subject, so a
+# same-named commit in any other repository is still recorded normally. Keep
+# SELF_AUTO_COMMIT_SUBJECT in sync with the commit message in
+# .github/workflows/collect.yml.
+SELF_REPO = "YanTKYS/devlog"
+SELF_AUTO_COMMIT_SUBJECT = "chore(logs): update devlog entries"
+
+API_REQUEST_COUNT = 0  # for the timing summary printed by main()
 PAGINATION_SAFETY_MAX_PAGES = 200  # backstop only; fetch functions normally
                                     # stop earlier once they pass `since`
 
@@ -106,7 +121,9 @@ def api_request(path: str, token: str | None, params: dict | None = None):
     if token:
         req.add_header("Authorization", f"Bearer {token}")
 
+    global API_REQUEST_COUNT
     for attempt in range(2):
+        API_REQUEST_COUNT += 1
         try:
             with urllib.request.urlopen(req, timeout=30) as resp:
                 return json.loads(resp.read().decode("utf-8"))
@@ -219,28 +236,36 @@ def fetch_releases(owner: str, repo: str, token: str | None, since: datetime) ->
     return events
 
 
+def is_self_log_commit(owner: str, repo: str, subject: str) -> bool:
+    """True for the log commit this repository's own workflow pushes."""
+    return f"{owner}/{repo}" == SELF_REPO and subject == SELF_AUTO_COMMIT_SUBJECT
+
+
 def fetch_direct_commits(owner: str, repo: str, token: str | None, since: datetime) -> list[dict]:
-    repo_info = api_request(f"/repos/{owner}/{repo}", token)
-    branch = repo_info["default_branch"]
+    # No `sha` parameter and no /repos/{owner}/{repo} lookup to find one: the
+    # commits API already defaults to the repository's default branch.
     since_param = since.strftime("%Y-%m-%dT%H:%M:%SZ")
 
     events = []
     for commit in paginate(
         f"/repos/{owner}/{repo}/commits",
         token,
-        {"sha": branch, "since": since_param},
+        {"since": since_param},
     ):
         sha = commit["sha"]
-        associated_prs = api_request(f"/repos/{owner}/{repo}/commits/{sha}/pulls", token) or []
-        if any(p.get("merged_at") for p in associated_prs):
-            continue  # already recorded as part of its merged PR
-
         commit_info = commit.get("commit", {})
         message = commit_info.get("message") or ""
         first_line = message.splitlines()[0] if message else ""
         date_field = (commit_info.get("committer") or commit_info.get("author") or {}).get("date")
         if not date_field:
             continue
+        if is_self_log_commit(owner, repo, first_line):
+            continue  # checked before the /pulls call below, so it costs no request
+
+        associated_prs = api_request(f"/repos/{owner}/{repo}/commits/{sha}/pulls", token) or []
+        if any(p.get("merged_at") for p in associated_prs):
+            continue  # already recorded as part of its merged PR
+
         dt = parse_dt(date_field)
         events.append(
             {
@@ -253,6 +278,14 @@ def fetch_direct_commits(owner: str, repo: str, token: str | None, since: dateti
             }
         )
     return events
+
+
+# Ordered as they run, with the label used in the per-repository timing report.
+FETCH_STEPS = (
+    ("merged PRs", fetch_merged_prs),
+    ("releases", fetch_releases),
+    ("direct commits", fetch_direct_commits),
+)
 
 
 # ---------------------------------------------------------------------------
@@ -587,6 +620,22 @@ def write_latest_view() -> list[Path]:
 # ---------------------------------------------------------------------------
 
 
+def requests_phrase(count: int) -> str:
+    return f"{count} API request" + ("" if count == 1 else "s")
+
+
+def report_step(label: str, started: float, requests_before: int) -> str:
+    """One line of the per-repository timing report.
+
+    Timings are what actually tells us where a slow run went; they are printed
+    with plain perf_counter() arithmetic rather than a logging framework.
+    """
+    return (
+        f"  {label + ':':<16}{time.perf_counter() - started:6.1f}s"
+        f"  ({requests_phrase(API_REQUEST_COUNT - requests_before)})"
+    )
+
+
 def get_lookback_days() -> int:
     """Normal runs use LOOKBACK_DAYS. A manual run (workflow_dispatch) may
     override this via DEVLOG_LOOKBACK_DAYS, e.g. to backfill history."""
@@ -617,17 +666,25 @@ def main() -> None:
         print("No repositories configured in config/repositories.yml", file=sys.stderr)
 
     all_events: list[dict] = []
+    run_started = time.perf_counter()
     for full_name in repos:
         if "/" not in full_name:
             print(f"warning: skipping invalid repository entry: {full_name!r}", file=sys.stderr)
             continue
         owner, repo = full_name.split("/", 1)
         print(f"Collecting {full_name} ...")
-        for fetch_fn in (fetch_merged_prs, fetch_releases, fetch_direct_commits):
+        repo_started, repo_requests = time.perf_counter(), API_REQUEST_COUNT
+        for label, fetch_fn in FETCH_STEPS:
+            step_started, step_requests = time.perf_counter(), API_REQUEST_COUNT
             try:
                 all_events += fetch_fn(owner, repo, token, since)
             except GitHubError as e:
                 print(f"warning: {full_name}: {fetch_fn.__name__} failed: {e}", file=sys.stderr)
+            print(report_step(label, step_started, step_requests))
+        print(report_step("total", repo_started, repo_requests))
+
+    print(f"Collected in {time.perf_counter() - run_started:.1f}s "
+          f"using {requests_phrase(API_REQUEST_COUNT)}.")
 
     changed = add_events_to_logs(all_events)
     if not changed:
