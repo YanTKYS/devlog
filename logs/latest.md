@@ -10,7 +10,7 @@
 | chouseisan | 2026-07-25 | PR | [#28 Refactor API handling and improve error management](https://github.com/YanTKYS/chouseisan/pull/28) |
 | clock | 2026-08-25 | PR | [#33 Refactor README and improve code documentation](https://github.com/YanTKYS/clock/pull/33) |
 | desknets_noticer | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/desknets_noticer/pull/6) |
-| devlog | 2026-08-30 | PR | [#5 perf(collect): trim API calls, skip devlog's own log commit](https://github.com/YanTKYS/devlog/pull/5) |
+| devlog | 2026-08-30 | PR | [#6 perf(collect): batch commit/PR association over GraphQL](https://github.com/YanTKYS/devlog/pull/6) |
 | fusen | 2026-08-25 | PR | [#11 Improve code comments and README documentation](https://github.com/YanTKYS/fusen/pull/11) |
 | giin_iinkai | 2026-07-26 | PR | [#4 Refactor common code into shared module and improve save robustness](https://github.com/YanTKYS/giin_iinkai/pull/4) |
 | giin_zaiseki | 2026-07-26 | PR | [#3 Fix data-corruption bugs and refactor shared front-end logic](https://github.com/YanTKYS/giin_zaiseki/pull/3) |
