@@ -2,4 +2,8 @@
 
 # Today - 2026-08-30
 
-記録はありません。
+### devlog
+
+- PR #5 perf(collect): trim API calls, skip devlog's own log commit
+  - merged
+  - https://github.com/YanTKYS/devlog/pull/5
