@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       lookback_days:
-        description: "取得対象日数(何日前まで遡るか)。空欄なら35日(通常運用時の既定値)"
+        description: "取得対象日数(何日前まで遡るか)。空欄なら7日(通常運用時の既定値)"
         required: false
         default: ""
 
@@ -49,5 +49,7 @@ jobs:
             exit 0
           fi
 
+          # scripts/collect.py skips this exact commit when collecting devlog
+          # itself (SELF_AUTO_COMMIT_SUBJECT); keep the two in sync.
           git commit -m "chore(logs): update devlog entries"
           git push
