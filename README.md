@@ -89,6 +89,10 @@ GitHub 上の最終更新をその場で問い合わせた結果ではありま�
 
 を取得し、対象月の `logs/YYYY/YYYY-MM.md` に追記します。
 
+一覧の取得（PR・Release・コミット）は REST API です。コミットが merged PR に属するかの
+判定だけは、コミット1件ごとに1リクエストを要する REST の代わりに GraphQL API へ
+まとめて（既定 30 件ずつ）問い合わせます。認証には同じ `DEVLOG_READ_TOKEN` を使います。
+
 **重複防止**: 別途の状態ファイルは持たず、各イベントの GitHub URL をそのまま重複判定の
 キーとして使います。追記前に、対象月のファイル内に同じ URL が既に含まれていないかを
 確認し、含まれていれば追記をスキップします。`logs/` 自体が唯一の正とするデータになる
@@ -154,10 +158,14 @@ Python 3.8 以降があれば、依存ライブラリのインストールなし
 （OS のタイムゾーンデータベースにも依存しません）。
 
 ```bash
-export DEVLOG_READ_TOKEN=ghp_xxxxxxxx   # private を含めるならセット。public のみなら未設定でも可
+export DEVLOG_READ_TOKEN=ghp_xxxxxxxx   # 必須。GraphQL は未認証だと使えないため
 export DEVLOG_LOOKBACK_DAYS=365          # 省略可。省略時は7日(通常運用と同じ)
 python3 scripts/collect.py
 ```
 
 `config/repositories.yml` を読み込み、`logs/YYYY/YYYY-MM.md` を生成・更新します。
 再実行しても、既に記録済みの内容は重複追加されません。
+
+トークンなしでも PR・Release は public リポジトリから取得できますが、direct commit の
+判定に使う GraphQL は未認証では利用できないため、その分は warning を出してスキップします
+（GitHub Actions 上では `GITHUB_TOKEN` があるため常に認証されます）。
