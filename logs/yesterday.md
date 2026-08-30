@@ -1,51 +1,47 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-08-29
+# Yesterday - 2026-08-30
 
-### benri
+### chouseisan
 
-- PR #128 画像加工に、加工結果を次の画像加工へ渡す「続けて加工」を追加
+- PR #29 Fix UI bugs and improve event loading/display logic
   - merged
-  - https://github.com/YanTKYS/benri/pull/128
-
-- PR #134 docs: Update UX review and library assessment with new proposals
-  - merged
-  - https://github.com/YanTKYS/benri/pull/134
-
-- PR #133 Fix lease calculation copy buttons and refactor result handling
-  - merged
-  - https://github.com/YanTKYS/benri/pull/133
-
-- PR #132 文章比較がWord・PDF等をそのまま受け取れるようにした（UX-4）
-  - merged
-  - https://github.com/YanTKYS/benri/pull/132
-
-- PR #131 計算結果の1行ごとに「コピー」を追加（UX-1）
-  - merged
-  - https://github.com/YanTKYS/benri/pull/131
-
-- PR #130 Fix file drop and text paste handling in image tools
-  - merged
-  - https://github.com/YanTKYS/benri/pull/130
-
-- PR #129 UXレビュー文書 docs/ux-review.md を新設し、docs/README.md へ追加
-  - merged
-  - https://github.com/YanTKYS/benri/pull/129
+  - https://github.com/YanTKYS/chouseisan/pull/29
 
 ### devlog
 
-- Commit `1a0189a` chore(logs): update devlog entries
-  - direct commit
-  - https://github.com/YanTKYS/devlog/commit/1a0189af43b16c38a118bf9165ca55656c8931e8
-
-- PR #3 Add daily convenience views (today.md and yesterday.md)
+- PR #5 perf(collect): trim API calls, skip devlog's own log commit
   - merged
-  - https://github.com/YanTKYS/devlog/pull/3
+  - https://github.com/YanTKYS/devlog/pull/5
 
-- Commit `3a70afd` chore(logs): update devlog entries
-  - direct commit
-  - https://github.com/YanTKYS/devlog/commit/3a70afdfebc015ef5cff4314971ef5620a801264
-
-- PR #4 feat(logs): add latest.md fleet overview
+- PR #6 perf(collect): batch commit/PR association over GraphQL
   - merged
-  - https://github.com/YanTKYS/devlog/pull/4
+  - https://github.com/YanTKYS/devlog/pull/6
+
+### giin_iinkai
+
+- PR #5 Implement operation queuing to prevent concurrent save conflicts
+  - merged
+  - https://github.com/YanTKYS/giin_iinkai/pull/5
+
+### giin_zaiseki
+
+- PR #4 Improve multi-device sync and offline handling in input screen
+  - merged
+  - https://github.com/YanTKYS/giin_zaiseki/pull/4
+
+### quotaplayer
+
+- PR #24 Fix playback speed, time display, and error handling issues
+  - merged
+  - https://github.com/YanTKYS/quotaplayer/pull/24
+
+### whiteboard
+
+- PR #11 Fix UI bugs and improve file encoding handling
+  - merged
+  - https://github.com/YanTKYS/whiteboard/pull/11
+
+- PR #10 Migrate admin password to external PBKDF2 config file
+  - merged
+  - https://github.com/YanTKYS/whiteboard/pull/10
