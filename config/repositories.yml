@@ -16,6 +16,8 @@ repositories:
   - YanTKYS/fusen
   - YanTKYS/giin_iinkai
   - YanTKYS/giin_zaiseki
+  - YanTKYS/idontlovepdf
+  - YanTKYS/idontlovepdf-test
   - YanTKYS/kanban
   - YanTKYS/lgpwmng
   - YanTKYS/markdownutil
