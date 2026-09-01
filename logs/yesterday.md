@@ -1,47 +1,35 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-08-31
+# Yesterday - 2026-09-01
 
-### devlog
+### idontlovepdf-engine
 
-- Commit `7dccc6c` Update repositories.yml
-  - direct commit
-  - https://github.com/YanTKYS/devlog/commit/7dccc6cd8d770aac99278a50e1417262e41d86c5
+- PR #18 Make release workflow manual, extract release notes, and create Releases via `gh`
+  - merged
+  - https://github.com/YanTKYS/idontlovepdf-engine/pull/18
 
-- Commit `4637db4` Update repositories.yml
-  - direct commit
-  - https://github.com/YanTKYS/devlog/commit/4637db4f46621e52daacdead21de0664ec091b5e
+- PR #17 Enable manual Release workflow runs with selectable tag
+  - merged
+  - https://github.com/YanTKYS/idontlovepdf-engine/pull/17
 
-- Commit `9a38993` Update repositories.yml
-  - direct commit
-  - https://github.com/YanTKYS/devlog/commit/9a38993f3b6bffce28f1347702eb9de4aec1306d
+- PR #16 Establish idontlovepdf-engine as a standalone, published library
+  - merged
+  - https://github.com/YanTKYS/idontlovepdf-engine/pull/16
+
+- PR #15 Fix R6 /O//U zero-padding and Encrypt-dict /Length nesting for a real…
+  - merged
+  - https://github.com/YanTKYS/idontlovepdf-engine/pull/15
+
+- PR #14 Authenticate and decrypt Standard Security Handler R6 / AESV3 (AES-256)
+  - merged
+  - https://github.com/YanTKYS/idontlovepdf-engine/pull/14
+
+- Release v0.2.0 (v0.2.0 - Browser library formalization)
+  - release
+  - https://github.com/YanTKYS/idontlovepdf-engine/releases/tag/v0.2.0
 
 ### idontlovepdf-test
 
-- PR #13 Recognize content-stream dictionary operands instead of misreading th…
+- PR #14 Authenticate and decrypt Standard Security Handler R6 / AESV3 (AES-256)
   - merged
-  - https://github.com/YanTKYS/idontlovepdf-test/pull/13
-
-- PR #12 Resolve PDF Object Stream (/ObjStm) compressed objects
-  - merged
-  - https://github.com/YanTKYS/idontlovepdf-test/pull/12
-
-- PR #11 Authenticate and decrypt Standard Security Handler R4 / AESV2 PDFs
-  - merged
-  - https://github.com/YanTKYS/idontlovepdf-test/pull/11
-
-- PR #10 Diagnose /Encrypt dictionaries instead of refusing encrypted PDFs out…
-  - merged
-  - https://github.com/YanTKYS/idontlovepdf-test/pull/10
-
-- PR #9 Support FlateDecode /Predictor (PNG 10-15, TIFF 2 8-bit)
-  - merged
-  - https://github.com/YanTKYS/idontlovepdf-test/pull/9
-
-- PR #8 Support cross-reference streams (PDF 1.5+), mixed with classic xref v…
-  - merged
-  - https://github.com/YanTKYS/idontlovepdf-test/pull/8
-
-- PR #7 Browser PoC UX Phase 2: PDF preview and text search/replace
-  - merged
-  - https://github.com/YanTKYS/idontlovepdf-test/pull/7
+  - https://github.com/YanTKYS/idontlovepdf-test/pull/14

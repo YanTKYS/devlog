@@ -10,12 +10,12 @@
 | chouseisan | 2026-08-30 | PR | [#29 Fix UI bugs and improve event loading/display logic](https://github.com/YanTKYS/chouseisan/pull/29) |
 | clock | 2026-08-25 | PR | [#33 Refactor README and improve code documentation](https://github.com/YanTKYS/clock/pull/33) |
 | desknets_noticer | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/desknets_noticer/pull/6) |
-| devlog | 2026-08-31 | direct commit | [`9a38993` Update repositories.yml](https://github.com/YanTKYS/devlog/commit/9a38993f3b6bffce28f1347702eb9de4aec1306d) |
+| devlog | 2026-09-02 | direct commit | [`a77c7fa` Update repositories.yml](https://github.com/YanTKYS/devlog/commit/a77c7fafe4eadb7518ccb77c412c7a1a3636b0b1) |
 | fusen | 2026-08-25 | PR | [#11 Improve code comments and README documentation](https://github.com/YanTKYS/fusen/pull/11) |
 | giin_iinkai | 2026-08-30 | PR | [#5 Implement operation queuing to prevent concurrent save conflicts](https://github.com/YanTKYS/giin_iinkai/pull/5) |
 | giin_zaiseki | 2026-08-30 | PR | [#4 Improve multi-device sync and offline handling in input screen](https://github.com/YanTKYS/giin_zaiseki/pull/4) |
-| idontlovepdf | 2026-08-30 | PR | [#1 Update dashboard status to "Feasible (PoC pending)" with split assessment](https://github.com/YanTKYS/idontlovepdf/pull/1) |
-| idontlovepdf-test | 2026-09-01 | PR | [#14 Authenticate and decrypt Standard Security Handler R6 / AESV3 (AES-256)](https://github.com/YanTKYS/idontlovepdf-test/pull/14) |
+| idontlovepdf | 2026-09-02 | PR | [#2 Integrate idontlovepdf-engine v0.2.0 and implement PoC UI](https://github.com/YanTKYS/idontlovepdf/pull/2) |
+| idontlovepdf-engine | 2026-09-01 | Release | [v0.2.0 (v0.2.0 - Browser library formalization)](https://github.com/YanTKYS/idontlovepdf-engine/releases/tag/v0.2.0) |
 | kanban | 2026-08-25 | PR | [#15 Refactor README and remove redundant code comments](https://github.com/YanTKYS/kanban/pull/15) |
 | lgpwmng | 2026-08-27 | PR | [#24 v0.6.0: Chrome ウェブストア公開準備](https://github.com/YanTKYS/lgpwmng/pull/24) |
 | markdownutil | 2026-08-25 | PR | [#30 Fix presentation mode issues and empty content handling](https://github.com/YanTKYS/markdownutil/pull/30) |
