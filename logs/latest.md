@@ -10,10 +10,12 @@
 | chouseisan | 2026-08-30 | PR | [#29 Fix UI bugs and improve event loading/display logic](https://github.com/YanTKYS/chouseisan/pull/29) |
 | clock | 2026-08-25 | PR | [#33 Refactor README and improve code documentation](https://github.com/YanTKYS/clock/pull/33) |
 | desknets_noticer | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/desknets_noticer/pull/6) |
-| devlog | 2026-08-30 | PR | [#6 perf(collect): batch commit/PR association over GraphQL](https://github.com/YanTKYS/devlog/pull/6) |
+| devlog | 2026-08-31 | direct commit | [`9a38993` Update repositories.yml](https://github.com/YanTKYS/devlog/commit/9a38993f3b6bffce28f1347702eb9de4aec1306d) |
 | fusen | 2026-08-25 | PR | [#11 Improve code comments and README documentation](https://github.com/YanTKYS/fusen/pull/11) |
 | giin_iinkai | 2026-08-30 | PR | [#5 Implement operation queuing to prevent concurrent save conflicts](https://github.com/YanTKYS/giin_iinkai/pull/5) |
 | giin_zaiseki | 2026-08-30 | PR | [#4 Improve multi-device sync and offline handling in input screen](https://github.com/YanTKYS/giin_zaiseki/pull/4) |
+| idontlovepdf | 2026-08-30 | PR | [#1 Update dashboard status to "Feasible (PoC pending)" with split assessment](https://github.com/YanTKYS/idontlovepdf/pull/1) |
+| idontlovepdf-test | 2026-09-01 | PR | [#14 Authenticate and decrypt Standard Security Handler R6 / AESV3 (AES-256)](https://github.com/YanTKYS/idontlovepdf-test/pull/14) |
 | kanban | 2026-08-25 | PR | [#15 Refactor README and remove redundant code comments](https://github.com/YanTKYS/kanban/pull/15) |
 | lgpwmng | 2026-08-27 | PR | [#24 v0.6.0: Chrome ウェブストア公開準備](https://github.com/YanTKYS/lgpwmng/pull/24) |
 | markdownutil | 2026-08-25 | PR | [#30 Fix presentation mode issues and empty content handling](https://github.com/YanTKYS/markdownutil/pull/30) |
@@ -25,3 +27,4 @@
 | since | 2026-08-25 | PR | [#6 Refactor README and improve code comments for clarity](https://github.com/YanTKYS/since/pull/6) |
 | slide | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/slide/pull/6) |
 | whiteboard | 2026-08-30 | PR | [#10 Migrate admin password to external PBKDF2 config file](https://github.com/YanTKYS/whiteboard/pull/10) |
+| winevtview | 2026-08-30 | PR | [#1 v0.1.0: EventPeek を WinEvtView として整理（0件の扱い・初期表示・列幅・README）](https://github.com/YanTKYS/winevtview/pull/1) |

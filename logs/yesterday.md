@@ -1,47 +1,47 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-08-30
-
-### chouseisan
-
-- PR #29 Fix UI bugs and improve event loading/display logic
-  - merged
-  - https://github.com/YanTKYS/chouseisan/pull/29
+# Yesterday - 2026-08-31
 
 ### devlog
 
-- PR #5 perf(collect): trim API calls, skip devlog's own log commit
+- Commit `7dccc6c` Update repositories.yml
+  - direct commit
+  - https://github.com/YanTKYS/devlog/commit/7dccc6cd8d770aac99278a50e1417262e41d86c5
+
+- Commit `4637db4` Update repositories.yml
+  - direct commit
+  - https://github.com/YanTKYS/devlog/commit/4637db4f46621e52daacdead21de0664ec091b5e
+
+- Commit `9a38993` Update repositories.yml
+  - direct commit
+  - https://github.com/YanTKYS/devlog/commit/9a38993f3b6bffce28f1347702eb9de4aec1306d
+
+### idontlovepdf-test
+
+- PR #13 Recognize content-stream dictionary operands instead of misreading th…
   - merged
-  - https://github.com/YanTKYS/devlog/pull/5
+  - https://github.com/YanTKYS/idontlovepdf-test/pull/13
 
-- PR #6 perf(collect): batch commit/PR association over GraphQL
+- PR #12 Resolve PDF Object Stream (/ObjStm) compressed objects
   - merged
-  - https://github.com/YanTKYS/devlog/pull/6
+  - https://github.com/YanTKYS/idontlovepdf-test/pull/12
 
-### giin_iinkai
-
-- PR #5 Implement operation queuing to prevent concurrent save conflicts
+- PR #11 Authenticate and decrypt Standard Security Handler R4 / AESV2 PDFs
   - merged
-  - https://github.com/YanTKYS/giin_iinkai/pull/5
+  - https://github.com/YanTKYS/idontlovepdf-test/pull/11
 
-### giin_zaiseki
-
-- PR #4 Improve multi-device sync and offline handling in input screen
+- PR #10 Diagnose /Encrypt dictionaries instead of refusing encrypted PDFs out…
   - merged
-  - https://github.com/YanTKYS/giin_zaiseki/pull/4
+  - https://github.com/YanTKYS/idontlovepdf-test/pull/10
 
-### quotaplayer
-
-- PR #24 Fix playback speed, time display, and error handling issues
+- PR #9 Support FlateDecode /Predictor (PNG 10-15, TIFF 2 8-bit)
   - merged
-  - https://github.com/YanTKYS/quotaplayer/pull/24
+  - https://github.com/YanTKYS/idontlovepdf-test/pull/9
 
-### whiteboard
-
-- PR #11 Fix UI bugs and improve file encoding handling
+- PR #8 Support cross-reference streams (PDF 1.5+), mixed with classic xref v…
   - merged
-  - https://github.com/YanTKYS/whiteboard/pull/11
+  - https://github.com/YanTKYS/idontlovepdf-test/pull/8
 
-- PR #10 Migrate admin password to external PBKDF2 config file
+- PR #7 Browser PoC UX Phase 2: PDF preview and text search/replace
   - merged
-  - https://github.com/YanTKYS/whiteboard/pull/10
+  - https://github.com/YanTKYS/idontlovepdf-test/pull/7
