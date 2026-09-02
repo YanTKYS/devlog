@@ -6,7 +6,7 @@
 
 | Repository | 最新記録 | 種別 | 内容 |
 | --- | --- | --- | --- |
-| benri | 2026-08-29 | PR | [#129 UXレビュー文書 docs/ux-review.md を新設し、docs/README.md へ追加](https://github.com/YanTKYS/benri/pull/129) |
+| benri | 2026-09-02 | direct commit | [`07fecd5` Add files via upload](https://github.com/YanTKYS/benri/commit/07fecd54f196e7bdff54056fdbe70e9f04a14202) |
 | chouseisan | 2026-08-30 | PR | [#29 Fix UI bugs and improve event loading/display logic](https://github.com/YanTKYS/chouseisan/pull/29) |
 | clock | 2026-08-25 | PR | [#33 Refactor README and improve code documentation](https://github.com/YanTKYS/clock/pull/33) |
 | desknets_noticer | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/desknets_noticer/pull/6) |
@@ -14,8 +14,8 @@
 | fusen | 2026-08-25 | PR | [#11 Improve code comments and README documentation](https://github.com/YanTKYS/fusen/pull/11) |
 | giin_iinkai | 2026-08-30 | PR | [#5 Implement operation queuing to prevent concurrent save conflicts](https://github.com/YanTKYS/giin_iinkai/pull/5) |
 | giin_zaiseki | 2026-08-30 | PR | [#4 Improve multi-device sync and offline handling in input screen](https://github.com/YanTKYS/giin_zaiseki/pull/4) |
-| idontlovepdf | 2026-09-02 | PR | [#2 Integrate idontlovepdf-engine v0.2.0 and implement PoC UI](https://github.com/YanTKYS/idontlovepdf/pull/2) |
-| idontlovepdf-engine | 2026-09-01 | Release | [v0.2.0 (v0.2.0 - Browser library formalization)](https://github.com/YanTKYS/idontlovepdf-engine/releases/tag/v0.2.0) |
+| idontlovepdf | 2026-09-02 | PR | [#4 Add PDF preview and upgrade to engine v0.2.1 with improved search](https://github.com/YanTKYS/idontlovepdf/pull/4) |
+| idontlovepdf-engine | 2026-09-03 | Release | [v0.4.0 (v0.4.0 - Fallback Japanese font)](https://github.com/YanTKYS/idontlovepdf-engine/releases/tag/v0.4.0) |
 | kanban | 2026-08-25 | PR | [#15 Refactor README and remove redundant code comments](https://github.com/YanTKYS/kanban/pull/15) |
 | lgpwmng | 2026-08-27 | PR | [#24 v0.6.0: Chrome ウェブストア公開準備](https://github.com/YanTKYS/lgpwmng/pull/24) |
 | markdownutil | 2026-08-25 | PR | [#30 Fix presentation mode issues and empty content handling](https://github.com/YanTKYS/markdownutil/pull/30) |
