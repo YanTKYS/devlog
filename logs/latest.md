@@ -14,8 +14,8 @@
 | fusen | 2026-08-25 | PR | [#11 Improve code comments and README documentation](https://github.com/YanTKYS/fusen/pull/11) |
 | giin_iinkai | 2026-08-30 | PR | [#5 Implement operation queuing to prevent concurrent save conflicts](https://github.com/YanTKYS/giin_iinkai/pull/5) |
 | giin_zaiseki | 2026-08-30 | PR | [#4 Improve multi-device sync and offline handling in input screen](https://github.com/YanTKYS/giin_zaiseki/pull/4) |
-| idontlovepdf | 2026-09-02 | PR | [#4 Add PDF preview and upgrade to engine v0.2.1 with improved search](https://github.com/YanTKYS/idontlovepdf/pull/4) |
-| idontlovepdf-engine | 2026-09-03 | Release | [v0.4.0 (v0.4.0 - Fallback Japanese font)](https://github.com/YanTKYS/idontlovepdf-engine/releases/tag/v0.4.0) |
+| idontlovepdf | 2026-09-04 | PR | [#8 Upgrade idontlovepdf-engine to v0.4.3 and verify public PDF support](https://github.com/YanTKYS/idontlovepdf/pull/8) |
+| idontlovepdf-engine | 2026-09-03 | Release | [v0.4.1 (v0.4.1 - Fallback font for text drawn by TJ)](https://github.com/YanTKYS/idontlovepdf-engine/releases/tag/v0.4.1) |
 | kanban | 2026-08-25 | PR | [#15 Refactor README and remove redundant code comments](https://github.com/YanTKYS/kanban/pull/15) |
 | lgpwmng | 2026-08-27 | PR | [#24 v0.6.0: Chrome ウェブストア公開準備](https://github.com/YanTKYS/lgpwmng/pull/24) |
 | markdownutil | 2026-08-25 | PR | [#30 Fix presentation mode issues and empty content handling](https://github.com/YanTKYS/markdownutil/pull/30) |

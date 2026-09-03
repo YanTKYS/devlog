@@ -1,13 +1,9 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Today - 2026-09-03
+# Today - 2026-09-04
 
-### idontlovepdf-engine
+### idontlovepdf
 
-- PR #22 Write characters the document's fonts do not have, via a fallback fon…
+- PR #8 Upgrade idontlovepdf-engine to v0.4.3 and verify public PDF support
   - merged
-  - https://github.com/YanTKYS/idontlovepdf-engine/pull/22
-
-- Release v0.4.0 (v0.4.0 - Fallback Japanese font)
-  - release
-  - https://github.com/YanTKYS/idontlovepdf-engine/releases/tag/v0.4.0
+  - https://github.com/YanTKYS/idontlovepdf/pull/8
