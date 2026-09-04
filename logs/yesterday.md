@@ -1,63 +1,35 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-09-03
+# Yesterday - 2026-09-04
 
 ### idontlovepdf
 
-- PR #7 Update idontlovepdf-engine to v0.4.2 with improved font metrics resolution
+- PR #8 Upgrade idontlovepdf-engine to v0.4.3 and verify public PDF support
   - merged
-  - https://github.com/YanTKYS/idontlovepdf/pull/7
+  - https://github.com/YanTKYS/idontlovepdf/pull/8
 
-- PR #6 Update idontlovepdf-engine to v0.4.1 with TJ array support
+- PR #10 Add serif/sans font auto-selection and CI infrastructure
   - merged
-  - https://github.com/YanTKYS/idontlovepdf/pull/6
+  - https://github.com/YanTKYS/idontlovepdf/pull/10
 
-- PR #5 Add font fallback support and upgrade engine to v0.4.0
+- PR #9 Update idontlovepdf-engine to v0.4.4 with layout safety checks
   - merged
-  - https://github.com/YanTKYS/idontlovepdf/pull/5
+  - https://github.com/YanTKYS/idontlovepdf/pull/9
 
 ### idontlovepdf-engine
 
-- PR #22 Write characters the document's fonts do not have, via a fallback fon…
+- PR #30 PoC: Auto-select serif/sans fallback fonts based on source font
   - merged
-  - https://github.com/YanTKYS/idontlovepdf-engine/pull/22
+  - https://github.com/YanTKYS/idontlovepdf-engine/pull/30
 
-- Release v0.4.0 (v0.4.0 - Fallback Japanese font)
+- PR #29 Refuse fallback replacements that would overrun following text
+  - merged
+  - https://github.com/YanTKYS/idontlovepdf-engine/pull/29
+
+- Release v0.5.0 (v0.5.0 - PoC: BIZ UD明朝/BIZ UDゴシックの自動選択)
   - release
-  - https://github.com/YanTKYS/idontlovepdf-engine/releases/tag/v0.4.0
+  - https://github.com/YanTKYS/idontlovepdf-engine/releases/tag/v0.5.0
 
-- PR #28 Support inline CIDFont dictionaries in /DescendantFonts arrays
-  - merged
-  - https://github.com/YanTKYS/idontlovepdf-engine/pull/28
-
-- PR #27 Add manual GitHub Actions workflow to diagnose real PDFs
-  - merged
-  - https://github.com/YanTKYS/idontlovepdf-engine/pull/27
-
-- PR #26 Diagnose descendant font resolution, and refuse two descendant fonts either way
-  - merged
-  - https://github.com/YanTKYS/idontlovepdf-engine/pull/26
-
-- PR #25 Damage the padding through the block that decides it, not by luck
-  - merged
-  - https://github.com/YanTKYS/idontlovepdf-engine/pull/25
-
-- PR #24 Support indirect font width objects in PDF documents
-  - merged
-  - https://github.com/YanTKYS/idontlovepdf-engine/pull/24
-
-- PR #23 Support fallback font for text drawn by TJ operators
-  - merged
-  - https://github.com/YanTKYS/idontlovepdf-engine/pull/23
-
-- Release v0.4.3 (v0.4.3 - Inline descendant CIDFont dictionaries)
+- Release v0.4.4 (v0.4.4 - Fallback replacement must not overrun the text after it)
   - release
-  - https://github.com/YanTKYS/idontlovepdf-engine/releases/tag/v0.4.3
-
-- Release v0.4.2 (v0.4.2 - Font widths a real PDF actually states)
-  - release
-  - https://github.com/YanTKYS/idontlovepdf-engine/releases/tag/v0.4.2
-
-- Release v0.4.1 (v0.4.1 - Fallback font for text drawn by TJ)
-  - release
-  - https://github.com/YanTKYS/idontlovepdf-engine/releases/tag/v0.4.1
+  - https://github.com/YanTKYS/idontlovepdf-engine/releases/tag/v0.4.4
