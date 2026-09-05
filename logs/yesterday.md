@@ -1,35 +1,19 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-09-04
+# Yesterday - 2026-09-05
 
 ### idontlovepdf
 
-- PR #8 Upgrade idontlovepdf-engine to v0.4.3 and verify public PDF support
+- PR #11 Update to idontlovepdf-engine v0.5.1 with inline FontDescriptor support
   - merged
-  - https://github.com/YanTKYS/idontlovepdf/pull/8
-
-- PR #10 Add serif/sans font auto-selection and CI infrastructure
-  - merged
-  - https://github.com/YanTKYS/idontlovepdf/pull/10
-
-- PR #9 Update idontlovepdf-engine to v0.4.4 with layout safety checks
-  - merged
-  - https://github.com/YanTKYS/idontlovepdf/pull/9
+  - https://github.com/YanTKYS/idontlovepdf/pull/11
 
 ### idontlovepdf-engine
 
-- PR #30 PoC: Auto-select serif/sans fallback fonts based on source font
+- PR #31 Fix Serif/Sans classification for inline FontDescriptor PDFs
   - merged
-  - https://github.com/YanTKYS/idontlovepdf-engine/pull/30
+  - https://github.com/YanTKYS/idontlovepdf-engine/pull/31
 
-- PR #29 Refuse fallback replacements that would overrun following text
-  - merged
-  - https://github.com/YanTKYS/idontlovepdf-engine/pull/29
-
-- Release v0.5.0 (v0.5.0 - PoC: BIZ UD明朝/BIZ UDゴシックの自動選択)
+- Release v0.5.1 (v0.5.1 - 実PDFで判明したSerif分類のinline FontDescriptor対応)
   - release
-  - https://github.com/YanTKYS/idontlovepdf-engine/releases/tag/v0.5.0
-
-- Release v0.4.4 (v0.4.4 - Fallback replacement must not overrun the text after it)
-  - release
-  - https://github.com/YanTKYS/idontlovepdf-engine/releases/tag/v0.4.4
+  - https://github.com/YanTKYS/idontlovepdf-engine/releases/tag/v0.5.1
