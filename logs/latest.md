@@ -6,7 +6,7 @@
 
 | Repository | 最新記録 | 種別 | 内容 |
 | --- | --- | --- | --- |
-| benri | 2026-09-02 | direct commit | [`07fecd5` Add files via upload](https://github.com/YanTKYS/benri/commit/07fecd54f196e7bdff54056fdbe70e9f04a14202) |
+| benri | 2026-09-07 | PR | [#135 READMEに同梱JSライブラリのバージョンを追記](https://github.com/YanTKYS/benri/pull/135) |
 | chouseisan | 2026-08-30 | PR | [#29 Fix UI bugs and improve event loading/display logic](https://github.com/YanTKYS/chouseisan/pull/29) |
 | clock | 2026-08-25 | PR | [#33 Refactor README and improve code documentation](https://github.com/YanTKYS/clock/pull/33) |
 | desknets_noticer | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/desknets_noticer/pull/6) |
