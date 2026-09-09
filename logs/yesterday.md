@@ -1,15 +1,17 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-09-08
+# Yesterday - 2026-09-09
 
 ### benri
 
-- PR #137 UX-10: 生成物の保存名へ日時を付与（タイムスタンプ付きファイル名）
+- PR #140 fix: クリティカルパスの入力時の重さ・図のリセット・空の行番号列を修正
   - merged
-  - https://github.com/YanTKYS/benri/pull/137
+  - https://github.com/YanTKYS/benri/pull/140
 
-### proxypac
-
-- PR #6 Add browser launch PAC data URL generation (v0.2.0)
+- PR #139 improve: クリティカルパスの用語説明と検証中バッジを追加
   - merged
-  - https://github.com/YanTKYS/proxypac/pull/6
+  - https://github.com/YanTKYS/benri/pull/139
+
+- PR #138 Add Critical Path Method (CPM) calculation feature with network diagram
+  - merged
+  - https://github.com/YanTKYS/benri/pull/138
