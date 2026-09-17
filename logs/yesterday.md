@@ -1,17 +1,17 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-09-16
+# Yesterday - 2026-09-17
 
 ### benri
 
-- PR #150 fix: フローチャート（Mermaid）がライブラリ未配置時に無言で止まる問題を修正（B-86）
+- PR #151 docs/feature-ideas.md に機能改善案を追加
   - merged
-  - https://github.com/YanTKYS/benri/pull/150
+  - https://github.com/YanTKYS/benri/pull/151
 
-- PR #149 improve: 公示送達用PDF（A方式）の画質設定を出力倍率へ統一し、注意文を選択肢直下へ
+- PR #153 Verify codebase and confirm operational stability
   - merged
-  - https://github.com/YanTKYS/benri/pull/149
+  - https://github.com/YanTKYS/benri/pull/153
 
-- PR #148 Add public notice PDF creation feature with image and encryption modes
+- PR #152 Add Word document export for notification letters
   - merged
-  - https://github.com/YanTKYS/benri/pull/148
+  - https://github.com/YanTKYS/benri/pull/152
