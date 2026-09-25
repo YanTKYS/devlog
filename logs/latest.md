@@ -6,7 +6,7 @@
 
 | Repository | 最新記録 | 種別 | 内容 |
 | --- | --- | --- | --- |
-| benri | 2026-09-23 | PR | [#154 Fix decimal handling and rounding issues in calculations](https://github.com/YanTKYS/benri/pull/154) |
+| benri | 2026-09-25 | PR | [#155 docs: Update UX/design decisions for PDF public notice and notification features](https://github.com/YanTKYS/benri/pull/155) |
 | chouseisan | 2026-08-30 | PR | [#29 Fix UI bugs and improve event loading/display logic](https://github.com/YanTKYS/chouseisan/pull/29) |
 | clock | 2026-08-25 | PR | [#33 Refactor README and improve code documentation](https://github.com/YanTKYS/clock/pull/33) |
 | desknets_noticer | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/desknets_noticer/pull/6) |
