@@ -20,13 +20,17 @@ repositories:
   - YanTKYS/idontlovepdf-engine
   - YanTKYS/kanban
   - YanTKYS/lgpwmng
+  - YanTKYS/mailexporter
   - YanTKYS/markdownutil
+  - YanTKYS/markdown-library
   - YanTKYS/nestsuite
   - YanTKYS/nonpaper
+  - YanTKYS/pdfengine
   - YanTKYS/proxypac
   - YanTKYS/quotaplayer
   - YanTKYS/signage
   - YanTKYS/since
+  - YanTKYS/sheltermatch
   - YanTKYS/slide
   - YanTKYS/whiteboard
   - YanTKYS/winevtview
