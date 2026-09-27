@@ -23,7 +23,7 @@
 | markdown-library | 2026-09-23 | PR | [#7 Rebrand Prompt Library to Markdown Library with enhanced content support](https://github.com/YanTKYS/markdown-library/pull/7) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
-| pdfengine | 2026-09-26 | PR | [#12 Cancel a proven-invertible CTM at confirmed page-program boundaries](https://github.com/YanTKYS/pdfengine/pull/12) |
+| pdfengine | 2026-09-27 | PR | [#17 Admit confirmed boundaries inside a chain of two q ... Q scopes](https://github.com/YanTKYS/pdfengine/pull/17) |
 | proxypac | 2026-09-08 | PR | [#6 Add browser launch PAC data URL generation (v0.2.0)](https://github.com/YanTKYS/proxypac/pull/6) |
 | quotaplayer | 2026-08-30 | PR | [#24 Fix playback speed, time display, and error handling issues](https://github.com/YanTKYS/quotaplayer/pull/24) |
 | signage | 2026-08-25 | PR | [#37 Simplify README and remove unused database methods](https://github.com/YanTKYS/signage/pull/37) |
