@@ -23,12 +23,12 @@
 | markdown-library | 2026-09-23 | PR | [#7 Rebrand Prompt Library to Markdown Library with enhanced content support](https://github.com/YanTKYS/markdown-library/pull/7) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
-| pdfengine | 2026-09-27 | PR | [#17 Admit confirmed boundaries inside a chain of two q ... Q scopes](https://github.com/YanTKYS/pdfengine/pull/17) |
+| pdfengine | 2026-09-28 | PR | [#19 Use exact source CTM inverses with dual-model compensation proofs](https://github.com/YanTKYS/pdfengine/pull/19) |
 | proxypac | 2026-09-08 | PR | [#6 Add browser launch PAC data URL generation (v0.2.0)](https://github.com/YanTKYS/proxypac/pull/6) |
 | quotaplayer | 2026-08-30 | PR | [#24 Fix playback speed, time display, and error handling issues](https://github.com/YanTKYS/quotaplayer/pull/24) |
 | signage | 2026-08-25 | PR | [#37 Simplify README and remove unused database methods](https://github.com/YanTKYS/signage/pull/37) |
 | since | 2026-08-25 | PR | [#6 Refactor README and improve code comments for clarity](https://github.com/YanTKYS/since/pull/6) |
-| sheltermatch | 2026-09-24 | PR | [#39 レビューHTMLに「道路に沿った参考経路」を追加する（任意・既定OFF）](https://github.com/YanTKYS/sheltermatch/pull/39) |
+| sheltermatch | 2026-09-28 | PR | [#44 docs: 実データ投入前の事前確認（サンドボックス）の結果を記録する](https://github.com/YanTKYS/sheltermatch/pull/44) |
 | slide | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/slide/pull/6) |
 | whiteboard | 2026-08-30 | PR | [#10 Migrate admin password to external PBKDF2 config file](https://github.com/YanTKYS/whiteboard/pull/10) |
 | winevtview | 2026-08-30 | PR | [#1 v0.1.0: EventPeek を WinEvtView として整理（0件の扱い・初期表示・列幅・README）](https://github.com/YanTKYS/winevtview/pull/1) |
