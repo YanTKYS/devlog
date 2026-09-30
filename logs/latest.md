@@ -28,7 +28,7 @@
 | quotaplayer | 2026-08-30 | PR | [#24 Fix playback speed, time display, and error handling issues](https://github.com/YanTKYS/quotaplayer/pull/24) |
 | signage | 2026-08-25 | PR | [#37 Simplify README and remove unused database methods](https://github.com/YanTKYS/signage/pull/37) |
 | since | 2026-08-25 | PR | [#6 Refactor README and improve code comments for clarity](https://github.com/YanTKYS/since/pull/6) |
-| sheltermatch | 2026-09-28 | PR | [#44 docs: 実データ投入前の事前確認（サンドボックス）の結果を記録する](https://github.com/YanTKYS/sheltermatch/pull/44) |
+| sheltermatch | 2026-09-29 | Release | [v1.0.0 (v1.0.0 - 初回運用版)](https://github.com/YanTKYS/sheltermatch/releases/tag/v1.0.0) |
 | slide | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/slide/pull/6) |
 | whiteboard | 2026-08-30 | PR | [#10 Migrate admin password to external PBKDF2 config file](https://github.com/YanTKYS/whiteboard/pull/10) |
 | winevtview | 2026-08-30 | PR | [#1 v0.1.0: EventPeek を WinEvtView として整理（0件の扱い・初期表示・列幅・README）](https://github.com/YanTKYS/winevtview/pull/1) |
