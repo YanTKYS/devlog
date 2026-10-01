@@ -1,25 +1,45 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-09-29
+# Yesterday - 2026-09-30
 
-### sheltermatch
+### pdfengine
 
-- PR #48 Colab実行時に取得する外部モジュールを v1.0.0 へ固定する
+- PR #29 Connect the caller workflow destination to shared-flow continuation (acceptance test)
   - merged
-  - https://github.com/YanTKYS/sheltermatch/pull/48
+  - https://github.com/YanTKYS/pdfengine/pull/29
 
-- PR #47 2026-09-29の実データによるColab確認結果をドキュメントへ反映する
+- PR #28 Fix the continuation destination caller workflow (acceptance test and docs)
   - merged
-  - https://github.com/YanTKYS/sheltermatch/pull/47
+  - https://github.com/YanTKYS/pdfengine/pull/28
 
-- PR #46 住居表示住所の末尾の部屋番号を、方書付きで安全な条件のときだけ除外して照合する
+- PR #27 Add a confirmation request builder for a caller-selected continuation boundary
   - merged
-  - https://github.com/YanTKYS/sheltermatch/pull/46
+  - https://github.com/YanTKYS/pdfengine/pull/27
 
-- PR #45 住所変換で住居表示住所と方書付き住所を座標化できるようにする
+- PR #26 Real-PDF external validation of the continuation geometry review API
   - merged
-  - https://github.com/YanTKYS/sheltermatch/pull/45
+  - https://github.com/YanTKYS/pdfengine/pull/26
 
-- Release v1.0.0 (v1.0.0 - 初回運用版)
-  - release
-  - https://github.com/YanTKYS/sheltermatch/releases/tag/v1.0.0
+- PR #25 Add read-only geometry review for caller-provided continuation bounds
+  - merged
+  - https://github.com/YanTKYS/pdfengine/pull/25
+
+- PR #24 Formal real-PDF validation of the continuation boundary review API
+  - merged
+  - https://github.com/YanTKYS/pdfengine/pull/24
+
+- PR #23 Add read-only continuation boundary review API
+  - merged
+  - https://github.com/YanTKYS/pdfengine/pull/23
+
+- PR #22 Group safe continuation boundaries by paint position for read-only review
+  - merged
+  - https://github.com/YanTKYS/pdfengine/pull/22
+
+- PR #21 Inspect natural q depths and remaining barriers in the LibreOffice original
+  - merged
+  - https://github.com/YanTKYS/pdfengine/pull/21
+
+- PR #20 Support confirmed boundaries inside three nested graphics-state saves
+  - merged
+  - https://github.com/YanTKYS/pdfengine/pull/20
