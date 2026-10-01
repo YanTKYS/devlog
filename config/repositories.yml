@@ -24,6 +24,7 @@ repositories:
   - YanTKYS/markdownutil
   - YanTKYS/markdown-library
   - YanTKYS/nestsuite
+  - YanTKYS/news-watch
   - YanTKYS/nonpaper
   - YanTKYS/pdfengine
   - YanTKYS/proxypac
