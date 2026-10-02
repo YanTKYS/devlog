@@ -14,6 +14,7 @@
 
 - 無料枠の数値は、公式ドメインの検索結果で確認できたものだけを書いた。確認できないもの、変動が激しいものは「上限は公式参照」とした
 - 非公式のまとめ・ブログは、数値や条件の根拠に使っていない
+- 変更リスクの高い項目は、公式ドキュメント等を根拠にしたDeep Research（`data/deepresearch/free-apis-20261002.md`）の再検証結果と突き合わせている。ただしDeep Research側が「要確認」とした事項は、断定せず注記にとどめた
 - 利用を決める前に、各項目の「公式」リンクで必ず再確認する
 
 ## 分類の見方
@@ -38,34 +39,38 @@
 | Gemini API | 無料枠あり | 一部モデルのみ無料枠 | API Key | 生成・要約・分類 | 課金アカウントを紐付けると、そのプロジェクトの利用は全て課金対象 |
 | Groq | 無料モデル・プラン | 無料プラン（上限は公式参照） | API Key | 高速なLLM応答 | 無料プランはカード不要。Developerへのアップグレードはカード等が必要 |
 | OpenRouter | 無料モデル・プラン | `:free` モデルのみ | API Key | 複数LLMの切替・比較 | 無料モデルはレート制限あり。上限は残高で変わる |
-| Mistral（Mistral Studio） | 無料枠あり | Freeティアあり（上限はコンソール参照） | API Key | LLM・OCR等の試作 | 旧名称 La Plateforme。名称はStudioへ移行している |
-| Hugging Face Inference Providers | 無料枠あり | 月次の少額クレジット | HFトークン | 多様なOSSモデルの呼び出し | 無料ユーザーはPROより少額。超過は従量課金 |
-| Cloudflare Workers AI | 無料枠あり | 1日あたりの無料割当 | CFアカウント / API Token | エッジでの推論 | 一部モデルは有料プラン必須（2026-07変更） |
+| Mistral（Mistral Studio） | 無料枠あり | Free mode（上限はコンソール参照） | API Key | LLM・OCR等の試作 | Free modeは既定で有効・カード不要。旧名称 La Plateforme |
+| Hugging Face Inference Providers | 無料枠あり | 月次クレジット（無料ユーザーは月$0.10分） | HFトークン | 多様なOSSモデルの呼び出し | 動作確認向けの少額枠。超過は従量課金 |
+| Cloudflare Workers AI | 無料枠あり | 1日10,000 Neurons | CFアカウント / API Token | エッジでの推論 | 一部モデルは有料プラン必須（2026-07変更） |
 | Cohere | Trial | 評価キー（月間上限あり） | API Key | Chat / Embed / Rerank の試用 | 商用・本番利用は不可。本番キーは従量課金 |
-| Jina AI | Trial / 初回付与 | 新規キーに無料トークン | API Key | Embedding / Rerank / Reader | 付与分を使い切ると購入が必要 |
-| Voyage AI | Trial / 初回付与 | アカウントごとの初回無料トークン | API Key | Embedding / Rerank | モデルごとに無料分が決まっている |
+| Jina AI（Embedding / Rerank） | Trial / 初回付与 | 新規キーに1,000万トークン | API Key | Embedding / Rerank / 分類 | 付与分を使い切ると購入が必要 |
+| Jina Reader | 無料 | キーなしの基本利用は無料 | 不要 / API Key | URLの本文をMarkdownで抽出 | キーなしは低レート。検索結果URLの本文取得に使える |
+| Voyage AI | Trial / 初回付与 | アカウントごとの初回無料トークン（現行の多くのモデルで2億） | API Key | Embedding / Rerank | モデルごとに無料分が決まっている |
 
 ### 検索・ニュース・気象
 
 | API / サービス | 分類 | 無料利用 | 認証 | 主な用途 | メモ |
 | --- | --- | --- | --- | --- | --- |
 | Brave Search API | 無料枠あり | 毎月$5分のクレジット | API Key | Web検索の組み込み | カード登録必須。帰属表示が条件 |
-| Tavily | 無料枠あり | 月1,000クレジット | API Key | AIエージェント向け検索 | カード不要 |
+| Tavily | 無料枠あり | 月1,000クレジット | API Key（キーなしの低レート利用もあり） | AIエージェント向け検索 | カード不要。キーなしはSearch / Extractのみ |
 | NewsAPI | 非商用のみ無料 | Developerプラン（開発環境のみ） | API Key | ニュース取得の試作 | 本番・ステージング・社内利用は不可 |
 | Open-Meteo | 非商用のみ無料 | 非商用は無料 | 不要 | 天気・予報 | 商用は有料プラン。帰属表示（CC BY 4.0）が必要 |
-| OpenWeatherMap | 無料枠あり | One Call 3.0は1日1,000回まで | API Key | 天気・予報 | 超過分は従量課金 |
-| 気象庁 防災情報XML | 公共・無料 | 無料 | 不要 | 警報・地震・火山等の電文 | 出典明記が必要。提供の停止・遅延は保証されない |
+| OpenWeatherMap | 無料枠あり | One Call 3.0は1日1,000回まで | API Key | 天気・予報 | 購読にカード情報が必要。超過は従量課金なので1日の上限を設定する |
+| 気象庁 防災情報XML | 公共・無料 | 無料 | 不要 | 警報・地震・火山等の電文 | 出典明記が必要。提供の停止・遅延は保証されず、1日10GB超でIP遮断 |
 
 ### 公共データ・行政（日本）
 
 | API / サービス | 分類 | 無料利用 | 認証 | 主な用途 | メモ |
 | --- | --- | --- | --- | --- | --- |
 | e-Stat API | 公共・無料 | 無料 | アプリケーションID | 政府統計 | ユーザー登録が必要。IDは1ユーザー3つまで |
+| 統計ダッシュボード WebAPI | 公共・無料 | 無料 | 不要 | 主要統計の時系列・地域比較 | 利用登録不要。JSON / XML / CSV。e-Statより手軽 |
 | 日本銀行 時系列統計データAPI | 公共・無料 | 無料 | マニュアル参照 | 金融・経済の時系列 | 2026-02提供開始。20万系列超 |
 | 法人番号システム Web-API | 公共・無料 | 無料 | アプリケーションID | 法人情報の照会・名寄せ | ID発行は手数料・添付書類なし。検証環境あり |
+| Gビズインフォ REST API（v2） | 公共・無料 | 無料 | 利用申請 → APIトークン | 法人の基本・補助金・調達・届出認定・特許・財務情報 | 申請に法人番号・利用目的等が必要。法人番号APIより企業活動情報が豊富 |
+| EDINET API（Version 2） | 公共・無料 | 無料 | APIキー（登録が必要） | 有価証券報告書などの開示書類 | 上場企業の分析・文書抽出に使える |
 | e-Gov 法令API（Version 2） | 公共・無料 | 無料 | 登録・申請不要 | 法令本文・改正履歴 | 時点指定で過去の条文を取得できる |
 | 国会会議録検索システム API | 公共・無料 | 無料 | 仕様上キーの記載なし | 発言・会議録の取得 | 多重リクエストは避ける |
-| 国立国会図書館サーチ API | 公共・無料 | 無料（営利目的は申請が必要な場合あり） | 申請が必要な場合あり | 書誌・蔵書検索 | クレジット表示が必須 |
+| 国立国会図書館サーチ API | 公共・無料 | 無料（営利目的は申請が必要な場合あり） | 申請が必要な場合あり | 書誌・蔵書検索、OAI-PMHでの一括収集 | クレジット表示が必須。営利性・課金・利用者数などを申請で確認される |
 | 次世代デジタルライブラリー | 公共・無料 | 無料（営利かつ継続利用を除く） | 申請不要（条件あり） | 全文テキスト検索・IIIF | 実験的サービス。安定提供は前提にしない |
 | 国土地理院 地理院タイル | 公共・無料 | 無料 | 不要 | 地図表示・標高・陰影 | 出典明示で申請不要（基本測量成果） |
 | 国土数値情報 | 公共・無料 | 無料（ファイル配布） | 不要 | 行政区域・施設・災害リスク等のGISデータ | APIではなくダウンロード。データごとに商用可否が異なる |
@@ -75,7 +80,7 @@
 | アドレス・ベース・レジストリ / ABRジオコーダ | ローカル実行 + 公共データ | 無料 | 不要 | 住所の正規化・緯度経度付与 | ジオコーダはOSS。手元で動かす |
 | 公共交通オープンデータセンター（ODPT） | 公共・無料 | 無料 | 登録 + APIキー | 鉄道・バス等の運行データ | データごとのライセンスは事業者が決める |
 | J-Quants API | 無料枠あり | Freeプラン（12週遅延） | アカウント | 株価・財務データ | 無料は1年間で、毎分5回まで |
-| e-Govデータポータル / 東京都オープンデータAPI | 公共・無料 | 無料 | 不要（東京都APIは登録不要） | データ検索・自治体データ | メタデータ取得APIはCKAN互換。旧データカタログサイトの後継 |
+| e-Govデータポータル / 東京都オープンデータAPI | 公共・無料 | 無料 | 不要（東京都APIは登録不要） | データ検索・自治体データ（防災データ等） | メタデータ取得APIはCKAN互換。旧データカタログサイトの後継 |
 
 ### 海外のオープンデータ・学術・為替・地図
 
@@ -85,6 +90,7 @@
 | arXiv API | 無料 | 無料 | 不要 | 論文検索 | 3秒に1回・単一接続 |
 | Crossref REST API | 無料 | 無料 | 不要（mailto推奨） | DOI・論文メタデータ | mailto付きの方が上限が高い |
 | OpenAlex | 無料枠あり | 1日$1分の利用 | API Key（無料） | 論文・著者・機関の分析 | 2026-02以降はキー必須 |
+| Open Library API | 無料 | 無料 | 不要（User-Agent推奨） | ISBN検索・書誌・表紙画像 | NDLの書誌とISBNで突合する補完に使える |
 | Frankfurter | 無料 | 無料 | 不要 | 為替レート | 中央銀行の公表レートを集約 |
 | Nominatim（公開インスタンス） | 無料 | 無料（重い利用は禁止） | 不要（User-Agent必須） | ジオコーディング | 上限は1秒に1リクエスト |
 
@@ -98,8 +104,9 @@
 | Unsplash API | 無料枠あり | Demoは1時間50回 | Access Key | 写真の検索・表示 | 帰属表示とホットリンクが必須 |
 | Pexels API | 無料枠あり | 1時間200回 / 月20,000回 | API Key | 写真・動画の検索 | 帰属表示が必要。上限引き上げは一時停止中 |
 | TMDB | 非商用のみ無料 | 非商用は無料 | API Key | 映画・TV情報 | 商用・AI学習利用は別契約 |
-| DeepL API Developer | Trial / 初回付与 | 累計100万文字（月次リセットなし） | API Key | 翻訳 | 上限に達するとGrowthへの移行が必要 |
+| DeepL API Developer | Trial / 初回付与（要確認） | 累計100万文字（月次リセットなし） | API Key | 翻訳 | 公式の表記が揺れている。登録画面で確認する。上限到達後はGrowthへ |
 | Google Cloud Vision（OCR） | 無料枠あり | 毎月最初の1,000ユニット | GCP認証 | 画像・文書のOCR | 超過は従量課金 |
+| OCR.space | 無料枠あり | 月25,000リクエスト（1ファイル1MBまで） | API Key | 画像・PDFのOCR | 外部送信される。機密文書や個人情報には使わない |
 | VOICEVOX ENGINE | ローカル実行 | 無料（商用・非商用とも可） | 不要（ローカルAPI） | 日本語音声合成 | クレジット表記が必要。キャラクターごとの規約が優先 |
 
 ### APIカタログ
@@ -129,7 +136,7 @@
 - 無料利用: 無料プランがあり、レート制限（RPM / RPD / トークン）はモデルごと。具体値は公式のRate limitsとコンソールのlimits画面を参照
 - 認証: API Key
 - 主な用途: 応答速度が重要なチャット・エージェントの試作
-- 利用時の注意: 無料プランはカード不要。Developerプランへのアップグレードは支払い方法が必要
+- 利用時の注意: 無料プランはカード不要。Developerプランへのアップグレードは支払い方法が必要。Whisper系の音声認識（Speech-to-Text）も無料プランの範囲で試せる（議事録・音声入力の試作向け）
 - 公式: [Rate limits](https://console.groq.com/docs/rate-limits) / [Plans](https://console.groq.com/settings/billing/plans)
 
 #### OpenRouter
@@ -144,28 +151,28 @@
 #### Mistral（Mistral Studio）
 
 - 種類: LLM・OCR等のAPI
-- 無料利用: 実験・評価・試作向けのFreeティアがある。上限は秒間リクエスト、毎分トークン、毎月トークンの3種で、数値はコンソールのLimitsで確認する
+- 無料利用: 実験・評価・試作向けのFree modeがあり、既定で有効。最新のQuickstartではカード不要。上限は秒間リクエスト、毎分トークン、毎月トークンの3種で、数値はコンソールのLimitsで確認する
 - 認証: API Key
 - 主な用途: 日本語を含む軽量なLLMの試作、文書のOCR
-- 利用時の注意: 旧「La Plateforme」はStudioの名称に移っている。Freeティアのデータの取り扱いは規約を確認する。OCRはページ単価の課金で、無料枠の適用可否は要確認
-- 公式: [Usage and limits](https://docs.mistral.ai/admin/user-management-finops/tier) / [Pricing](https://mistral.ai/pricing/)
+- 利用時の注意: 旧「La Plateforme」はStudioの名称に移っている。古い資料には支払い有効化が必要との記述が残るため、最新のQuickstartを優先する。Free modeのデータの取り扱いは規約を確認する。OCRはページ単価の課金で、無料枠の適用可否は要確認
+- 公式: [Usage and limits](https://docs.mistral.ai/admin/billing-usage/usage-limits) / [Pricing](https://mistral.ai/pricing/)
 
 #### Hugging Face Inference Providers
 
 - 種類: 複数の推論プロバイダへのルーティング
-- 無料利用: 全ユーザーに月次クレジットがあり、無料ユーザーはPROより少額。使い切ると従量課金
+- 無料利用: 全ユーザーに月次クレジットがあり、無料ユーザーは月$0.10分（PROは$2）。使い切ると従量課金
 - 認証: HFトークン
-- 主な用途: OSSモデルの動作確認、Embeddingや画像モデルの試用
+- 主な用途: OSSモデルの動作確認、Embeddingや画像モデルの試用（本格的な継続利用向けの枠ではない）
 - 利用時の注意: 自前のプロバイダキーを使うとクレジットは適用されない。旧「Inference API」の無料枠とは別物
 - 公式: [Pricing and Billing](https://huggingface.co/docs/inference-providers/pricing)
 
 #### Cloudflare Workers AI
 
 - 種類: エッジ推論
-- 無料利用: 1日あたりの無料割当（Neurons単位）がある。超過はWorkers Paidでの従量課金
+- 無料利用: 1日10,000 Neuronsの無料割当がある。超過して使うにはWorkers Paidが必要で、超過分は従量課金
 - 認証: Cloudflareアカウント / API Token
-- 主な用途: LLM・Embedding・画像などの軽量な推論をWorkersから呼ぶ
-- 利用時の注意: 2026-07に、一部モデルがWorkers Paid限定になった。使うモデルが無料枠の対象か確認する
+- 主な用途: LLM・Embedding・画像などの軽量な推論をWorkersから呼ぶ。同じアカウントでR2・Vectorize・Browser Rendering・Workflowsにも無料枠があり、小規模なRAGや検索・抽出の自動化を組み立てやすい
+- 利用時の注意: 2026-07に、一部モデルがWorkers Paid限定になった。使うモデルが無料枠の対象か確認する。サービスごとに、無料枠を超えたときの挙動（停止か従量課金か）が違う
 - 公式: [Pricing](https://developers.cloudflare.com/workers-ai/platform/pricing/) / [Changelog](https://developers.cloudflare.com/changelog/post/2026-07-28-models-require-workers-paid/)
 
 #### Cohere
@@ -177,19 +184,28 @@
 - 利用時の注意: 評価キーは商用・本番利用が認められない。本番キーは従量課金
 - 公式: [Rate limits](https://docs.cohere.com/docs/rate-limits) / [Pricing](https://cohere.com/pricing)
 
-#### Jina AI
+#### Jina AI（Embedding / Rerank）
 
-- 種類: Embedding / Rerank / Reader（URLの本文取得）
-- 無料利用: 新規APIキーに無料トークンが付く。**初回付与型**で、使い切ると購入が必要。トークンはReader・Embeddings・Rerankerで共有
+- 種類: Embedding / Rerank / 分類
+- 無料利用: 新規APIキーに1,000万トークンが付く。**初回付与型**で、使い切ると購入が必要。トークンはJinaの各APIで共有
 - 認証: API Key
-- 主な用途: RAGの試作、Webページ本文のLLM向け変換
+- 主な用途: RAGの試作、問い合わせや文書のカテゴリ分け
 - 利用時の注意: 無料キーはレート制限が低い
-- 公式: [Embeddings](https://jina.ai/embeddings/) / [Reranker](https://jina.ai/reranker/) / [Reader](https://jina.ai/reader/)
+- 公式: [Embeddings](https://jina.ai/embeddings/) / [Reranker](https://jina.ai/reranker/)
+
+#### Jina Reader
+
+- 種類: URLからの本文抽出（Markdown化）
+- 無料利用: キーなしの基本利用は無料。キーを付けるとレート制限が上がり、トークンを消費する。EmbeddingのTrialと一括りにしない
+- 認証: 不要 / API Key
+- 主な用途: 検索結果のURLから本文を取り出してLLMに渡す（検索 → 本文抽出 → 要約・Rerank）
+- 利用時の注意: キーなしは低レート。取得するページの利用条件は別に確認する
+- 公式: [Reader](https://jina.ai/reader/)
 
 #### Voyage AI
 
 - 種類: Embedding / Rerank
-- 無料利用: アカウントごとに、モデルごとの初回無料トークンがある。継続的な毎月の無料枠ではない
+- 無料利用: アカウントごとに、モデルごとの初回無料トークンがある（現行の多くのモデルで最初の2億トークン、一部の旧モデルは5,000万）。継続的な毎月の無料枠ではない
 - 認証: API Key
 - 主な用途: 検索・RAGの精度比較
 - 利用時の注意: モデルのラインナップが入れ替わるため、無料の対象モデルは公式Pricingで確認する
@@ -209,11 +225,11 @@
 #### Tavily
 
 - 種類: AIエージェント向けの検索・抽出API
-- 無料利用: Researcherプランで月1,000クレジット。カード不要。Basic検索は1クレジット、Advanced検索は2クレジット
-- 認証: API Key
-- 主な用途: 検索結果の要約や調査エージェントの試作
-- 利用時の注意: クレジット消費はエンドポイントによって変わる
-- 公式: [Credits & Pricing](https://docs.tavily.com/documentation/api-credits)
+- 無料利用: Researcherプランで月1,000クレジット。カード不要。Basic検索は1クレジット、Advanced検索は2クレジット。アカウントもキーも不要の低レート利用（Search / Extractのみ）もある
+- 認証: API Key（キーなしも可）
+- 主な用途: 検索結果の要約や調査エージェントの試作（検索 → LLMの調査ツール）
+- 利用時の注意: クレジット消費はエンドポイントによって変わる。キーなしは別の上限・エラー形式になる
+- 公式: [Credits & Pricing](https://docs.tavily.com/documentation/api-credits) / [キーなし利用](https://docs.tavily.com/documentation/keyless)
 
 #### NewsAPI
 
@@ -231,7 +247,7 @@
 - 種類: 天気・予報・過去データAPI
 - 無料利用: 非商用に限り無料。1日10,000回未満、1時間5,000回、1分600回
 - 認証: 不要
-- 主な用途: 天気を使うWebアプリや家庭内の自動化
+- 主な用途: 天気を使うWebアプリや家庭内の自動化。標高API・大気質APIも同じ無料条件で使え、防災・環境ダッシュボードの試作に向く
 - 利用時の注意: 広告やサブスクのあるサイトは非商用にあたらない。表示箇所には「Weather data by Open-Meteo.com」等のリンク（CC BY 4.0）が必要。商用は有料プラン
 - 公式: [Terms](https://open-meteo.com/en/terms) / [Pricing](https://open-meteo.com/en/pricing)
 
@@ -241,17 +257,17 @@
 - 無料利用: One Call API 3.0は1日1,000回まで無料。超過は従量課金
 - 認証: API Key
 - 主な用途: 現在の天気・予報・過去データの取得
-- 利用時の注意: 超過課金が発生しうるため、サブスクの上限設定を確認する。他の旧エンドポイントの条件は別
+- 利用時の注意: 購読にカード情報が必要で、超過分は従量課金になる。課金画面で1日あたりの呼び出し上限を設定する。他の旧エンドポイントの条件は別
 - 公式: [One Call API 3.0](https://openweathermap.org/api/one-call-3) / [Pricing and limits](https://openweathermap.org/full-price)
 
 #### 気象庁 防災情報XML
 
-- 種類: 公共データ（XML電文のPULL配信）
+- 種類: 公共データ（XML電文のPULL配信。Atomフィードで更新を知らせる）
 - 無料利用: 無料。利用者登録は不要
 - 認証: 不要
-- 主な用途: 警報・注意報・地震・火山情報の取得、防災ダッシュボード
-- 利用時の注意: 出典に気象庁ホームページである旨を明記する。メンテナンスで配信が止まったり遅れたりしても、気象庁は責任を負わない。確実性が要るなら気象業務支援センター等を使う。XMLの構造が複雑で、パース処理が必要
-- 公式: [気象庁 高度利用者向け](https://www.data.jma.go.jp/developer/index.html) / [利用規約](https://www.jma.go.jp/jma/kishou/info/coment.html)
+- 主な用途: 警報・注意報・地震・火山情報の取得、防災ダッシュボード、差分監視による通知
+- 利用時の注意: 出典に気象庁ホームページである旨を明記する。メンテナンスで配信が止まったり遅れたりしても、気象庁は責任を負わない。確実性が要るなら気象業務支援センター等を使う。XMLの構造が複雑で、パース処理が必要。Atomフィードは高頻度（毎分更新）と長期（毎時更新）に分かれる。1日10GB以上のダウンロードはIP遮断の対象なので、更新分だけを取得してキャッシュする
+- 公式: [PULL型配信](https://xml.kishou.go.jp/xmlpull.html) / [気象庁 高度利用者向け](https://www.data.jma.go.jp/developer/index.html) / [利用規約](https://www.jma.go.jp/jma/kishou/info/coment.html)
 - 自治体との相性: 避難情報や防災情報の通知・可視化のPoCに使いやすい
 
 ### 公共データ・行政（日本）
@@ -265,6 +281,16 @@
 - 利用時の注意: 統計表のID・分類コードの理解が必要
 - 公式: [API機能](https://www.e-stat.go.jp/api/) / [利用規約](https://www.e-stat.go.jp/api/en/terms-of-use)
 - 自治体との相性: 市区町村の比較や政策の基礎データ取得に使いやすい
+
+#### 統計ダッシュボード WebAPI
+
+- 種類: 総務省統計局の統計ダッシュボードのデータAPI（REST）
+- 無料利用: 無料。利用登録は不要
+- 認証: 不要
+- 主な用途: 主要統計の時系列・地域別の値を取得して、市区町村比較や可視化を手早く試作する
+- 利用時の注意: 系列・地域・用語・社会事象・統計調査のメタ情報と、統計データを取得する6つの機能がある。JSON / XML / CSV（統計データはJSON-statも）。詳細統計はe-Stat APIを使い分ける
+- 公式: [API](https://dashboard.e-stat.go.jp/static/api)
+- 自治体との相性: 地域指標の比較ダッシュボードの試作に使いやすい
 
 #### 日本銀行 時系列統計データAPI
 
@@ -283,6 +309,24 @@
 - 主な用途: 法人名・所在地の照会、取引先データの名寄せ
 - 利用時の注意: 検証環境（架空データ）にもアプリケーションIDが必要
 - 公式: [Web-API](https://www.houjin-bangou.nta.go.jp/webapi/index.html)
+
+#### Gビズインフォ REST API（v2）
+
+- 種類: 府省庁が保有する法人情報の検索API
+- 無料利用: 無料
+- 認証: 利用申請（法人番号・法人名・利用目的等を入力）→ メールのURLで表示されるAPIトークン
+- 主な用途: 法人番号を共通キーにした、補助金・調達・届出認定・特許・財務などの情報の名寄せや閲覧
+- 利用時の注意: 法人番号APIより企業活動の情報が豊富。v2の仕様書に暫定版の表記があるため、仕様変更に注意する
+- 公式: [APIの利用](https://content.info.gbiz.go.jp/api/index.html) / [REST API利用申請マニュアル](https://help.info.gbiz.go.jp/hc/ja/articles/4795207351326-REST-API%E5%88%A9%E7%94%A8%E7%94%B3%E8%AB%8B%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB)
+
+#### EDINET API（Version 2）
+
+- 種類: 金融庁の開示書類取得API
+- 無料利用: 無料
+- 認証: APIキー（登録して発行する）
+- 主な用途: 有価証券報告書などを取得し、XBRL・PDFとLLMで比較・要点抽出する技術検証
+- 利用時の注意: キー不要のAPIではない。取得する書類の形式（XBRL・PDF）ごとに扱いが違う
+- 公式: [EDINET](https://disclosure2.edinet-fsa.go.jp/)
 
 #### e-Gov 法令API（Version 2）
 
@@ -308,8 +352,8 @@
 - 種類: 書誌・蔵書の検索API（SRU・OpenSearch・OpenURL）と、全文検索の実験サービス
 - 無料利用: 無料。営利企業が営利目的で使う場合は申請が必要。データ提供機関が許諾済みのデータは申請不要
 - 認証: 用途により申請が必要
-- 主な用途: 書籍・資料の検索、全文テキスト検索、IIIFでの画像取得
-- 利用時の注意: クレジット表示が必須。次世代デジタルライブラリーは営利目的かつ継続的な利用を除いて申請不要だが、実験的サービスで継続提供は保証されない
+- 主な用途: 書籍・資料の検索、OAI-PMHでの書誌メタデータの一括収集、全文テキスト検索、IIIFでの画像取得
+- 利用時の注意: クレジット表示が必須。申請ではAPIの利用形態（営利性・課金・利用者数など）を確認される。NDLが作成した書誌データ自体は営利・非営利を問わず申請なしで使える。典拠データはWeb NDL AuthoritiesのSPARQLでも取得できる。次世代デジタルライブラリーは営利目的かつ継続的な利用を除いて申請不要だが、実験的サービスで継続提供は保証されない
 - 公式: [API仕様の概要](https://ndlsearch.ndl.go.jp/help/api/specifications) / [次世代デジタルライブラリー](https://lab.ndl.go.jp/service/tsugidigi/)
 
 #### 国土地理院 地理院タイル
@@ -394,7 +438,7 @@
 - 種類: 中央行政のオープンデータポータル（CKAN互換のメタデータ取得API）と、自治体のAPI
 - 無料利用: 無料。メタデータ取得APIは誰でも自由に利用できる
 - 認証: e-Govデータポータルのメタデータ取得APIは不要。東京都のAPIは登録不要
-- 主な用途: 府省庁・自治体のオープンデータを検索・取得する
+- 主な用途: 府省庁・自治体のオープンデータ（東京都の避難所・防災関連など）を検索・取得する
 - 利用時の注意: 旧「データカタログサイト」は2023年3月末にe-Govデータポータルへ移行した。APIで取れるのはデータセット・リソースなどのメタデータで、データ本体はCSV等のファイルを別に取得する。データごとにライセンス・更新状況が違う
 - 公式: [e-Govデータポータル メタデータ取得API](https://data.e-gov.go.jp/data/api_guide) / [東京都APIの使い方](https://spec.api.metro.tokyo.lg.jp/spec/usage) / [東京都カタログ](https://catalog.data.metro.tokyo.lg.jp/)
 - 自治体との相性: 他自治体との比較や、統計データとの突合に使いやすい
@@ -436,6 +480,15 @@
 - 主な用途: 研究動向の分析、機関ごとの論文数の集計
 - 利用時の注意: 検索は1回あたりの単価が高く、リスト取得や単体取得は安い。単価は公式を参照
 - 公式: [Authentication](https://developers.openalex.org/guides/authentication) / [Pricing](https://help.openalex.org/access/pricing/)
+
+#### Open Library API
+
+- 種類: 書籍・著者・表紙画像のAPI（JSON / YAML / RDF・XML）
+- 無料利用: 無料
+- 認証: 不要。アプリ名と連絡先を含む `User-Agent` を付けると上限が上がる
+- 主な用途: ISBNで書籍情報・表紙画像を取得する。NDLの書誌とISBNで突合して、日本語資料の補完に使う
+- 利用時の注意: 識別のない場合は上限が低い（1秒に1リクエスト程度）。表紙のISBN指定取得は別に厳しい制限がある
+- 公式: [APIs](https://openlibrary.org/developers/api)
 
 #### Frankfurter
 
@@ -506,10 +559,10 @@
 #### DeepL API Developer
 
 - 種類: 翻訳API
-- 無料利用: **累計100万文字**まで。月次の無料枠ではなく、上限に達してもリセットされない。**初回付与型**に近い
+- 無料利用: 新プラン「API Developer」は**累計100万文字**まで（公式サポートの記載）。月次の無料枠ではなく、上限に達してもリセットされない。**初回付与型**に近い
 - 認証: API Key
 - 主な用途: 日本語・英語の翻訳を組み込んだ試作、多言語化の検証
-- 利用時の注意: 上限に達したら、有料のDeepL API Growthへ移行する。旧「DeepL API Free」（月50万文字）は新規購入できない。商用利用などの条件は利用規約を確認する
+- 利用時の注意: 公式の開発者文書には旧「DeepL API Free」（月50万文字）の記載が残っていて、表記が揺れている。地域・既存契約・移行状況で表示が違う可能性があるため、新規登録時のプラン選択画面で無料条件を確認する。上限に達したら有料のGrowthへ移行する。商用利用などの条件は利用規約を確認する
 - 公式: [DeepL API plans](https://support.deepl.com/hc/en-us/articles/360021200939-DeepL-API-plans) / [Usage and limits](https://developers.deepl.com/docs/resources/usage-limits)
 
 #### Google Cloud Vision（OCR）
@@ -520,6 +573,15 @@
 - 主な用途: 画像やスキャン文書からの文字抽出
 - 利用時の注意: 超過分は従量課金。複雑な帳票はDocument AIなど別サービスの価格を確認する
 - 公式: [Pricing](https://cloud.google.com/vision/pricing)
+
+#### OCR.space
+
+- 種類: 画像・PDFのOCR API
+- 無料利用: 無料プランで月25,000リクエスト。1ファイル1MBまで。IPあたり1日の上限もある
+- 認証: API Key
+- 主な用途: 帳票・スキャン画像の文字抽出を、軽量に比較・試作する（OCR → LLMでの項目抽出）
+- 利用時の注意: ファイルが外部に送信される。機密文書や個人情報を含む文書には使わず、公開サンプルで試す
+- 公式: [Free OCR API](https://ocr.space/ocrapi)
 
 #### VOICEVOX ENGINE
 
@@ -557,10 +619,10 @@
 
 小さく試せる組み合わせの例。いずれも既存プロジェクトとは無関係に、単独で試作できる。
 
-- **Brave Search / Tavily + Gemini / Groq**
-  → Web検索結果の要約・分類。検索は無料クレジットの範囲に収め、要約は無料枠のLLMで回す
-- **e-Stat + 国土地理院 + 国土数値情報**
-  → 地域統計の地図可視化。市区町村ごとの人口などを、行政区域のGISデータに重ねる
+- **Brave Search / Tavily + Jina Reader + Gemini / Groq**
+  → 出典付きのWeb調査アシスタント。検索、本文抽出、要約を分け、URLと取得日時を保存する
+- **e-Stat / 統計ダッシュボード + 国土地理院 + 国土数値情報**
+  → 地域統計の地図可視化。主要指標は統計ダッシュボード、詳細はe-Statで取り、市区町村ごとの値を行政区域のGISデータに重ねる
 - **気象庁 防災情報XML / Open-Meteo + 地図**
   → 防災・気象ダッシュボード。Open-Meteoは非商用の範囲で使う
 - **GitHub API + LLM（OpenRouter / Gemini / Groq など）**
@@ -569,10 +631,14 @@
   → ある法令に関する国会での議論と条文の突合。時点指定で当時の条文を引ける
 - **ABRジオコーダ + 自治体オープンデータ + 国土地理院**
   → 住所を含む表データの正規化と地図表示
-- **日銀API + Frankfurter + J-Quants**
-  → 金利・為替・株価の経済指標ダッシュボード
-- **LLM + VOICEVOX**
-  → 応答の読み上げ。音声合成はローカルで完結する
+- **日銀API + Frankfurter + J-Quants + EDINET**
+  → 金利・為替・株価・開示書類の経済・企業分析ダッシュボード。各データの公表時点と遅延を明示する
+- **法人番号API + Gビズインフォ**
+  → 法人名寄せと、補助金・調達情報のビューア。法人番号を共通キーにする
+- **NDLサーチ + Open Library**
+  → 書籍メタデータの統合。ISBNを主キーにし、タイトルだけの曖昧な突合は避ける
+- **Groq Whisper + LLM + VOICEVOX**
+  → 音声対話・議事録支援。音声認識はクラウド、音声合成はローカルという分離構成にできる
 - **ODPT + 地図タイル**
   → 地域の公共交通の位置・時刻表の表示
 
@@ -584,12 +650,18 @@
 - **NewsAPI の無料プランは開発環境専用**。公開した時点で使えなくなる
 - **TMDB と Open-Meteo は「無料」ではなく非商用のみ無料**。広告やサブスクのあるサイトは商用になる
 - **Gemini は課金アカウントを紐付けると、そのプロジェクトは全て課金対象**
-- **Hugging Face の無料分は月次の少額クレジット**。「Inference は無料」とは言えない
-- **Jina と Voyage の無料トークンは初回付与型**。毎月の無料枠ではない
+- **Hugging Face の無料分は月$0.10分の少額クレジット**。「Inference は無料」とは言えず、動作確認向け
+- **Jina（Embedding / Rerank）と Voyage の無料トークンは初回付与型**。毎月の無料枠ではない。ただし Jina Reader のキーなしの基本利用は別に無料
+- **Cerebras Inference は継続的な無料枠ではなく、$5・30日のTrial**。そのため掲載していない
+- **OpenWeatherMap は購読にカード情報が必要**。1日1,000回を超えると自動で課金される
+- **Cloudflare は無料枠を超えたときの挙動がサービスごとに違う**。Freeでは使えなくなるもの、Paidでは従量課金になるものがある
+- **気象庁防災情報XML は無制限・配信保証ではない**。1日10GB超のダウンロードでIPが遮断される
+- **NDLサーチ API は登録不要の完全公開APIではない**。利用形態により申請が必要
+- **OCR.space は外部送信型で、無料は1ファイル1MBまで**。機密文書には向かない
 - **LINE Messaging API の無料プランは月200通で、超えると配信できない**
 - **Spotify Web API は、現在の開発モードではPremiumアカウントが必要で、ユーザー数・アプリ数に上限がある**。非商用の学習用途向けに絞られているため、個人開発の候補から外した
 - **GitHub Models は2026-07-30に終了している**。Playground・モデルカタログ・Inference API・BYOKのすべてが利用できない。Copilotとは別サービスで、掲載しない
-- **DeepL API Free は新規購入できないが、後継の DeepL API Developer がある**。ただし月次の無料枠ではなく、累計100万文字の上限で、リセットされない
+- **DeepL API Free は新規購入できないが、後継の DeepL API Developer がある**。ただし月次の無料枠ではなく、累計100万文字の上限で、リセットされない。公式の開発者文書には旧Freeの月50万文字が残っていて表記が揺れているため、新規登録時のプラン選択画面で確認する
 - **国土数値情報は「API」ではなくファイル配布**。ただし構造化データとしてプログラムから扱える
 - **次世代デジタルライブラリーは実験的サービス**。継続提供を前提にしない
 - **VOICEVOX は無料のクラウドAPIではなく、ローカルで動かすOSS**
