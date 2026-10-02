@@ -41,7 +41,6 @@
 | Mistral（Mistral Studio） | 無料枠あり | Freeティアあり（上限はコンソール参照） | API Key | LLM・OCR等の試作 | 旧名称 La Plateforme。名称はStudioへ移行している |
 | Hugging Face Inference Providers | 無料枠あり | 月次の少額クレジット | HFトークン | 多様なOSSモデルの呼び出し | 無料ユーザーはPROより少額。超過は従量課金 |
 | Cloudflare Workers AI | 無料枠あり | 1日あたりの無料割当 | CFアカウント / API Token | エッジでの推論 | 一部モデルは有料プラン必須（2026-07変更） |
-| GitHub Models | 無料枠あり | レート制限付き無料API | GitHubアカウント | モデル比較・プロトタイプ | 上限はCopilotプランとモデル区分で異なる |
 | Cohere | Trial | 評価キー（月間上限あり） | API Key | Chat / Embed / Rerank の試用 | 商用・本番利用は不可。本番キーは従量課金 |
 | Jina AI | Trial / 初回付与 | 新規キーに無料トークン | API Key | Embedding / Rerank / Reader | 付与分を使い切ると購入が必要 |
 | Voyage AI | Trial / 初回付与 | アカウントごとの初回無料トークン | API Key | Embedding / Rerank | モデルごとに無料分が決まっている |
@@ -76,7 +75,7 @@
 | アドレス・ベース・レジストリ / ABRジオコーダ | ローカル実行 + 公共データ | 無料 | 不要 | 住所の正規化・緯度経度付与 | ジオコーダはOSS。手元で動かす |
 | 公共交通オープンデータセンター（ODPT） | 公共・無料 | 無料 | 登録 + APIキー | 鉄道・バス等の運行データ | データごとのライセンスは事業者が決める |
 | J-Quants API | 無料枠あり | Freeプラン（12週遅延） | アカウント | 株価・財務データ | 無料は1年間で、毎分5回まで |
-| data.go.jp / 東京都オープンデータAPI | 公共・無料 | 無料 | 東京都APIは登録不要 | データ検索・自治体データ | 自治体データはCKAN形式が多い |
+| e-Govデータポータル / 東京都オープンデータAPI | 公共・無料 | 無料 | 不要（東京都APIは登録不要） | データ検索・自治体データ | メタデータ取得APIはCKAN互換。旧データカタログサイトの後継 |
 
 ### 海外のオープンデータ・学術・為替・地図
 
@@ -99,6 +98,7 @@
 | Unsplash API | 無料枠あり | Demoは1時間50回 | Access Key | 写真の検索・表示 | 帰属表示とホットリンクが必須 |
 | Pexels API | 無料枠あり | 1時間200回 / 月20,000回 | API Key | 写真・動画の検索 | 帰属表示が必要。上限引き上げは一時停止中 |
 | TMDB | 非商用のみ無料 | 非商用は無料 | API Key | 映画・TV情報 | 商用・AI学習利用は別契約 |
+| DeepL API Developer | Trial / 初回付与 | 累計100万文字（月次リセットなし） | API Key | 翻訳 | 上限に達するとGrowthへの移行が必要 |
 | Google Cloud Vision（OCR） | 無料枠あり | 毎月最初の1,000ユニット | GCP認証 | 画像・文書のOCR | 超過は従量課金 |
 | VOICEVOX ENGINE | ローカル実行 | 無料（商用・非商用とも可） | 不要（ローカルAPI） | 日本語音声合成 | クレジット表記が必要。キャラクターごとの規約が優先 |
 
@@ -167,15 +167,6 @@
 - 主な用途: LLM・Embedding・画像などの軽量な推論をWorkersから呼ぶ
 - 利用時の注意: 2026-07に、一部モデルがWorkers Paid限定になった。使うモデルが無料枠の対象か確認する
 - 公式: [Pricing](https://developers.cloudflare.com/workers-ai/platform/pricing/) / [Changelog](https://developers.cloudflare.com/changelog/post/2026-07-28-models-require-workers-paid/)
-
-#### GitHub Models
-
-- 種類: モデルのプレイグラウンドとAPI
-- 無料利用: プロトタイピング向けの無料API利用があり、RPM・RPD・1リクエストのトークン数・同時実行数で制限される。上限はCopilotのプランとモデル区分（低・高・Embedding）で異なる
-- 認証: GitHubアカウント
-- 主な用途: モデルの比較、GitHub Actionsと組み合わせた自動化
-- 利用時の注意: 本番用途の無料枠ではない
-- 公式: [Prototyping with AI models](https://docs.github.com/en/enterprise-cloud@latest/github-models/use-github-models/prototyping-with-ai-models)
 
 #### Cohere
 
@@ -398,14 +389,14 @@
 - 利用時の注意: リアルタイム用途には向かない。CSVダウンロードは無料に含まれない
 - 公式: [プラン](https://jpx-jquants.com/ja/help/plan) / [レート制限](https://jpx-jquants.com/ja/spec/rate-limits)
 
-#### data.go.jp / 東京都オープンデータAPI
+#### e-Govデータポータル / 東京都オープンデータAPI
 
-- 種類: オープンデータのカタログ（CKAN）と、自治体のAPI
-- 無料利用: 無料
-- 認証: 東京都のAPIは登録不要
-- 主な用途: 自治体のオープンデータを検索・取得する
-- 利用時の注意: データごとにライセンス・更新状況が違う。CKAN APIはメタデータの取得に使い、本体はCSV等
-- 公式: [data.go.jp 開発者向け](https://www.data.go.jp/for-developer/for-developer) / [東京都APIの使い方](https://spec.api.metro.tokyo.lg.jp/spec/usage) / [東京都カタログ](https://catalog.data.metro.tokyo.lg.jp/)
+- 種類: 中央行政のオープンデータポータル（CKAN互換のメタデータ取得API）と、自治体のAPI
+- 無料利用: 無料。メタデータ取得APIは誰でも自由に利用できる
+- 認証: e-Govデータポータルのメタデータ取得APIは不要。東京都のAPIは登録不要
+- 主な用途: 府省庁・自治体のオープンデータを検索・取得する
+- 利用時の注意: 旧「データカタログサイト」は2023年3月末にe-Govデータポータルへ移行した。APIで取れるのはデータセット・リソースなどのメタデータで、データ本体はCSV等のファイルを別に取得する。データごとにライセンス・更新状況が違う
+- 公式: [e-Govデータポータル メタデータ取得API](https://data.e-gov.go.jp/data/api_guide) / [東京都APIの使い方](https://spec.api.metro.tokyo.lg.jp/spec/usage) / [東京都カタログ](https://catalog.data.metro.tokyo.lg.jp/)
 - 自治体との相性: 他自治体との比較や、統計データとの突合に使いやすい
 
 ### 海外のオープンデータ・学術・為替・地図
@@ -512,6 +503,15 @@
 - 利用時の注意: 帰属表示とTMDBロゴが必要。有料アプリ、広告・収益化を伴うサイト、AI学習への利用は別契約が必要
 - 公式: [API Terms of Use](https://www.themoviedb.org/api-terms-of-use)
 
+#### DeepL API Developer
+
+- 種類: 翻訳API
+- 無料利用: **累計100万文字**まで。月次の無料枠ではなく、上限に達してもリセットされない。**初回付与型**に近い
+- 認証: API Key
+- 主な用途: 日本語・英語の翻訳を組み込んだ試作、多言語化の検証
+- 利用時の注意: 上限に達したら、有料のDeepL API Growthへ移行する。旧「DeepL API Free」（月50万文字）は新規購入できない。商用利用などの条件は利用規約を確認する
+- 公式: [DeepL API plans](https://support.deepl.com/hc/en-us/articles/360021200939-DeepL-API-plans) / [Usage and limits](https://developers.deepl.com/docs/resources/usage-limits)
+
 #### Google Cloud Vision（OCR）
 
 - 種類: 画像・文書のOCR
@@ -563,7 +563,7 @@
   → 地域統計の地図可視化。市区町村ごとの人口などを、行政区域のGISデータに重ねる
 - **気象庁 防災情報XML / Open-Meteo + 地図**
   → 防災・気象ダッシュボード。Open-Meteoは非商用の範囲で使う
-- **GitHub API + LLM（GitHub Models）**
+- **GitHub API + LLM（OpenRouter / Gemini / Groq など）**
   → 開発履歴やリポジトリの分析。PRやIssueの傾向をまとめる
 - **国会会議録 API + e-Gov 法令API + LLM**
   → ある法令に関する国会での議論と条文の突合。時点指定で当時の条文を引ける
@@ -588,7 +588,8 @@
 - **Jina と Voyage の無料トークンは初回付与型**。毎月の無料枠ではない
 - **LINE Messaging API の無料プランは月200通で、超えると配信できない**
 - **Spotify Web API は、現在の開発モードではPremiumアカウントが必要で、ユーザー数・アプリ数に上限がある**。非商用の学習用途向けに絞られているため、個人開発の候補から外した
-- **DeepL API Free は新規購入できない**（既存契約のみ）ため、候補から外した
+- **GitHub Models は2026-07-30に終了している**。Playground・モデルカタログ・Inference API・BYOKのすべてが利用できない。Copilotとは別サービスで、掲載しない
+- **DeepL API Free は新規購入できないが、後継の DeepL API Developer がある**。ただし月次の無料枠ではなく、累計100万文字の上限で、リセットされない
 - **国土数値情報は「API」ではなくファイル配布**。ただし構造化データとしてプログラムから扱える
 - **次世代デジタルライブラリーは実験的サービス**。継続提供を前提にしない
 - **VOICEVOX は無料のクラウドAPIではなく、ローカルで動かすOSS**
