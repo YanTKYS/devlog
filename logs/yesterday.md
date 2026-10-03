@@ -1,63 +1,25 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-10-01
+# Yesterday - 2026-10-02
 
 ### devlog
 
-- Commit `f638b5d` Update repositories.yml
+- Commit `dafc5c4` Create free-apis-20261002.md
   - direct commit
-  - https://github.com/YanTKYS/devlog/commit/f638b5dcbca153681c7032555bf36f0736785124
+  - https://github.com/YanTKYS/devlog/commit/dafc5c4b203c36ce898476aef507f372adc158ba
+
+- PR #7 docs(notes): 個人開発で使える無料・無料枠APIの調査ノートを追加
+  - merged
+  - https://github.com/YanTKYS/devlog/pull/7
 
 ### news-watch
 
-- Commit `4602716` chore: collect news 2026-10-01
+- Commit `3445f12` chore: collect news 2026-10-02
   - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/4602716697c526f16afaed43482f6bc347288bee
-
-- Commit `3847cfd` chore: collect news 2026-10-01
-  - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/3847cfdf570b86639c0d225d6178dfdc35fa109d
-
-- PR #7 feat(pages): 記事カードのレスポンシブGrid化・メタ情報の簡潔化・最新日表示
-  - merged
-  - https://github.com/YanTKYS/news-watch/pull/7
-
-- PR #6 feat: Jevによる記事関連性フィルタの追加（Noul・fail-open・最大20リクエスト）
-  - merged
-  - https://github.com/YanTKYS/news-watch/pull/6
-
-- PR #5 feat(pages): 日付の折りたたみ・並び順切替・説明文の省略表示
-  - merged
-  - https://github.com/YanTKYS/news-watch/pull/5
-
-- PR #4 feat: GitHub Pages閲覧UIと months.json の自動生成を追加
-  - merged
-  - https://github.com/YanTKYS/news-watch/pull/4
-
-- PR #3 feat: 軽量な除外フィルタ（除外ドメイン・転載URLパターン）の追加
-  - merged
-  - https://github.com/YanTKYS/news-watch/pull/3
-
-- PR #2 feat: 検索クエリの精度改善（引用符による完全一致、7件→5件）
-  - merged
-  - https://github.com/YanTKYS/news-watch/pull/2
+  - https://github.com/YanTKYS/news-watch/commit/3445f123094f4d9a5664557f3649c17b37cba3da
 
 ### pdfengine
 
-- PR #30 Rewrite owned generated continuation blocks canonically on re-edit
+- PR #31 Validate canonical generated blocks on the Windows LibreOffice PDF
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/30
-
-### sheltermatch
-
-- PR #50 通常運用Notebookが取得する外部モジュールの版を v1.0.0 から v1.1.0 へ更新する
-  - merged
-  - https://github.com/YanTKYS/sheltermatch/pull/50
-
-- PR #49 v1.1.0候補: 担当部署の業務要件に合わせて、本人住所のハザードと直線距離の候補に絞る
-  - merged
-  - https://github.com/YanTKYS/sheltermatch/pull/49
-
-- Release v1.1.0 (v1.1.0 - 業務要件反映・出力簡素化)
-  - release
-  - https://github.com/YanTKYS/sheltermatch/releases/tag/v1.1.0
+  - https://github.com/YanTKYS/pdfengine/pull/31
