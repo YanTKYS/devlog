@@ -22,14 +22,14 @@
 | markdownutil | 2026-08-25 | PR | [#30 Fix presentation mode issues and empty content handling](https://github.com/YanTKYS/markdownutil/pull/30) |
 | markdown-library | 2026-09-23 | PR | [#7 Rebrand Prompt Library to Markdown Library with enhanced content support](https://github.com/YanTKYS/markdown-library/pull/7) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
-| news-watch | 2026-10-02 | direct commit | [`3445f12` chore: collect news 2026-10-02](https://github.com/YanTKYS/news-watch/commit/3445f123094f4d9a5664557f3649c17b37cba3da) |
+| news-watch | 2026-10-03 | direct commit | [`2e478c0` chore: collect news 2026-10-03](https://github.com/YanTKYS/news-watch/commit/2e478c04ff909f14b1c54fcbe33b0f70d80ecafc) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
-| pdfengine | 2026-10-03 | PR | [#32 Define source-slot rewrite ownership from synthetic evidence](https://github.com/YanTKYS/pdfengine/pull/32) |
+| pdfengine | 2026-10-03 | PR | [#33 Canonicalize owned source output in shared-flow v2](https://github.com/YanTKYS/pdfengine/pull/33) |
 | proxypac | 2026-09-08 | PR | [#6 Add browser launch PAC data URL generation (v0.2.0)](https://github.com/YanTKYS/proxypac/pull/6) |
 | quotaplayer | 2026-08-30 | PR | [#24 Fix playback speed, time display, and error handling issues](https://github.com/YanTKYS/quotaplayer/pull/24) |
 | signage | 2026-08-25 | PR | [#37 Simplify README and remove unused database methods](https://github.com/YanTKYS/signage/pull/37) |
 | since | 2026-08-25 | PR | [#6 Refactor README and improve code comments for clarity](https://github.com/YanTKYS/since/pull/6) |
-| sheltermatch | 2026-10-03 | PR | [#51 BODIKとGSIの指定緊急避難場所データを比較する実験を追加](https://github.com/YanTKYS/sheltermatch/pull/51) |
+| sheltermatch | 2026-10-04 | Release | [v1.2.0 (v1.2.0 - 自治体設定ファイル対応・運用設定共通化)](https://github.com/YanTKYS/sheltermatch/releases/tag/v1.2.0) |
 | slide | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/slide/pull/6) |
 | whiteboard | 2026-08-30 | PR | [#10 Migrate admin password to external PBKDF2 config file](https://github.com/YanTKYS/whiteboard/pull/10) |
 | winevtview | 2026-08-30 | PR | [#1 v0.1.0: EventPeek を WinEvtView として整理（0件の扱い・初期表示・列幅・README）](https://github.com/YanTKYS/winevtview/pull/1) |

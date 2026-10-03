@@ -1,21 +1,21 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Today - 2026-10-03
-
-### devlog
-
-- PR #8 docs(notes): Deep Research結果を反映して無料API調査ノートを更新
-  - merged
-  - https://github.com/YanTKYS/devlog/pull/8
-
-### pdfengine
-
-- PR #32 Define source-slot rewrite ownership from synthetic evidence
-  - merged
-  - https://github.com/YanTKYS/pdfengine/pull/32
+# Today - 2026-10-04
 
 ### sheltermatch
 
-- PR #51 BODIKとGSIの指定緊急避難場所データを比較する実験を追加
+- PR #56 すべてのNotebookにOpen In Colabバッジを追加し、付け忘れを検知する静的テストを追加する
   - merged
-  - https://github.com/YanTKYS/sheltermatch/pull/51
+  - https://github.com/YanTKYS/sheltermatch/pull/56
+
+- PR #55 experiments/ をテーマ別フォルダへ整理し、各READMEと入口の索引を追加する
+  - merged
+  - https://github.com/YanTKYS/sheltermatch/pull/55
+
+- PR #54 通常運用Notebookの取得先を v1.2.0 へ切り替え、ドキュメントを現行状態へ整理する
+  - merged
+  - https://github.com/YanTKYS/sheltermatch/pull/54
+
+- Release v1.2.0 (v1.2.0 - 自治体設定ファイル対応・運用設定共通化)
+  - release
+  - https://github.com/YanTKYS/sheltermatch/releases/tag/v1.2.0
