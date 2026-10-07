@@ -1,39 +1,35 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-10-05
+# Yesterday - 2026-10-06
 
 ### news-watch
 
-- Commit `ea588a2` chore: collect news 2026-10-05
+- Commit `aaa0f29` chore: collect news 2026-10-06
   - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/ea588a2d22c2a011a2b9c419d0239b336656eff5
+  - https://github.com/YanTKYS/news-watch/commit/aaa0f294a1909382f5e9afb32d23998b48e140bd
 
 ### pdfengine
 
-- PR #42 Implement canonical semantic island writer
+- PR #54 Implement the narrow semantic strikeout runtime
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/42
+  - https://github.com/YanTKYS/pdfengine/pull/54
 
-- PR #48 Reassess paint runtime blockers after the L1–L3 semantic lifecycle
+- PR #53 Define the semantic strikeout contract
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/48
+  - https://github.com/YanTKYS/pdfengine/pull/53
 
-- PR #47 Record Windows semantic lifecycle evidence
+- PR #52 Validate semantic underline lifecycle on Windows
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/47
+  - https://github.com/YanTKYS/pdfengine/pull/52
 
-- PR #46 Prepare Windows semantic lifecycle validation
+- PR #51 Prepare Windows semantic underline validation
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/46
+  - https://github.com/YanTKYS/pdfengine/pull/51
 
-- PR #45 Validate the end-to-end semantic bundle lifecycle
+- PR #50 Implement the narrow semantic underline runtime
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/45
+  - https://github.com/YanTKYS/pdfengine/pull/50
 
-- PR #44 Publish verified semantic bundles atomically (L3)
+- PR #49 Define the semantic underline contract
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/44
-
-- PR #43 Bind current semantic style and font authority
-  - merged
-  - https://github.com/YanTKYS/pdfengine/pull/43
+  - https://github.com/YanTKYS/pdfengine/pull/49
