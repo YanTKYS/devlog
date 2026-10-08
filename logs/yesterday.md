@@ -1,35 +1,23 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-10-06
+# Yesterday - 2026-10-07
 
 ### news-watch
 
-- Commit `aaa0f29` chore: collect news 2026-10-06
+- Commit `9c82d9d` chore: collect news 2026-10-07
   - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/aaa0f294a1909382f5e9afb32d23998b48e140bd
+  - https://github.com/YanTKYS/news-watch/commit/9c82d9d052d71770cc6858c6878f192139ec743c
 
 ### pdfengine
 
-- PR #54 Implement the narrow semantic strikeout runtime
+- PR #57 Bootstrap editable shared flows from ordinary pages
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/54
+  - https://github.com/YanTKYS/pdfengine/pull/57
 
-- PR #53 Define the semantic strikeout contract
+- PR #56 Reset the Acrobat editing critical path
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/53
+  - https://github.com/YanTKYS/pdfengine/pull/56
 
-- PR #52 Validate semantic underline lifecycle on Windows
+- PR #55 Validate semantic strikeout lifecycle on Windows
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/52
-
-- PR #51 Prepare Windows semantic underline validation
-  - merged
-  - https://github.com/YanTKYS/pdfengine/pull/51
-
-- PR #50 Implement the narrow semantic underline runtime
-  - merged
-  - https://github.com/YanTKYS/pdfengine/pull/50
-
-- PR #49 Define the semantic underline contract
-  - merged
-  - https://github.com/YanTKYS/pdfengine/pull/49
+  - https://github.com/YanTKYS/pdfengine/pull/55
