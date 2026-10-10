@@ -22,9 +22,9 @@
 | markdownutil | 2026-08-25 | PR | [#30 Fix presentation mode issues and empty content handling](https://github.com/YanTKYS/markdownutil/pull/30) |
 | markdown-library | 2026-09-23 | PR | [#7 Rebrand Prompt Library to Markdown Library with enhanced content support](https://github.com/YanTKYS/markdown-library/pull/7) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
-| news-watch | 2026-10-08 | direct commit | [`aa92656` chore: collect news 2026-10-08](https://github.com/YanTKYS/news-watch/commit/aa926568651a6eede2b0b9c8839eb88820971585) |
+| news-watch | 2026-10-09 | direct commit | [`92a679c` chore: collect news 2026-10-09](https://github.com/YanTKYS/news-watch/commit/92a679c7ddb5f29ba005f5fba192969230461878) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
-| pdfengine | 2026-10-08 | PR | [#58 Support structure-preserving editing of tagged PDFs](https://github.com/YanTKYS/pdfengine/pull/58) |
+| pdfengine | 2026-10-10 | PR | [#59 Unlock persistent editing of a real Japanese PDF](https://github.com/YanTKYS/pdfengine/pull/59) |
 | proxypac | 2026-09-08 | PR | [#6 Add browser launch PAC data URL generation (v0.2.0)](https://github.com/YanTKYS/proxypac/pull/6) |
 | quotaplayer | 2026-08-30 | PR | [#24 Fix playback speed, time display, and error handling issues](https://github.com/YanTKYS/quotaplayer/pull/24) |
 | signage | 2026-08-25 | PR | [#37 Simplify README and remove unused database methods](https://github.com/YanTKYS/signage/pull/37) |

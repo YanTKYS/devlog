@@ -1,15 +1,9 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-10-08
+# Yesterday - 2026-10-09
 
 ### news-watch
 
-- Commit `aa92656` chore: collect news 2026-10-08
+- Commit `92a679c` chore: collect news 2026-10-09
   - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/aa926568651a6eede2b0b9c8839eb88820971585
-
-### pdfengine
-
-- PR #58 Support structure-preserving editing of tagged PDFs
-  - merged
-  - https://github.com/YanTKYS/pdfengine/pull/58
+  - https://github.com/YanTKYS/news-watch/commit/92a679c7ddb5f29ba005f5fba192969230461878
