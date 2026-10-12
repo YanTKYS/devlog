@@ -1,0 +1,37 @@
+# GitHub Pages（閲覧UI）に掲載するリポジトリの許可リスト。
+#
+# GitHub Pages は公開サイトです。ここに書かれていないリポジトリは、
+# config/repositories.yml に登録されていても Pages には一切出力されません
+# （記録だけでなく、リポジトリ名も一覧に出ません）。
+# private リポジトリはここに追加しないでください。
+#
+# logs/ の収集対象・記録内容はこのファイルの影響を受けません。
+# 絞り込みは Pages 用データを生成する段階（scripts/build_site.py）でのみ行います。
+#
+# 掲載するには `owner/repo` の形式で1行追記します。
+# repositories.yml に登録されていないリポジトリは無視されます。
+
+public_repositories:
+  - YanTKYS/clock
+  - YanTKYS/chouseisan
+  - YanTKYS/desknets_noticer
+  - YanTKYS/devlog
+  - YanTKYS/fusen
+  - YanTKYS/idontlovepdf
+  - YanTKYS/idontlovepdf-engine
+  - YanTKYS/kanban
+  - YanTKYS/lgpwmng
+  - YanTKYS/mailexporter
+  - YanTKYS/markdownutil
+  - YanTKYS/markdown-library
+  - YanTKYS/nestsuite
+  - YanTKYS/news-watch
+  - YanTKYS/nonpaper
+  - YanTKYS/pdfengine
+  - YanTKYS/proxypac
+  - YanTKYS/signage
+  - YanTKYS/since
+  - YanTKYS/sheltermatch
+  - YanTKYS/slide
+  - YanTKYS/whiteboard
+  - YanTKYS/winevtview
