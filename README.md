@@ -15,7 +15,8 @@
 devlog/
 ├─ README.md
 ├─ config/
-│  └─ repositories.yml   # 収集対象リポジトリの一覧
+│  ├─ repositories.yml   # 収集対象リポジトリの一覧
+│  └─ pages.yml          # GitHub Pages に掲載するリポジトリの許可リスト
 ├─ logs/
 │  ├─ YYYY/YYYY-MM.md    # 自動収集ログ（月単位・正本）
 │  ├─ today.md           # 今日の記録だけを抜き出した閲覧用（自動生成）
@@ -24,9 +25,13 @@ devlog/
 ├─ projects/              # プロジェクトごとの判断・メモ（人間が記録）
 ├─ notes/                 # プロジェクト横断の知見（人間が記録）
 ├─ scripts/
-│  └─ collect.py          # 収集スクリプト本体
+│  ├─ collect.py          # 収集スクリプト本体
+│  └─ build_site.py       # Pages 用データ生成・サイト組み立て
+├─ site/                  # GitHub Pages 閲覧UI（静的 HTML / CSS / JavaScript）
+├─ tests/                 # build_site.py と閲覧UIのテスト
 └─ .github/workflows/
-   └─ collect.yml         # 定期実行・手動実行ワークフロー
+   ├─ collect.yml         # 定期実行・手動実行ワークフロー（収集）
+   └─ pages.yml           # GitHub Pages のデプロイ
 ```
 
 ### logs/
@@ -76,6 +81,71 @@ devlog/
 いずれも内容は最後に自動収集が走った時点までのものです。収集は1日1回（JST 06:00）なので、
 `today.md` は「たった今」ではなく「最後の収集時点までの今日」を表し、`latest.md` も
 GitHub 上の最終更新をその場で問い合わせた結果ではありません。
+
+## GitHub Pages（閲覧UI）
+
+`logs/` の記録を、ブラウザで「いつ・どのリポジトリで・何をしたか」として見られる軽量な
+ログビューアです。収集の仕組みとは独立しており、`logs/` の形式や収集処理は変えていません。
+
+- **最近の記録**: 最新月を初期表示。月・リポジトリ・種別（PR / Release / direct commit）で
+  絞り込み、新しい順・古い順を切り替えられます。日付ごとにカード表示し、
+  各カードから元の PR・Release・Commit の GitHub ページを開けます
+- **今日・昨日**: 最後の収集時点の「今日」「昨日」の記録です。リアルタイムの GitHub 活動
+  ではありません。「今日」の基準は閲覧者の時計ではなく、最後の収集日（`logs/today.md` の
+  見出し、JST）です
+- **リポジトリ一覧**: `latest.md` 相当です。公開対象の全リポジトリについて、devlog に
+  収集済みの最新記録（日付・種別・タイトル・リンク）を表示します。記録がないリポジトリは
+  `記録なし` と表示し、名前で絞り込めます
+
+外部 CDN・ライブラリは使わず、表示時に GitHub API も呼びません。データは Pages のビルド時に
+`logs/YYYY/YYYY-MM.md`（正本）から生成する `data/devlog.json` だけを、相対パスで読みます。
+Python 3 標準ライブラリのみで動き、サブパス（`https://<user>.github.io/devlog/`）配下でも
+動作します。
+
+### 公開対象の指定（重要）
+
+GitHub Pages は公開サイトです。`config/repositories.yml` には private リポジトリが含まれる
+ため、**`config/pages.yml` の `public_repositories` に書いたリポジトリだけ**を掲載します。
+書かれていないリポジトリは、記録もリポジトリ名も Pages 用データに出力されません
+（未指定の private リポジトリはデフォルトで非公開です）。
+
+```yaml
+public_repositories:
+  - YanTKYS/pdfengine
+  - YanTKYS/news-watch
+```
+
+- 掲載したいリポジトリを `owner/repo` で1行追記します（`repositories.yml` に登録済みであること）
+- **private リポジトリは追加しないでください**。追加するとそのタイトル・URL が公開されます
+- 絞り込みは Pages 用データの生成時（`scripts/build_site.py`）にだけ行います。`logs/` の
+  収集対象・記録内容は変わりません
+
+### Pages の有効化（初回のみ）
+
+リポジトリの Settings → Pages → Build and deployment → **Source** を
+**GitHub Actions** に設定してください。トークン（PAT）は不要です。
+
+### デプロイ
+
+`.github/workflows/pages.yml` が、テスト → `python3 scripts/build_site.py` →
+GitHub 公式の Pages Actions でのデプロイを行います（収集は行いません）。次のタイミングで
+実行され、同時に走らないよう直列化されます。
+
+- `Collect devlog` の成功後（`collect.yml` は `GITHUB_TOKEN` で push するため、その push では
+  他のワークフローが起動しません。そのため `workflow_run` で収集完了を受けます）
+- `main` に `logs/**` `site/**` `config/pages.yml` 等の変更が push されたとき
+- Actions タブからの手動実行（`Run workflow`）
+
+### ローカルで確認する
+
+```bash
+python3 scripts/build_site.py          # _site/ に生成（.gitignore 済み）
+python3 -m http.server -d _site 8000   # http://localhost:8000/ を開く
+python3 -m unittest discover -s tests  # データ生成のテスト
+node --test tests/site_lib.test.js     # 閲覧UIの絞り込み・並び替えのテスト
+```
+
+`file://` で直接開くと `data/devlog.json` を読めないため、上のように HTTP で配信してください。
 
 ## 自動収集の仕組み
 

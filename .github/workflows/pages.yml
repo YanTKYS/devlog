@@ -1,0 +1,79 @@
+name: Deploy Pages
+
+# 閲覧UI(site/)を GitHub Pages へデプロイする。ログ収集は行わない。
+#
+# - Collect devlog の完了後: collect.yml は GITHUB_TOKEN で logs/ を push するため、
+#   その push では他のワークフローの push トリガーが発火しない。
+#   workflow_run で収集完了を受けて最新の logs/ を公開する。
+# - main への手動 push: logs/ や site/ などを人が更新した場合。
+# - 手動実行: Actions タブの Run workflow。
+on:
+  workflow_run:
+    workflows: ["Collect devlog"]
+    types: [completed]
+    branches: [main]
+  push:
+    branches: [main]
+    paths:
+      - "logs/**"
+      - "site/**"
+      - "scripts/build_site.py"
+      - "scripts/collect.py"
+      - "config/pages.yml"
+      - "config/repositories.yml"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# 同時デプロイを避ける。実行中のデプロイは中断せず、後続を1件だけ待たせる。
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    # 収集が失敗した場合は、直前の公開内容をそのまま残す。
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout devlog
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Test viewer data and helpers
+        run: |
+          python3 -m unittest discover -s tests
+          node --test tests/site_lib.test.js
+
+      - name: Build static site (_site/)
+        run: python3 scripts/build_site.py --out _site
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
