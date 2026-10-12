@@ -1,27 +1,27 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-10-10
+# Yesterday - 2026-10-11
 
 ### news-watch
 
-- Commit `1ba9dde` chore: collect news 2026-10-10
+- Commit `fa71e58` chore: collect news 2026-10-11
   - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/1ba9ddeeacac2dc88aa123e3e4bb60a3b7518028
+  - https://github.com/YanTKYS/news-watch/commit/fa71e58b7d82dcfb59dbd568af48687a489d20dd
 
 ### pdfengine
 
-- PR #59 Unlock persistent editing of a real Japanese PDF
+- PR #66 Enable reflow between independent paragraphs across PDF pages
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/59
+  - https://github.com/YanTKYS/pdfengine/pull/66
 
-- PR #62 Expand font coverage for real-world PDF text editing
+- PR #65 Enable editing of existing body paragraphs across PDF pages
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/62
+  - https://github.com/YanTKYS/pdfengine/pull/65
 
-- PR #61 Enable real-world Japanese body reflow and paragraph push-down
+- PR #64 Enable real-world reflow of owned paragraphs across regions
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/61
+  - https://github.com/YanTKYS/pdfengine/pull/64
 
-- PR #60 Enable persistent editing of real Japanese body text
+- PR #63 Enable real-world PDF text continuation across verified regions
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/60
+  - https://github.com/YanTKYS/pdfengine/pull/63
