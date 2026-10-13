@@ -1,13 +1,9 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Today - 2026-10-12
+# Today - 2026-10-13
 
 ### pdfengine
 
-- PR #68 Enable PDF text reflow into space vacated by owned paragraphs
+- PR #72 Support sequential ownership extensions in restored PDF flows
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/68
-
-- PR #67 Audit and optimize test suite maintenance and execution
-  - merged
-  - https://github.com/YanTKYS/pdfengine/pull/67
+  - https://github.com/YanTKYS/pdfengine/pull/72
