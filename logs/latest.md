@@ -10,7 +10,7 @@
 | chouseisan | 2026-08-30 | PR | [#29 Fix UI bugs and improve event loading/display logic](https://github.com/YanTKYS/chouseisan/pull/29) |
 | clock | 2026-08-25 | PR | [#33 Refactor README and improve code documentation](https://github.com/YanTKYS/clock/pull/33) |
 | desknets_noticer | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/desknets_noticer/pull/6) |
-| devlog | 2026-10-12 | PR | [#9 feat(site): GitHub Pages 閲覧UIを追加（公開対象は許可リスト制）](https://github.com/YanTKYS/devlog/pull/9) |
+| devlog | 2026-10-13 | PR | [#11 docs(notes): free-apis.md に Sarashinaサービス（無償ベータ）を追加](https://github.com/YanTKYS/devlog/pull/11) |
 | fusen | 2026-08-25 | PR | [#11 Improve code comments and README documentation](https://github.com/YanTKYS/fusen/pull/11) |
 | giin_iinkai | 2026-08-30 | PR | [#5 Implement operation queuing to prevent concurrent save conflicts](https://github.com/YanTKYS/giin_iinkai/pull/5) |
 | giin_zaiseki | 2026-08-30 | PR | [#4 Improve multi-device sync and offline handling in input screen](https://github.com/YanTKYS/giin_zaiseki/pull/4) |
@@ -24,7 +24,7 @@
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
 | news-watch | 2026-10-12 | PR | [#8 同一話題の重複候補をタイトル類似度で検出（検証フェーズ・観測のみ）](https://github.com/YanTKYS/news-watch/pull/8) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
-| pdfengine | 2026-10-13 | PR | [#72 Support sequential ownership extensions in restored PDF flows](https://github.com/YanTKYS/pdfengine/pull/72) |
+| pdfengine | 2026-10-13 | PR | [#73 Preserve approved follower spacing across restored PDF edits](https://github.com/YanTKYS/pdfengine/pull/73) |
 | proxypac | 2026-10-12 | PR | [#7 UI/UXの再設計（デジタル庁デザインシステムの考え方を参考に、落ち着いた業務UIへ）](https://github.com/YanTKYS/proxypac/pull/7) |
 | quotaplayer | 2026-08-30 | PR | [#24 Fix playback speed, time display, and error handling issues](https://github.com/YanTKYS/quotaplayer/pull/24) |
 | signage | 2026-08-25 | PR | [#37 Simplify README and remove unused database methods](https://github.com/YanTKYS/signage/pull/37) |
