@@ -1,19 +1,9 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-10-13
+# Yesterday - 2026-10-14
 
-### devlog
+### news-watch
 
-- PR #11 docs(notes): free-apis.md に Sarashinaサービス（無償ベータ）を追加
-  - merged
-  - https://github.com/YanTKYS/devlog/pull/11
-
-### pdfengine
-
-- PR #72 Support sequential ownership extensions in restored PDF flows
-  - merged
-  - https://github.com/YanTKYS/pdfengine/pull/72
-
-- PR #73 Preserve approved follower spacing across restored PDF edits
-  - merged
-  - https://github.com/YanTKYS/pdfengine/pull/73
+- Commit `b6b6129` chore: collect news 2026-10-14
+  - direct commit
+  - https://github.com/YanTKYS/news-watch/commit/b6b6129c0193e250d793905bb372b0ba22b3cc32
