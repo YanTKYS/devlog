@@ -22,9 +22,9 @@
 | markdownutil | 2026-10-12 | PR | [#34 Fluent 2に基づくUI/UX改善（編集・プレビュー・出力操作の統一）](https://github.com/YanTKYS/markdownutil/pull/34) |
 | markdown-library | 2026-10-12 | PR | [#9 UI/UXを行政系の実用サイト向けに見直し（DADSの設計思想を参考）](https://github.com/YanTKYS/markdown-library/pull/9) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
-| news-watch | 2026-10-14 | direct commit | [`b6b6129` chore: collect news 2026-10-14](https://github.com/YanTKYS/news-watch/commit/b6b6129c0193e250d793905bb372b0ba22b3cc32) |
+| news-watch | 2026-10-15 | direct commit | [`2569747` chore: collect news 2026-10-15](https://github.com/YanTKYS/news-watch/commit/25697472a319785b306e22c452a703345fe699c3) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
-| pdfengine | 2026-10-13 | PR | [#73 Preserve approved follower spacing across restored PDF edits](https://github.com/YanTKYS/pdfengine/pull/73) |
+| pdfengine | 2026-10-15 | PR | [#74 Record real-PDF three-page preflight and page-seam refusal](https://github.com/YanTKYS/pdfengine/pull/74) |
 | proxypac | 2026-10-12 | PR | [#7 UI/UXの再設計（デジタル庁デザインシステムの考え方を参考に、落ち着いた業務UIへ）](https://github.com/YanTKYS/proxypac/pull/7) |
 | quotaplayer | 2026-08-30 | PR | [#24 Fix playback speed, time display, and error handling issues](https://github.com/YanTKYS/quotaplayer/pull/24) |
 | signage | 2026-08-25 | PR | [#37 Simplify README and remove unused database methods](https://github.com/YanTKYS/signage/pull/37) |
