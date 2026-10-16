@@ -6,7 +6,7 @@
 
 - 調査基準日（確認日）: 2026-10-16
 - 目的: 主要10製品の違いを共通の比較軸で把握し、自分の条件に合う候補を短時間で絞り込む
-- 位置付け: 3者のDeep Research結果（[H. 参考資料](#h-参考資料)）を統合し、変動しやすい項目を公式情報で照合したもの
+- 位置付け: 3者のDeep Research結果（[H. 参考資料](#h-参考資料)）を統合し、変動しやすい項目を公式情報で照合したもの。照合の詳細は [補足](#補足-調査方法と3者の照合) にまとめた
 
 ## 目次
 
@@ -17,15 +17,16 @@
 - [E. 製品別詳細](#e-製品別詳細)
 - [F. 用途別の選び方](#f-用途別の選び方)
 - [G. 比較上の注意点](#g-比較上の注意点)
+- [補足: 調査方法と3者の照合](#補足-調査方法と3者の照合)
 - [H. 参考資料](#h-参考資料)
 
 ## A. 概要
 
-### 調査対象
+- 調査対象: 主要10製品（Claude Code / OpenAI Codex / GitHub Copilot / Cursor / Windsurf（現 Devin Desktop）/ Gemini CLI / Cline / Roo Code / OpenCode / Google Antigravity）。その他の製品は [E の補足](#補足-その他の製品) で簡単に扱う
+- 比較の前提: 個人開発者の新規契約が基準。価格はUSD・税抜・月払い（年払い割引は併記）。旧プラン・年契約の経過措置は注記にとどめる。ツールの利用料金とモデルの推論料金は分けて書く。独自ベンチマークは実施しておらず、性能の優劣は判断しない
+- 情報源: 料金・利用制限・提供状況は公式情報で照合した。公式で確認できずDeep Researchに頼った事項は「※DR」、第三者記事が根拠の事項は「（第三者）」、確認できない事項は「未確認」、提供元が数値を公表していない事項は「非公開」と記す。確認方法と3者の照合結果は [補足: 調査方法と3者の照合](#補足-調査方法と3者の照合) を参照
 
-主要10製品: Claude Code / OpenAI Codex / GitHub Copilot / Cursor / Windsurf（現 Devin Desktop）/ Gemini CLI / Cline / Roo Code / OpenCode / Google Antigravity
-
-2026年10月時点で、このうち3製品は前提が大きく変わっている。
+2026年10月時点で、次の3製品は前提が大きく変わっている。
 
 | 製品 | 2026-10時点の状況 |
 | --- | --- |
@@ -34,67 +35,6 @@
 | Roo Code | 2026-05-15に拡張機能・Cloud・Routerを含む全製品が提供終了。リポジトリはアーカイブ済み |
 
 そのため、新規に選べる現役の選択肢は実質8系統（Claude Code / Codex / Copilot / Cursor / Devin Desktop / Antigravity / Cline / OpenCode）と、組織・API契約者向けの Gemini CLI になる。
-
-### 比較の前提
-
-- 個人開発者の新規契約を基準にする。旧プラン・年契約の経過措置は注記にとどめる
-- 価格はUSD・税抜・月払い。年払い割引がある場合は併記する
-- 「ツールの利用料金」と「モデルの推論料金」を分けて書く。BYOK（自分のAPIキー）型は、ツールが無料でも推論料金がかかる
-- 独自のベンチマークは実施していない。コード品質・速度の優劣は判断しない
-- 組織導入の観点は、個人が業務利用を検討する場合の参考として最小限に含める
-
-### 情報源と確認方法
-
-調査環境のネットワーク制限により、多くの公式サイトのページ本体を直接取得できなかった。そのため、次の方法で確認している。
-
-- **直接確認**: Anthropic公式（claude.com、support.claude.com、code.claude.com）のページ本文と、GitHub上の公式リポジトリ（README・LICENSE）
-- **公式ドメイン限定の検索で確認**: OpenAI、GitHub、Cursor、Cognition（Devin）、Google（Antigravity・Gemini CLI）、Cline、Roo Code、OpenCode。検索結果として得られた公式ページの記載内容を根拠にした
-- **Deep Researchのみ**: 上記で確認できなかった事項は、Deep Research側の出典付き記述を使い「※DR」と付記した。第三者記事が根拠のものは「（第三者）」とした
-- 確認できなかった事項は「未確認」、提供元が数値を公表していない事項は「非公開」とした
-
-判断の優先順位は、(1) 2026年10月時点の公式情報、(2) 公式の変更履歴・リリースノート、(3) 出典と確認日が明確なDeep Researchの記述、(4) 信頼できる第三者の検証情報、の順とした。3者の記述が一致していても、変動しやすい項目は公式情報で照合した。
-
-### 3者の調査結果の照合
-
-調査原文は ChatGPT・Claude・Perplexity の3件（いずれも2026-10-16付）。
-
-**共通して確認できた情報**（公式でも確認済み）
-
-- Claude Code は Claude の有料プラン（Pro以上）またはAPIで利用し、Freeプランには含まれない。上限は5時間ごとのセッション上限と週間上限
-- GitHub Copilot は2026-06-01から AI Credits（1クレジット＝$0.01）による使用量課金。Pro $10 / Pro+ $39 / Max $100
-- Codex は ChatGPT プランに含まれ、APIキー利用はサブスクとは別のAPI従量課金
-- Cline・OpenCode はツール本体が無料のOSSで、クラウドモデルを使えば推論料金が別にかかる
-- 個人プランは学習利用があり得る（設定で変更）、組織プランは既定で学習なし、という傾向
-
-**3者で異なっていた重要情報と判断**
-
-| 項目 | ChatGPT | Claude | Perplexity | 採用した内容と根拠 |
-| --- | --- | --- | --- | --- |
-| Cursorの料金体系 | Free / Plus $8 / Premium $30 / Super $100 / Ultra $200、週間プール | Hobby / Pro $20 / Pro+ $60 / Ultra $200、月間（第三者記事） | ChatGPTと同じ新体系 | 新体系を採用。Cursor公式の料金・モデル料金ページとフォーラム告知で確認。Claudeの値は旧体系（既存契約者向けに残る） |
-| Roo Code | 2026-05-15にアーカイブ | 2026-05-15に提供終了 | 現役製品として推奨 | 提供終了を採用。公式の終了告知とアーカイブ済みリポジトリで確認。Perplexityは情報が古い |
-| Gemini CLI の無料利用 | 個人向けは2026-06-18に終了 | 同左 | 継続無料枠あり（1日1,000回） | 個人向け終了を採用。公式READMEの冒頭告知とGoogle Developers Blogで確認。Perplexityの数値は旧README由来 |
-| Google Antigravity | 主要製品として扱う | 提供中（料金は第三者記事） | 製品範囲・料金とも未確認 | 提供中を採用。公式の料金・プラン・モデル・ダウンロードページで確認 |
-| Windsurf / Devin Desktop の料金 | 製品移行のみ記載 | Free / Pro $20 / Max $200 / Teams（第三者） | 要再確認（ACU等の可能性） | Claudeの値を公式で確認できたため採用（Devin公式ドキュメント） |
-| Codex のモデル | ChatGPTログインのGPT-5.5は2026-10-14退役、GPT-6系 | GPT-5.x-Codex系、GPT-6系は第三者報告 | 記載なし | 退役を採用。公式の変更履歴で確認（APIキー利用は対象外） |
-| Codex の Free / Go | 記載あり | Freeで軽量タスク | Free・GoはCloud対象外 | Perplexityを採用。公式ヘルプで「Codex Cloud は Free・Go に含まれない」を確認 |
-| Claude Code の料金の根拠 | 公式 | 第三者記事として記載 | 第三者記事 | 公式料金ページで確認（数値は3者一致） |
-| Claude Code のWindows | Hooks・sandbox等を整理 | Git for Windows は任意 | Git for Windows 推奨、sandbox はネイティブWindows非対応 | 両方とも公式記載どおり（推奨だが必須ではない）。sandbox はネイティブWindows非対応を公式で確認 |
-| Copilot の学習利用 | 記載少 | Free/Pro/Pro+ は2026-04-24以降オプトアウト制 | 個人は条件次第 | Claudeを採用。GitHub公式ブログで確認。現行ドキュメントは Max も対象に含める |
-
-**情報の新旧で差が出た可能性が高い項目**
-
-- Cursorの旧料金（Pro $20 等）、Windsurfのクレジット制、Gemini CLIの無料1,000回/日、Roo Codeの「無料で使える」、Copilotの「プレミアムリクエスト300回」は、いずれも2026年10月時点では旧情報
-- Gemini CLI の公式料金ページには、個人向けの旧上限表（Code Assist 個人 1,000回/日 など）が残っている。同じリポジトリの README 冒頭の移行告知と矛盾するため、個人向けは利用不可として扱った
-- Codex のモデル名は、公式ドキュメント内でも GPT-6.1 Sol / GPT-6 Luna / GPT-6 Astra など表記が揺れている
-
-**公式資料での追加確認が必要な項目**（本資料では「未確認」「非公開」として扱った）
-
-- Claude Code・Codex・Devin Desktop・Antigravity の上限の具体量（いずれも非公開または範囲表示）
-- Copilot Free の AI Credits の量、Copilot の個人プランでの BYOK 可否
-- Cursor 個人プランの Privacy Mode の既定値
-- Devin Desktop の BYOK・ローカルモデル・Hooks
-- Cline の Teams プランの価格
-- Antigravity 個人プランのデータ利用条件（規約と概要ページで記述が分かれる）
 
 ## B. 総合比較表
 
@@ -442,6 +382,63 @@ Roo Code は提供終了のため除外した。
 
 - 2026年に、Copilot の課金方式、Cursor の料金体系、Windsurf の製品名、Gemini CLI の個人向け提供、Roo Code の提供が相次いで変わった。2025年以前の比較記事は前提が崩れている
 - 再確認の目安: 料金・上限・モデル一覧は毎月、データ利用条件と提供状況は四半期ごと、または規約改定の通知時
+
+## 補足: 調査方法と3者の照合
+
+調査の信頼性を確認するための情報。製品の比較だけが目的なら読み飛ばしてよい。
+
+### 確認方法
+
+調査環境のネットワーク制限により、多くの公式サイトのページ本体を直接取得できなかった。そのため、次の方法で確認している。
+
+- **直接確認**: Anthropic公式（claude.com、support.claude.com、code.claude.com）のページ本文と、GitHub上の公式リポジトリ（README・LICENSE）
+- **公式ドメイン限定の検索で確認**: OpenAI、GitHub、Cursor、Cognition（Devin）、Google（Antigravity・Gemini CLI）、Cline、Roo Code、OpenCode。検索結果として得られた公式ページの記載内容を根拠にした
+- **Deep Researchのみ**: 上記で確認できなかった事項は、Deep Research側の出典付き記述を使い「※DR」と付記した。第三者記事が根拠のものは「（第三者）」とした
+- 確認できなかった事項は「未確認」、提供元が数値を公表していない事項は「非公開」とした
+
+判断の優先順位は、(1) 2026年10月時点の公式情報、(2) 公式の変更履歴・リリースノート、(3) 出典と確認日が明確なDeep Researchの記述、(4) 信頼できる第三者の検証情報、の順とした。3者の記述が一致していても、変動しやすい項目は公式情報で照合した。
+
+### 3者の調査結果の照合
+
+調査原文は ChatGPT・Claude・Perplexity の3件（いずれも2026-10-16付）。
+
+**共通して確認できた情報**（公式でも確認済み）
+
+- Claude Code は Claude の有料プラン（Pro以上）またはAPIで利用し、Freeプランには含まれない。上限は5時間ごとのセッション上限と週間上限
+- GitHub Copilot は2026-06-01から AI Credits（1クレジット＝$0.01）による使用量課金。Pro $10 / Pro+ $39 / Max $100
+- Codex は ChatGPT プランに含まれ、APIキー利用はサブスクとは別のAPI従量課金
+- Cline・OpenCode はツール本体が無料のOSSで、クラウドモデルを使えば推論料金が別にかかる
+- 個人プランは学習利用があり得る（設定で変更）、組織プランは既定で学習なし、という傾向
+
+**3者で異なっていた重要情報と判断**
+
+| 項目 | ChatGPT | Claude | Perplexity | 採用した内容と根拠 |
+| --- | --- | --- | --- | --- |
+| Cursorの料金体系 | Free / Plus $8 / Premium $30 / Super $100 / Ultra $200、週間プール | Hobby / Pro $20 / Pro+ $60 / Ultra $200、月間（第三者記事） | ChatGPTと同じ新体系 | 新体系を採用。Cursor公式の料金・モデル料金ページとフォーラム告知で確認。Claudeの値は旧体系（既存契約者向けに残る） |
+| Roo Code | 2026-05-15にアーカイブ | 2026-05-15に提供終了 | 現役製品として推奨 | 提供終了を採用。公式の終了告知とアーカイブ済みリポジトリで確認。Perplexityは情報が古い |
+| Gemini CLI の無料利用 | 個人向けは2026-06-18に終了 | 同左 | 継続無料枠あり（1日1,000回） | 個人向け終了を採用。公式READMEの冒頭告知とGoogle Developers Blogで確認。Perplexityの数値は旧README由来 |
+| Google Antigravity | 主要製品として扱う | 提供中（料金は第三者記事） | 製品範囲・料金とも未確認 | 提供中を採用。公式の料金・プラン・モデル・ダウンロードページで確認 |
+| Windsurf / Devin Desktop の料金 | 製品移行のみ記載 | Free / Pro $20 / Max $200 / Teams（第三者） | 要再確認（ACU等の可能性） | Claudeの値を公式で確認できたため採用（Devin公式ドキュメント） |
+| Codex のモデル | ChatGPTログインのGPT-5.5は2026-10-14退役、GPT-6系 | GPT-5.x-Codex系、GPT-6系は第三者報告 | 記載なし | 退役を採用。公式の変更履歴で確認（APIキー利用は対象外） |
+| Codex の Free / Go | 記載あり | Freeで軽量タスク | Free・GoはCloud対象外 | Perplexityを採用。公式ヘルプで「Codex Cloud は Free・Go に含まれない」を確認 |
+| Claude Code の料金の根拠 | 公式 | 第三者記事として記載 | 第三者記事 | 公式料金ページで確認（数値は3者一致） |
+| Claude Code のWindows | Hooks・sandbox等を整理 | Git for Windows は任意 | Git for Windows 推奨、sandbox はネイティブWindows非対応 | 両方とも公式記載どおり（推奨だが必須ではない）。sandbox はネイティブWindows非対応を公式で確認 |
+| Copilot の学習利用 | 記載少 | Free/Pro/Pro+ は2026-04-24以降オプトアウト制 | 個人は条件次第 | Claudeを採用。GitHub公式ブログで確認。現行ドキュメントは Max も対象に含める |
+
+**情報の新旧で差が出た可能性が高い項目**
+
+- Cursorの旧料金（Pro $20 等）、Windsurfのクレジット制、Gemini CLIの無料1,000回/日、Roo Codeの「無料で使える」、Copilotの「プレミアムリクエスト300回」は、いずれも2026年10月時点では旧情報
+- Gemini CLI の公式料金ページには、個人向けの旧上限表（Code Assist 個人 1,000回/日 など）が残っている。同じリポジトリの README 冒頭の移行告知と矛盾するため、個人向けは利用不可として扱った
+- Codex のモデル名は、公式ドキュメント内でも GPT-6.1 Sol / GPT-6 Luna / GPT-6 Astra など表記が揺れている
+
+**公式資料での追加確認が必要な項目**（本資料では「未確認」「非公開」として扱った）
+
+- Claude Code・Codex・Devin Desktop・Antigravity の上限の具体量（いずれも非公開または範囲表示）
+- Copilot Free の AI Credits の量、Copilot の個人プランでの BYOK 可否
+- Cursor 個人プランの Privacy Mode の既定値
+- Devin Desktop の BYOK・ローカルモデル・Hooks
+- Cline の Teams プランの価格
+- Antigravity 個人プランのデータ利用条件（規約と概要ページで記述が分かれる）
 
 ## H. 参考資料
 
