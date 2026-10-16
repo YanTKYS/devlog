@@ -10,3 +10,4 @@
 ## 一覧
 
 - [free-apis.md](free-apis.md): 個人開発・PoC で使える無料・無料枠 API の調査ノート
+- [ai-coding-tools.md](ai-coding-tools.md): 主要AIコーディングツール10製品の料金・利用制限・機能の比較（2026年10月）
