@@ -18,12 +18,19 @@ Design notes:
   - Dates are the JST dates already stored in the logs. "Today" is the date
     of the last collection (the heading of logs/today.md), not the viewer's
     clock, so the page never presents stale data as live.
+  - Notes are published only when listed in PUBLIC_NOTES. Each listed file is
+    copied to notes/<id>.md with its relative links rewritten: a link to
+    another published note becomes a #notes route, a link to anything else in
+    the repository points at the file on GitHub, so unlisted files (other
+    notes, data/deepresearch/) are never copied into the site.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import os
+import posixpath
 import re
 import shutil
 import sys
@@ -40,7 +47,26 @@ REPOSITORIES_PATH = collect.CONFIG_PATH
 PAGES_CONFIG_PATH = ROOT / "config" / "pages.yml"
 SITE_SRC = ROOT / "site"
 DATA_FILE = "data/devlog.json"
+NOTES_DATA_FILE = "data/notes.json"
 SCHEMA_VERSION = 1
+
+# Notes shown in the viewer's "ノート" tab. Only these files are published;
+# add an entry here to publish another note. `id` is the URL (#notes/<id>).
+PUBLIC_NOTES = (
+    {
+        "id": "free-apis",
+        "source": "notes/free-apis.md",
+        "description": "個人開発・PoC で使える無料・無料枠の API とデータサービスの比較",
+    },
+    {
+        "id": "ai-coding-tools",
+        "source": "notes/ai-coding-tools.md",
+        "description": "主要 AI コーディングツール10製品の料金・利用制限・開発機能と、用途別の選び方",
+    },
+)
+# Where links to unpublished repository files point (the file on GitHub).
+SOURCE_REPOSITORY = os.environ.get("GITHUB_REPOSITORY") or "YanTKYS/devlog"
+SOURCE_BRANCH = "main"
 
 _PR_RE = re.compile(r"^- PR #(\d+)(?:[ \t]+(.*))?$")
 _RELEASE_RE = re.compile(r"^- Release (\S+)(?: \((.*)\))?$")
@@ -51,6 +77,12 @@ _ANGLE_URL_RE = re.compile(r"<(https?://[^>\s]+)>")
 _BARE_URL_RE = re.compile(r"https?://\S+")
 _TODAY_HEADING_RE = re.compile(r"^# Today - (\d{4}-\d{2}-\d{2})\s*$", re.MULTILINE)
 _MONTH_STEM_RE = re.compile(r"^\d{4}-\d{2}$")
+_NOTE_ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+_FENCE_RE = re.compile(r"^ {0,3}(`{3,}|~{3,})")
+_CODE_SPAN_RE = re.compile(r"(`+)(?:.*?[^`])?\1(?!`)")
+_LINK_TARGET_RE = re.compile(r"\]\((\s*)(<[^>\n]*>|[^\s()<>]+)")
+_SCHEME_RE = re.compile(r"^[a-zA-Z][a-zA-Z0-9+.-]*:")
+_H1_RE = re.compile(r"^# +(.+?)\s*#*\s*$", re.MULTILINE)
 
 
 # ---------------------------------------------------------------------------
@@ -256,11 +288,126 @@ def build_data(
 
 
 # ---------------------------------------------------------------------------
+# Notes
+# ---------------------------------------------------------------------------
+
+
+def note_title(markdown: str, fallback: str) -> str:
+    m = _H1_RE.search(markdown)
+    return m.group(1).strip() if m else fallback
+
+
+def rewrite_note_link(
+    target: str, source: str, note_id: str, published: dict[str, str], repository: str, branch: str
+) -> str:
+    """Where a link in a published note should point.
+
+    `#frag` -> `#notes/<id>/frag` (a heading of this note, kept apart from the
+    viewer's own routes); a published note -> `#notes/<id>[/frag]`; any other
+    repository path -> the file on GitHub. URLs with a scheme are unchanged.
+    """
+    if _SCHEME_RE.match(target) or target.startswith("//"):
+        return target
+    path, _, fragment = target.partition("#")
+    if not path:
+        return f"#notes/{note_id}/{fragment}" if fragment else f"#notes/{note_id}"
+    resolved = posixpath.normpath(posixpath.join(posixpath.dirname(source), path))
+    if resolved.startswith("../") or resolved == "..":
+        return target  # outside the repository; the viewer shows it as text
+    if resolved in published:
+        route = f"#notes/{published[resolved]}"
+        return f"{route}/{fragment}" if fragment else route
+    url = f"https://github.com/{repository}/blob/{branch}/{resolved}"
+    return f"{url}#{fragment}" if fragment else url
+
+
+def rewrite_note_links(
+    markdown: str,
+    source: str,
+    note_id: str,
+    published: dict[str, str],
+    repository: str = SOURCE_REPOSITORY,
+    branch: str = SOURCE_BRANCH,
+) -> str:
+    """Rewrite inline link targets `](...)` outside code blocks and code spans."""
+    out: list[str] = []
+    fence = None
+    for line in markdown.split("\n"):
+        m = _FENCE_RE.match(line)
+        if fence:
+            if m and m.group(1)[0] == fence[0] and len(m.group(1)) >= len(fence) and not line.strip(" `~"):
+                fence = None
+            out.append(line)
+            continue
+        if m:
+            fence = m.group(1)
+            out.append(line)
+            continue
+        parts = []
+        pos = 0
+        for code in _CODE_SPAN_RE.finditer(line):
+            parts.append((line[pos : code.start()], True))
+            parts.append((code.group(0), False))
+            pos = code.end()
+        parts.append((line[pos:], True))
+
+        def repl(lm: re.Match) -> str:
+            raw = lm.group(2)
+            target = raw[1:-1] if raw.startswith("<") else raw
+            new = rewrite_note_link(target, source, note_id, published, repository, branch)
+            if new == target:
+                return lm.group(0)
+            return f"]({lm.group(1)}<{new}>" if raw.startswith("<") else f"]({lm.group(1)}{new}"
+
+        out.append("".join(_LINK_TARGET_RE.sub(repl, text) if rewrite else text for text, rewrite in parts))
+    return "\n".join(out)
+
+
+def build_notes(notes=PUBLIC_NOTES, root: Path = ROOT) -> tuple[list[dict], dict[str, str]]:
+    """The notes manifest and the published Markdown, keyed by output path.
+
+    A listed note that is missing, or a malformed or duplicate id, fails the
+    build instead of silently dropping the note.
+    """
+    published: dict[str, str] = {}
+    for note in notes:
+        if not _NOTE_ID_RE.match(note["id"]) or note["id"] in published.values():
+            raise SystemExit(f"invalid or duplicate note id: {note['id']!r}")
+        published[posixpath.normpath(note["source"])] = note["id"]
+
+    manifest: list[dict] = []
+    files: dict[str, str] = {}
+    for note in notes:
+        source = posixpath.normpath(note["source"])
+        path = root / source
+        if not path.is_file():
+            raise SystemExit(f"note listed in PUBLIC_NOTES not found: {source}")
+        text = path.read_text(encoding="utf-8")
+        out_path = f"notes/{note['id']}.md"
+        files[out_path] = rewrite_note_links(text, source, note["id"], published)
+        manifest.append(
+            {
+                "id": note["id"],
+                "title": note_title(text, note["id"]),
+                "description": note["description"],
+                "path": out_path,
+                "source": source,
+            }
+        )
+    return manifest, files
+
+
+# ---------------------------------------------------------------------------
 # Output
 # ---------------------------------------------------------------------------
 
 
-def build_site(out_dir: Path, data: dict, site_src: Path = SITE_SRC) -> None:
+def build_site(
+    out_dir: Path,
+    data: dict,
+    site_src: Path = SITE_SRC,
+    notes: tuple[list[dict], dict[str, str]] = ([], {}),
+) -> None:
     resolved = out_dir.resolve()
     if resolved == site_src.resolve() or resolved == ROOT or resolved in ROOT.parents:
         raise SystemExit(f"refusing to clear {out_dir}: it contains the repository sources")
@@ -270,6 +417,15 @@ def build_site(out_dir: Path, data: dict, site_src: Path = SITE_SRC) -> None:
     data_path = out_dir / DATA_FILE
     data_path.parent.mkdir(parents=True, exist_ok=True)
     data_path.write_text(json.dumps(data, ensure_ascii=False) + "\n", encoding="utf-8")
+    manifest, files = notes
+    for rel, text in files.items():
+        path = out_dir / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+    (out_dir / NOTES_DATA_FILE).write_text(
+        json.dumps({"schema": SCHEMA_VERSION, "notes": manifest}, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
 
 
 def main() -> None:
@@ -283,8 +439,9 @@ def main() -> None:
         load_public_repositories(),
         datetime.now(collect.JST),
     )
-    build_site(args.out, data)
-    print(f"Built {args.out} ({len(data['repositories'])} repositories)")
+    notes = build_notes()
+    build_site(args.out, data, notes=notes)
+    print(f"Built {args.out} ({len(data['repositories'])} repositories, {len(notes[0])} notes)")
 
 
 if __name__ == "__main__":

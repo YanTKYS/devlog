@@ -91,3 +91,26 @@ test("empty data does not throw", () => {
   assert.deepEqual(L.sortByDate([], "asc"), []);
   assert.deepEqual(L.filterRepositories([], "x"), []);
 });
+
+test("parseRoute: tabs, notes and note headings", () => {
+  const r = (tab, note, anchor) => ({ tab, note: note || null, anchor: anchor || null });
+  assert.deepEqual(L.parseRoute(""), r("recent"));
+  assert.deepEqual(L.parseRoute("#recent"), r("recent"));
+  assert.deepEqual(L.parseRoute("#daily"), r("daily"));
+  assert.deepEqual(L.parseRoute("#repos"), r("repos"));
+  assert.deepEqual(L.parseRoute("#unknown"), r("recent"));
+  assert.deepEqual(L.parseRoute("#notes"), r("notes"));
+  assert.deepEqual(L.parseRoute("#notes/"), r("notes"));
+  assert.deepEqual(L.parseRoute("#notes/free-apis"), r("notes", "free-apis"));
+  assert.deepEqual(L.parseRoute("#notes/ai-coding-tools/a-概要"), r("notes", "ai-coding-tools", "a-概要"));
+  // Browsers report non-ASCII hashes percent-encoded.
+  assert.deepEqual(L.parseRoute("#notes/ai-coding-tools/" + encodeURIComponent("c-料金利用制限の比較")),
+    r("notes", "ai-coding-tools", "c-料金利用制限の比較"));
+  assert.deepEqual(L.parseRoute("#notes/x/%E0%A4%A"), r("notes", "x", "%E0%A4%A"));  // malformed: kept as is
+});
+
+test("parseRoute: a heading named like a tab stays inside its note", () => {
+  assert.deepEqual(L.parseRoute("#notes/free-apis/recent"), { tab: "notes", note: "free-apis", anchor: "recent" });
+  assert.deepEqual(L.parseRoute("#notes/free-apis/notes"), { tab: "notes", note: "free-apis", anchor: "notes" });
+  assert.ok(L.TABS.includes("notes") && L.TABS.length === 4);
+});

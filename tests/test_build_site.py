@@ -259,6 +259,119 @@ class OutputTests(unittest.TestCase):
         self.assertNotIn("innerHTML", app)
 
 
+class NoteLinkTests(unittest.TestCase):
+    PUBLISHED = {"notes/a.md": "a", "notes/b.md": "b"}
+
+    def rewrite(self, target, source="notes/a.md"):
+        return bs.rewrite_note_link(target, source, "a", self.PUBLISHED, "o/r", "main")
+
+    def test_heading_link_stays_inside_the_note(self):
+        self.assertEqual(self.rewrite("#a-概要"), "#notes/a/a-概要")
+
+    def test_link_to_published_note_becomes_route(self):
+        self.assertEqual(self.rewrite("b.md"), "#notes/b")
+        self.assertEqual(self.rewrite("./b.md#x"), "#notes/b/x")
+        self.assertEqual(self.rewrite("../notes/b.md"), "#notes/b")
+
+    def test_unpublished_file_points_to_github(self):
+        self.assertEqual(
+            self.rewrite("../data/deepresearch/x.md"),
+            "https://github.com/o/r/blob/main/data/deepresearch/x.md",
+        )
+        self.assertEqual(self.rewrite("README.md#top"), "https://github.com/o/r/blob/main/notes/README.md#top")
+
+    def test_urls_and_outside_paths_unchanged(self):
+        for target in ("https://e.com/a", "mailto:a@b.c", "javascript:x", "//cdn.example/x", "../../outside.md"):
+            self.assertEqual(self.rewrite(target), target)
+
+    def test_rewrite_skips_code(self):
+        md = (
+            "[r](../data/x.md) and `[c](../data/x.md)`\n"
+            "```\n[f](../data/x.md)\n```\n"
+            "[t](#h) [ang](<b.md>) ![i](../img.png)"
+        )
+        out = bs.rewrite_note_links(md, "notes/a.md", "a", self.PUBLISHED, "o/r", "main").split("\n")
+        self.assertEqual(out[0], "[r](https://github.com/o/r/blob/main/data/x.md) and `[c](../data/x.md)`")
+        self.assertEqual(out[1:4], ["```", "[f](../data/x.md)", "```"])
+        self.assertEqual(out[4], "[t](#notes/a/h) [ang](<#notes/b>) ![i](https://github.com/o/r/blob/main/img.png)")
+
+
+class NotesBuildTests(unittest.TestCase):
+    def test_only_listed_notes_are_published(self):
+        manifest, files = bs.build_notes()
+        self.assertEqual([n["id"] for n in manifest], ["free-apis", "ai-coding-tools"])
+        self.assertEqual(sorted(files), ["notes/ai-coding-tools.md", "notes/free-apis.md"])
+        self.assertEqual(manifest[0]["title"], "個人開発で使える無料・無料枠API")
+        self.assertEqual(manifest[1]["title"], "AIコーディングツール比較（2026年10月）")
+        for note in manifest:
+            self.assertTrue(note["description"])
+            self.assertEqual(note["path"], f"notes/{note['id']}.md")
+
+    def test_published_notes_have_no_relative_file_links(self):
+        _, files = bs.build_notes()
+        for name, text in files.items():
+            for target in re.findall(r"\]\(([^)\s]+)", text):
+                self.assertRegex(target, r"^(https?://|mailto:|#notes/)", f"{name}: {target}")
+        self.assertIn(
+            f"https://github.com/{bs.SOURCE_REPOSITORY}/blob/main/data/deepresearch/ai-coding-tools-20261016-claude.md",
+            files["notes/ai-coding-tools.md"],
+        )
+
+    def test_note_body_is_unchanged_apart_from_links(self):
+        _, files = bs.build_notes()
+        source = (ROOT / "notes" / "free-apis.md").read_text(encoding="utf-8")
+        self.assertEqual(re.sub(r"#notes/free-apis/", "#", files["notes/free-apis.md"]), source)
+
+    def test_missing_or_invalid_note_fails_the_build(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "notes").mkdir()
+            (root / "notes" / "a.md").write_text("# A\n", encoding="utf-8")
+            ok = {"id": "a", "source": "notes/a.md", "description": "d"}
+            self.assertEqual(bs.build_notes([ok], root)[0][0]["title"], "A")
+            for notes in (
+                [{"id": "missing", "source": "notes/missing.md", "description": "d"}],
+                [{"id": "Bad/Id", "source": "notes/a.md", "description": "d"}],
+                [ok, dict(ok)],
+            ):
+                with self.assertRaises(SystemExit):
+                    bs.build_notes(notes, root)
+
+    def test_site_contains_only_published_markdown(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            logs = make_logs(Path(tmp))
+            data, _ = build(logs)
+            out = Path(tmp) / "out"
+            bs.build_site(out, data, notes=bs.build_notes())
+            md = sorted(str(p.relative_to(out)) for p in out.rglob("*.md"))
+            self.assertEqual(md, ["notes/ai-coding-tools.md", "notes/free-apis.md"])
+            self.assertFalse(any("deepresearch" in str(p) for p in out.rglob("*")))
+            manifest = json.loads((out / bs.NOTES_DATA_FILE).read_text(encoding="utf-8"))
+            self.assertEqual([n["id"] for n in manifest["notes"]], ["free-apis", "ai-coding-tools"])
+            for note in manifest["notes"]:
+                self.assertTrue((out / note["path"]).is_file())
+
+    def test_viewer_renders_notes_without_html_injection(self):
+        html = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
+        self.assertIn('<script src="markdown-lib.js"></script>', html)
+        self.assertIn('data-tab="notes"', html)
+        self.assertIn("Content-Security-Policy", html)
+        for name in ("app.js", "markdown-lib.js"):
+            js = (ROOT / "site" / name).read_text(encoding="utf-8")
+            for sink in ("innerHTML", "outerHTML", "insertAdjacentHTML", "document.write", "eval(", "new Function"):
+                self.assertNotIn(sink, js, f"{name}: {sink}")
+        self.assertRegex((ROOT / "site" / "app.js").read_text(encoding="utf-8"), r'NOTES_URL = "data/notes\.json"')
+
+
+class PagesWorkflowTests(unittest.TestCase):
+    def test_pages_redeploys_when_a_published_note_changes(self):
+        workflow = (ROOT / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")
+        for note in bs.PUBLIC_NOTES:
+            self.assertIn(f'- "{note["source"]}"', workflow)
+        self.assertNotIn('"notes/**"', workflow)
+        self.assertIn("tests/markdown_lib.test.js", workflow)
+
+
 class RealLogsTests(unittest.TestCase):
     """Consistency of the JSON generated from the repository's actual logs."""
 

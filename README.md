@@ -96,9 +96,28 @@ GitHub 上の最終更新をその場で問い合わせた結果ではありま�
 - **リポジトリ一覧**: `latest.md` 相当です。公開対象の全リポジトリについて、devlog に
   収集済みの最新記録（日付・種別・タイトル・リンク）を表示します。記録がないリポジトリは
   `記録なし` と表示し、名前で絞り込めます
+- **ノート**: `notes/` の比較資料を読めます。一覧から選ぶと本文を整形表示し、
+  `#notes/<id>` で直接開けます。見出しへのリンクは `#notes/<id>/<見出し>` になり、
+  タブの切り替えとは衝突しません
 
 外部 CDN・ライブラリは使わず、表示時に GitHub API も呼びません。データは Pages のビルド時に
 `logs/YYYY/YYYY-MM.md`（正本）から生成する `data/devlog.json` だけを、相対パスで読みます。
+
+### 公開するノート
+
+公開されるノートは、`scripts/build_site.py` の `PUBLIC_NOTES` に列挙したファイルだけです
+（現在は `notes/free-apis.md` と `notes/ai-coding-tools.md`）。`notes/` や
+`data/deepresearch/` を丸ごと公開することはありません。ノートを追加する場合は次の2か所に
+追記します。
+
+- `PUBLIC_NOTES` に `id`（URL に使う英小文字とハイフン）・`source`・`description` を追加する
+- `.github/workflows/pages.yml` の `paths` にそのファイルを追加する（変更時に Pages を更新するため）
+
+ビルド時にノート内の相対リンクを書き換えます。公開対象のノートへのリンクは閲覧UI内の
+リンクに、それ以外のファイル（調査原文など）へのリンクは GitHub 上の元ファイルへの
+リンクになります。Markdown は `site/markdown-lib.js` が構文木に変換し、`site/app.js` が
+DOM を組み立てます。HTML 文字列は一切使わないため、ノート内の HTML はそのまま文字として
+表示され、`http(s)`・`mailto` 以外のリンク（`javascript:` など）はリンクになりません。
 Python 3 標準ライブラリのみで動き、サブパス（`https://<user>.github.io/devlog/`）配下でも
 動作します。
 
@@ -142,7 +161,7 @@ GitHub 公式の Pages Actions でのデプロイを行います（収集は行�
 python3 scripts/build_site.py          # _site/ に生成（.gitignore 済み）
 python3 -m http.server -d _site 8000   # http://localhost:8000/ を開く
 python3 -m unittest discover -s tests  # データ生成のテスト
-node --test tests/site_lib.test.js     # 閲覧UIの絞り込み・並び替えのテスト
+node --test tests/site_lib.test.js tests/markdown_lib.test.js  # 閲覧UIとMarkdown表示のテスト
 ```
 
 `file://` で直接開くと `data/devlog.json` を読めないため、上のように HTTP で配信してください。
