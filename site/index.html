@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
+  <!-- Defense in depth: only this site's own scripts, styles and data may load. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>devlog</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="style.css">
@@ -16,6 +18,7 @@
         <button role="tab" id="tab-recent" aria-controls="panel" data-tab="recent">最近の記録</button>
         <button role="tab" id="tab-daily" aria-controls="panel" data-tab="daily">今日・昨日</button>
         <button role="tab" id="tab-repos" aria-controls="panel" data-tab="repos">リポジトリ一覧</button>
+        <button role="tab" id="tab-notes" aria-controls="panel" data-tab="notes">ノート</button>
       </div>
     </div>
   </header>
@@ -25,6 +28,7 @@
   <footer class="wrap site-footer" id="footer"></footer>
   <noscript><p class="wrap state">この画面の表示には JavaScript が必要です。</p></noscript>
   <script src="devlog-lib.js"></script>
+  <script src="markdown-lib.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

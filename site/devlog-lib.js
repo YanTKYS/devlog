@@ -101,7 +101,33 @@
     });
   }
 
+  var TABS = ["recent", "daily", "repos", "notes"];
+
+  function decodePart(part) {
+    try { return decodeURIComponent(part); } catch (e) { return part; }
+  }
+
+  /**
+   * Location hash -> view. "#recent" / "#daily" / "#repos" / "#notes" select a
+   * tab; "#notes/<id>" opens a note and "#notes/<id>/<heading>" one of its
+   * headings. Headings live under the note's own path, so a heading can never
+   * be mistaken for a tab or another note. Anything unknown shows "recent".
+   */
+  function parseRoute(hash) {
+    var parts = String(hash || "").replace(/^#/, "").split("/");
+    var tab = decodePart(parts[0]);
+    if (tab !== "notes") {
+      return { tab: TABS.indexOf(tab) === -1 ? "recent" : tab, note: null, anchor: null };
+    }
+    return {
+      tab: "notes",
+      note: parts[1] ? decodePart(parts[1]) : null,
+      anchor: parts.length > 2 && parts.slice(2).join("/") ? decodePart(parts.slice(2).join("/")) : null
+    };
+  }
+
   return {
+    TABS: TABS, parseRoute: parseRoute,
     typeLabel: typeLabel, typeShort: typeShort, identifier: identifier, safeUrl: safeUrl,
     monthOf: monthOf, formatMonth: formatMonth, formatDay: formatDay, formatFullDay: formatFullDay,
     filterRecords: filterRecords, sortByDate: sortByDate, groupByDate: groupByDate,

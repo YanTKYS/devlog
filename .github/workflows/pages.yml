@@ -22,6 +22,9 @@ on:
       - "config/pages.yml"
       - "config/repositories.yml"
       - ".github/workflows/pages.yml"
+      # Published notes (keep in sync with PUBLIC_NOTES in scripts/build_site.py).
+      - "notes/free-apis.md"
+      - "notes/ai-coding-tools.md"
   workflow_dispatch:
 
 permissions:
@@ -51,7 +54,7 @@ jobs:
       - name: Test viewer data and helpers
         run: |
           python3 -m unittest discover -s tests
-          node --test tests/site_lib.test.js
+          node --test tests/site_lib.test.js tests/markdown_lib.test.js
 
       - name: Build static site (_site/)
         run: python3 scripts/build_site.py --out _site
