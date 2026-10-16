@@ -10,7 +10,7 @@
 | chouseisan | 2026-08-30 | PR | [#29 Fix UI bugs and improve event loading/display logic](https://github.com/YanTKYS/chouseisan/pull/29) |
 | clock | 2026-08-25 | PR | [#33 Refactor README and improve code documentation](https://github.com/YanTKYS/clock/pull/33) |
 | desknets_noticer | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/desknets_noticer/pull/6) |
-| devlog | 2026-10-13 | PR | [#11 docs(notes): free-apis.md に Sarashinaサービス（無償ベータ）を追加](https://github.com/YanTKYS/devlog/pull/11) |
+| devlog | 2026-10-16 | PR | [#12 docs(notes): AIコーディングツール比較資料を追加（2026年10月）](https://github.com/YanTKYS/devlog/pull/12) |
 | fusen | 2026-08-25 | PR | [#11 Improve code comments and README documentation](https://github.com/YanTKYS/fusen/pull/11) |
 | giin_iinkai | 2026-08-30 | PR | [#5 Implement operation queuing to prevent concurrent save conflicts](https://github.com/YanTKYS/giin_iinkai/pull/5) |
 | giin_zaiseki | 2026-08-30 | PR | [#4 Improve multi-device sync and offline handling in input screen](https://github.com/YanTKYS/giin_zaiseki/pull/4) |
@@ -22,7 +22,7 @@
 | markdownutil | 2026-10-12 | PR | [#34 Fluent 2に基づくUI/UX改善（編集・プレビュー・出力操作の統一）](https://github.com/YanTKYS/markdownutil/pull/34) |
 | markdown-library | 2026-10-12 | PR | [#9 UI/UXを行政系の実用サイト向けに見直し（DADSの設計思想を参考）](https://github.com/YanTKYS/markdown-library/pull/9) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
-| news-watch | 2026-10-15 | direct commit | [`2569747` chore: collect news 2026-10-15](https://github.com/YanTKYS/news-watch/commit/25697472a319785b306e22c452a703345fe699c3) |
+| news-watch | 2026-10-16 | direct commit | [`c50e41a` chore: collect news 2026-10-16](https://github.com/YanTKYS/news-watch/commit/c50e41a5ee77b20d85bd06f9e44559cabac98cd9) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
 | pdfengine | 2026-10-15 | PR | [#74 Record real-PDF three-page preflight and page-seam refusal](https://github.com/YanTKYS/pdfengine/pull/74) |
 | proxypac | 2026-10-12 | PR | [#7 UI/UXの再設計（デジタル庁デザインシステムの考え方を参考に、落ち着いた業務UIへ）](https://github.com/YanTKYS/proxypac/pull/7) |
