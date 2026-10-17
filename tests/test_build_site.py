@@ -7,6 +7,7 @@ import tempfile
 import unittest
 from datetime import datetime, timezone
 from pathlib import Path
+from xml.etree import ElementTree
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -246,6 +247,22 @@ class OutputTests(unittest.TestCase):
             bs.build_site(ROOT, {})
         with self.assertRaises(SystemExit):
             bs.build_site(ROOT / "site", {})
+
+    def test_favicon_is_a_plain_svg_and_published(self):
+        html = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
+        self.assertIn('<link rel="icon" type="image/svg+xml" href="favicon.svg">', html)
+        self.assertNotIn('href="data:,"', html)
+        svg = (ROOT / "site" / "favicon.svg").read_text(encoding="utf-8")
+        root = ElementTree.fromstring(svg)  # well-formed XML
+        self.assertEqual(root.tag, "{http://www.w3.org/2000/svg}svg")
+        self.assertEqual(root.get("viewBox"), "0 0 32 32")
+        # Flat shapes only: no gradient, filter/shadow, script, style, text, or external references.
+        for banned in ("Gradient", "filter", "<script", "<style", "<text", "<image", "href", "url(", "@import", "font"):
+            self.assertNotIn(banned, svg)
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "out"
+            bs.build_site(out, {})
+            self.assertEqual((out / "favicon.svg").read_text(encoding="utf-8"), svg)
 
     def test_site_uses_relative_paths_only(self):
         """The site is served under /<repo>/, so no root-absolute URLs may be used."""
