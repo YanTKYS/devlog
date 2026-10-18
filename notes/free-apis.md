@@ -55,6 +55,7 @@
 | --- | --- | --- | --- | --- | --- |
 | Brave Search API | 無料枠あり | 毎月$5分のクレジット | API Key | Web検索の組み込み | カード登録必須。帰属表示が条件 |
 | Tavily | 無料枠あり | 月1,000クレジット | API Key（キーなしの低レート利用もあり） | AIエージェント向け検索 | カード不要。キーなしはSearch / Extractのみ |
+| treg WebAccess | 無料モデル・プラン | 無料ベンダー（TinyFishなど）が応答した検索・本文取得は$0。新規に$1.00の初回クレジットもある | APIトークン（サインインして発行）。MCPはOAuth | AIエージェント向けの検索・本文取得 | 「$0」は無料ベンダーが応答したときだけ。失敗すると有料ベンダーへ進み課金される。無料枠の継続条件・具体的な制限は未確認 |
 | NewsAPI | 非商用のみ無料 | Developerプラン（開発環境のみ） | API Key | ニュース取得の試作 | 本番・ステージング・社内利用は不可 |
 | Open-Meteo | 非商用のみ無料 | 非商用は無料 | 不要 | 天気・予報 | 商用は有料プラン。帰属表示（CC BY 4.0）が必要 |
 | OpenWeatherMap | 無料枠あり | One Call 3.0は1日1,000回まで | API Key | 天気・予報 | 購読にカード情報が必要。超過は従量課金なので1日の上限を設定する |
@@ -253,6 +254,29 @@
 - 主な用途: 検索結果の要約や調査エージェントの試作（検索 → LLMの調査ツール）
 - 利用時の注意: クレジット消費はエンドポイントによって変わる。キーなしは別の上限・エラー形式になる
 - 公式: [Credits & Pricing](https://docs.tavily.com/documentation/api-credits) / [キーなし利用](https://docs.tavily.com/documentation/keyless)
+
+#### treg WebAccess
+
+- 種類・提供元: AIエージェント向けのツール・APIゲートウェイ「treg」（treg.to）の機能。Web検索とページ本文の取得を、無料のベンダーから順に試し、失敗したら有料のベンダーへ進む。運営の詳細は未確認だが、ソースコードはGitHubの `superdesigndev/treg`（Superdesign）で公開されている。早期アクセスで、稼働保証のない現状有姿の提供（[Terms](https://treg.to/terms)）
+- 主な機能: キーワードや意味での検索と、ページ本文の取得（Markdown・HTML・構造化JSON）。無料側のTinyFishは `tinyfish.web.search`（検索）と `tinyfish.web.fetch`（取得。1回に最大10URL）が $0.00 と表示されている（[TinyFish](https://treg.to/tools/tinyfish)）。例として示されたルーティングはTinyFish → Crawl4AI → 有料のAnyAPIの順（[WebAccess](https://treg.to/web-access)）。Crawl4AIの料金条件、ルーティングされる呼び出しの具体的なエンドポイントIDは未確認
+- 無料利用: 無料ベンダーが応答した呼び出しは $0。アカウントの初回クレジット $1.00（新規チームに1回、カード不要）は別で、有料ベンダーの呼び出しに使える。無料ベンダーの継続提供と、レート制限や1日の回数の上限は確認できなかった（利用規約には、メンバーごとの1日の呼び出し上限を設ける旨の記載があるが数値は未確認。一部のツールには無料の1日回数の上限があるが、WebAccessの無料ベンダーにあるかも未確認）。「verified account」の条件も未確認で、ページによって「新規チーム」「verified account」と表記が分かれる
+- 有料へのフォールバック: 無料の呼び出しが空の結果やブロックで失敗すると、次のベンダーへ進む。有料ベンダーの例は、検索がExa $0.007/回・Firecrawl $0.01/成功・Olostep $0.01/回、取得がExa $0.001/結果・Firecrawl $0.005/成功（[検索](https://treg.to/catalog/web/search) / [取得](https://treg.to/catalog/web/extract)）。上限を付けないと、失敗が続いた場合は1回の呼び出しで最大 $1 分のベンダーを順に試す。応答の `_treg` ブロックに、どのベンダーが答えていくらかかったかが付く
+- 費用の制御: ルーティングはリクエストヘッダーで指定する（[WebAccess](https://treg.to/web-access)）。`X-Treg-Route-Prefer`（先に試すベンダー。例: 無料のTinyFish）、`X-Treg-Route-Exclude`（外すベンダー）、`X-Treg-Route-Max-Cost`（1回の呼び出しの費用上限）、`X-Treg-Route-Waterfall: 0`（最初の失敗で止める）。上限の値の形式は確認できなかった。別ページ（Jev）には `X-Treg-Max-Cost-Usd` という名前もあり、使う前に [API reference](https://treg.to/docs) で確認する
+- 料金・利用制限: サブスクはなく、プリペイド残高から1回ごとにプロバイダの単価で課金する。tregの上乗せはない（[Pricing](https://treg.to/pricing)）。自分のプロバイダキーを登録した呼び出しはtregが課金しない。既定の1日の上限は1チームあたり $5（[トップ](https://treg.to/) / [Support](https://treg.to/support)に記載。個別の出典ページは特定できていない）。残高がなくなったときの挙動は未確認
+- 認証: REST APIは `POST https://treg.to/call/{エンドポイントID}` にJSONを送り、`X-Treg-Token: <トークン>` ヘッダーで認証する。`Authorization: Bearer` はMCPだけで有効で、RESTでは無視され、`/call/` はプロバイダへそのまま転送するため、tregのトークンをBearerに入れてはいけない（[API reference](https://treg.to/docs)）。個別のツールページに「Bearerトークンで呼ぶ」という記述があるが、API referenceと矛盾するため、API referenceを優先した。サインインはGitHub・Google・メールのワンタイムコードで、初回サインインでアカウントができる。トークンの発行手順の詳細は未確認
+- 使い方（MCP・CLI）: リモートMCPは `https://treg.to/mcp`（HTTP transport、OAuthでサインイン）
+  - Claude Code: `claude mcp add --transport http treg https://treg.to/mcp`（treg.toの各ツールのページに記載。例: [Microsoft Advertising](https://treg.to/tools/microsoft-ads)）。CLIで入れる場合は `treg login`、`treg mcp install`（[USAGE](https://github.com/superdesigndev/treg/blob/main/USAGE.md)）
+  - Codex: 同じURLをHTTP transportで登録する。認証は、トークンを設定ファイルに書かない方法を優先する。Codexが対応する項目は公式ドキュメントで確認した（[Codex MCP](https://developers.openai.com/codex/mcp) / [設定リファレンス](https://developers.openai.com/codex/config-reference)）。tregのトークンでの動作は、トークンがなく試していない
+    - 環境変数（優先）: `[mcp_servers.treg]` に `url = "https://treg.to/mcp"` と `bearer_token_env_var = "TREG_TOKEN"` を書く。トークンは設定ファイルに残らず、`Authorization: Bearer` として送られる。変数はCodex自身のプロセスの環境に必要で、tregのPR #583では、環境変数なしでCodexアプリを再起動すると401になり、ツールが黙って消えた。トークンを `export` したシェルからCLIを起動する使い方なら避けやすい
+    - OAuth: `codex mcp login treg` でtregのOAuthサインインを使う。トークンを自分で扱わずに済む。ただしtregで動くかは未確認で、OAuth認証済みのMCPサーバーでツールが読み込まれないというCodex側の報告もあるため、ログイン後にtregのツールが実際に使えるかを確認する
+    - 設定ファイルへの直書き（非推奨）: `http_headers = { Authorization = "Bearer <トークン>" }`。tregのインストーラ（`treg mcp install`）はこの形で書く（[treg PR #583](https://github.com/superdesigndev/treg/pull/583)）。トークンが `~/.codex/config.toml` に平文で残るので、環境変数やOAuthが使えないときだけにして、ファイルを共有・コミットしない
+    - `/mcp` では `X-Treg-Token` は使えず、`Authorization` ヘッダーだけが有効
+- 使い方（GitHub Actions）: 公式の手順は確認できなかった。仕様上は、REST APIなので、トークンをSecretに置いて `X-Treg-Token` ヘッダーで `curl` やPythonから呼べるはずで、CLIにはCI向けの `treg login --token` がある（[USAGE](https://github.com/superdesigndev/treg/blob/main/USAGE.md)）。ただし、GitHub Actions上での動作は未確認（公式の記載がなく、こちらでも試していない）。GitHub Actionsの送信元からtreg.toへ接続できるかも未確認
+- 主な用途: 検索 → 本文取得の試作。複数の検索・取得ベンダーを1つのMCPやAPIで試す。想定している例は、`YanTKYS/news-watch` のようなGitHub Actionsによる情報収集で、検索済みの記事URLから本文を取得する用途。**導入も動作確認もしておらず、実利用の実績ではない**
+- 既存APIとの違い: [Jina Reader](#jina-reader) はURLからの本文抽出に特化し、キーなしの基本利用が無料で、条件が単純。WebAccessは検索も含み、無料ベンダーが失敗したときに有料へ進める代わりに、トークンが必要で、費用の管理が要る。[Brave Search API](#brave-search-api) は単一の検索インデックスで、月$5のクレジット方式（カード登録が必須）。WebAccessは呼び出しごとに答えるベンダーが変わりうるので、同じ検索結果を安定して得たいときはBraveが向く。品質や速度の比較は未検証
+- 利用時の注意: 「無料」は無料ベンダーが応答したときだけで、フォールバックすると残高から課金される。上限を固定したい場合は、費用上限ヘッダー、`Waterfall: 0`、1日の上限を使う。上流のベンダー（TinyFishなど）の無料提供はtregの管理外で、継続性は不明。稼働保証はなく、上流APIの規約・レート制限を守る責任は利用者にある（[Terms](https://treg.to/terms)）。取得するページの利用条件は別に確認する。サイトに載っている成功率などの数値は自己申告。GitHubのソースはApache-2.0に追加条項が付いていて、自チーム向けのセルフホストは可能だが、第三者向けのホスト型サービスの提供は許可が必要（[LICENSE](https://github.com/superdesigndev/treg/blob/main/LICENSE)）
+- 確認範囲: 公式サイトとGitHubの本文は直接取得できず、公式ドメインの検索結果で確認できた内容に基づく（2026-10-18時点）
+- 公式: [WebAccess](https://treg.to/web-access) / [Pricing](https://treg.to/pricing) / [API reference](https://treg.to/docs) / [Terms](https://treg.to/terms) / [GitHub](https://github.com/superdesigndev/treg)
 
 #### NewsAPI
 
@@ -671,6 +695,7 @@
 
 - **RESAS-API は終了している**。新規受付の停止に続き、2025-03-24にサービスが終了した。RESASの画面は継続しているが、APIとしては使えない
 - **Brave Search API の無料枠は「毎月◯回」ではなく、毎月$5分のクレジット**。カード登録が必須で、帰属表示が条件
+- **treg WebAccess の「$0」は、無料ベンダーが応答したときだけ**。失敗すると次の（有料の）ベンダーへ進んで残高から課金され、上限を付けないと1回で最大$1分まで試す。費用上限ヘッダーと1日の上限で抑える。無料ベンダーの継続条件は確認できていない
 - **Cohere の無料キーは Trial**。商用・本番は不可
 - **NewsAPI の無料プランは開発環境専用**。公開した時点で使えなくなる
 - **TMDB と Open-Meteo は「無料」ではなく非商用のみ無料**。広告やサブスクのあるサイトは商用になる
