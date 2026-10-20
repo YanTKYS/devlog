@@ -1,19 +1,25 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-10-18
+# Yesterday - 2026-10-19
 
-### devlog
+### benri
 
-- PR #16 docs(notes): free-apis に treg WebAccess を追加
+- PR #156 fix: 口調統一の二重変換・JPEG変換の黒背景・Markdown変換のShift_JIS CSV文字化けを修正
   - merged
-  - https://github.com/YanTKYS/devlog/pull/16
+  - https://github.com/YanTKYS/benri/pull/156
 
 ### news-watch
 
-- Commit `d68c868` chore: collect news 2026-10-18
+- Commit `ba7ca29` chore: collect news 2026-10-19
   - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/d68c8683f19783da9e966c34219cf04f8c53377e
+  - https://github.com/YanTKYS/news-watch/commit/ba7ca29a9d0559cf3128f93abeb3b8b001cf9072
 
-- PR #16 feat(pages): サイト名を「自治体DX Watch」に変更
+### pdfengine
+
+- PR #77 Enable bounded single-Span editing with atomic ActualText updates
   - merged
-  - https://github.com/YanTKYS/news-watch/pull/16
+  - https://github.com/YanTKYS/pdfengine/pull/77
+
+- PR #76 Validate real Japanese three-page sequential reflow and re-editing
+  - merged
+  - https://github.com/YanTKYS/pdfengine/pull/76

@@ -6,7 +6,7 @@
 
 | Repository | 最新記録 | 種別 | 内容 |
 | --- | --- | --- | --- |
-| benri | 2026-09-25 | PR | [#155 docs: Update UX/design decisions for PDF public notice and notification features](https://github.com/YanTKYS/benri/pull/155) |
+| benri | 2026-10-19 | PR | [#156 fix: 口調統一の二重変換・JPEG変換の黒背景・Markdown変換のShift_JIS CSV文字化けを修正](https://github.com/YanTKYS/benri/pull/156) |
 | chouseisan | 2026-08-30 | PR | [#29 Fix UI bugs and improve event loading/display logic](https://github.com/YanTKYS/chouseisan/pull/29) |
 | clock | 2026-08-25 | PR | [#33 Refactor README and improve code documentation](https://github.com/YanTKYS/clock/pull/33) |
 | desknets_noticer | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/desknets_noticer/pull/6) |
@@ -22,9 +22,9 @@
 | markdownutil | 2026-10-12 | PR | [#34 Fluent 2に基づくUI/UX改善（編集・プレビュー・出力操作の統一）](https://github.com/YanTKYS/markdownutil/pull/34) |
 | markdown-library | 2026-10-12 | PR | [#9 UI/UXを行政系の実用サイト向けに見直し（DADSの設計思想を参考）](https://github.com/YanTKYS/markdown-library/pull/9) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
-| news-watch | 2026-10-18 | PR | [#16 feat(pages): サイト名を「自治体DX Watch」に変更](https://github.com/YanTKYS/news-watch/pull/16) |
+| news-watch | 2026-10-19 | direct commit | [`ba7ca29` chore: collect news 2026-10-19](https://github.com/YanTKYS/news-watch/commit/ba7ca29a9d0559cf3128f93abeb3b8b001cf9072) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
-| pdfengine | 2026-10-15 | PR | [#74 Record real-PDF three-page preflight and page-seam refusal](https://github.com/YanTKYS/pdfengine/pull/74) |
+| pdfengine | 2026-10-20 | PR | [#78 Support bounded single-Span replacement and insertion with pinned fonts](https://github.com/YanTKYS/pdfengine/pull/78) |
 | proxypac | 2026-10-12 | PR | [#7 UI/UXの再設計（デジタル庁デザインシステムの考え方を参考に、落ち着いた業務UIへ）](https://github.com/YanTKYS/proxypac/pull/7) |
 | quotaplayer | 2026-08-30 | PR | [#24 Fix playback speed, time display, and error handling issues](https://github.com/YanTKYS/quotaplayer/pull/24) |
 | signage | 2026-08-25 | PR | [#37 Simplify README and remove unused database methods](https://github.com/YanTKYS/signage/pull/37) |
