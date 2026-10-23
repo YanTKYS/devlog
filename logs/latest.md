@@ -6,7 +6,7 @@
 
 | Repository | 最新記録 | 種別 | 内容 |
 | --- | --- | --- | --- |
-| benri | 2026-10-22 | PR | [#157 docs: ソースとdocsの棚卸し・現行実装との不整合修正](https://github.com/YanTKYS/benri/pull/157) |
+| benri | 2026-10-23 | PR | [#160 fix: トリミング済みPDFの通し番号の位置ずれ・非表示を修正](https://github.com/YanTKYS/benri/pull/160) |
 | chouseisan | 2026-08-30 | PR | [#29 Fix UI bugs and improve event loading/display logic](https://github.com/YanTKYS/chouseisan/pull/29) |
 | clock | 2026-08-25 | PR | [#33 Refactor README and improve code documentation](https://github.com/YanTKYS/clock/pull/33) |
 | desknets_noticer | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/desknets_noticer/pull/6) |
@@ -22,9 +22,9 @@
 | markdownutil | 2026-10-12 | PR | [#34 Fluent 2に基づくUI/UX改善（編集・プレビュー・出力操作の統一）](https://github.com/YanTKYS/markdownutil/pull/34) |
 | markdown-library | 2026-10-12 | PR | [#9 UI/UXを行政系の実用サイト向けに見直し（DADSの設計思想を参考）](https://github.com/YanTKYS/markdown-library/pull/9) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
-| news-watch | 2026-10-22 | direct commit | [`e692654` chore: collect news 2026-10-22](https://github.com/YanTKYS/news-watch/commit/e692654344a451c933fb9f4d9d6e3b8b5401ddfe) |
+| news-watch | 2026-10-23 | direct commit | [`47d6aa7` chore: collect news 2026-10-23](https://github.com/YanTKYS/news-watch/commit/47d6aa7669b733c8849da5fea3bef99ba0c15752) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
-| pdfengine | 2026-10-22 | PR | [#87 Infer paragraph frames and preserve source fonts during PDF rebuilding](https://github.com/YanTKYS/pdfengine/pull/87) |
+| pdfengine | 2026-10-23 | PR | [#90 B2: edit text under scaled text matrices and inside Form XObjects (InDesign-style PDFs)](https://github.com/YanTKYS/pdfengine/pull/90) |
 | proxypac | 2026-10-12 | PR | [#7 UI/UXの再設計（デジタル庁デザインシステムの考え方を参考に、落ち着いた業務UIへ）](https://github.com/YanTKYS/proxypac/pull/7) |
 | quotaplayer | 2026-08-30 | PR | [#24 Fix playback speed, time display, and error handling issues](https://github.com/YanTKYS/quotaplayer/pull/24) |
 | signage | 2026-08-25 | PR | [#37 Simplify README and remove unused database methods](https://github.com/YanTKYS/signage/pull/37) |
