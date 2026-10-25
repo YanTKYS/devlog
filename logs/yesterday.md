@@ -1,23 +1,15 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-10-24
+# Yesterday - 2026-10-25
 
 ### news-watch
 
-- Commit `2263c3d` chore: collect news 2026-10-24
+- Commit `777de99` chore: collect news 2026-10-25
   - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/2263c3d41715d9633dcc5f2600a0c470a3ebdeef
-
-- PR #18 docs: UI/UX・機能追加・運用改善の18提案を整理
-  - merged
-  - https://github.com/YanTKYS/news-watch/pull/18
+  - https://github.com/YanTKYS/news-watch/commit/777de995cff2aacfe2b35ad65ed7cec86ce5219c
 
 ### pdfengine
 
-- PR #92 元のレイアウトを維持する高忠実度PDF編集：変更した範囲だけを組み直すB2
+- PR #94 再編集の往復：元の組版を記録し、元の文章に戻した行を元の位置に復元する
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/92
-
-- PR #91 タグ付きPDFの編集：意味構造を保つ段落編集（構造の判定と描画の書き換えの分離）
-  - merged
-  - https://github.com/YanTKYS/pdfengine/pull/91
+  - https://github.com/YanTKYS/pdfengine/pull/94
