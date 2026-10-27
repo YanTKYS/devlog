@@ -1,15 +1,19 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-10-25
+# Yesterday - 2026-10-26
 
 ### news-watch
 
-- Commit `777de99` chore: collect news 2026-10-25
+- Commit `a4776dd` chore: weekly review 2026-10-26
   - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/777de995cff2aacfe2b35ad65ed7cec86ce5219c
+  - https://github.com/YanTKYS/news-watch/commit/a4776ddc8daddb5e26a8882f80d338fe6d447fae
+
+- Commit `d8e54f7` chore: collect news 2026-10-26
+  - direct commit
+  - https://github.com/YanTKYS/news-watch/commit/d8e54f7d8a8cbd8603c0a5d165fb5cadbb864951
 
 ### pdfengine
 
-- PR #94 再編集の往復：元の組版を記録し、元の文章に戻した行を元の位置に復元する
+- PR #96 同じ段落の複数の編集：記録した組版に対して配置し、経路と順序によらない結果にする
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/94
+  - https://github.com/YanTKYS/pdfengine/pull/96
