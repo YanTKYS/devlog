@@ -1,19 +1,19 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-10-26
+# Yesterday - 2026-10-27
 
 ### news-watch
 
-- Commit `a4776dd` chore: weekly review 2026-10-26
+- Commit `d4e3fc0` chore: collect news 2026-10-27
   - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/a4776ddc8daddb5e26a8882f80d338fe6d447fae
-
-- Commit `d8e54f7` chore: collect news 2026-10-26
-  - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/d8e54f7d8a8cbd8603c0a5d165fb5cadbb864951
+  - https://github.com/YanTKYS/news-watch/commit/d4e3fc0f74b62854476642d30d3f2e4593814de5
 
 ### pdfengine
 
-- PR #96 同じ段落の複数の編集：記録した組版に対して配置し、経路と順序によらない結果にする
+- PR #98 後続段落のインライン配置物を、所属を証明できるときだけ一緒に移動する
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/96
+  - https://github.com/YanTKYS/pdfengine/pull/98
+
+- PR #100 後続段落の行の装飾（検索欄・リンク注釈）を、明示の承認で一体に移動する
+  - merged
+  - https://github.com/YanTKYS/pdfengine/pull/100

@@ -22,9 +22,9 @@
 | markdownutil | 2026-10-12 | PR | [#34 Fluent 2に基づくUI/UX改善（編集・プレビュー・出力操作の統一）](https://github.com/YanTKYS/markdownutil/pull/34) |
 | markdown-library | 2026-10-12 | PR | [#9 UI/UXを行政系の実用サイト向けに見直し（DADSの設計思想を参考）](https://github.com/YanTKYS/markdown-library/pull/9) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
-| news-watch | 2026-10-26 | direct commit | [`d8e54f7` chore: collect news 2026-10-26](https://github.com/YanTKYS/news-watch/commit/d8e54f7d8a8cbd8603c0a5d165fb5cadbb864951) |
+| news-watch | 2026-10-27 | direct commit | [`d4e3fc0` chore: collect news 2026-10-27](https://github.com/YanTKYS/news-watch/commit/d4e3fc0f74b62854476642d30d3f2e4593814de5) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
-| pdfengine | 2026-10-27 | PR | [#98 後続段落のインライン配置物を、所属を証明できるときだけ一緒に移動する](https://github.com/YanTKYS/pdfengine/pull/98) |
+| pdfengine | 2026-10-27 | PR | [#100 後続段落の行の装飾（検索欄・リンク注釈）を、明示の承認で一体に移動する](https://github.com/YanTKYS/pdfengine/pull/100) |
 | proxypac | 2026-10-12 | PR | [#7 UI/UXの再設計（デジタル庁デザインシステムの考え方を参考に、落ち着いた業務UIへ）](https://github.com/YanTKYS/proxypac/pull/7) |
 | quotaplayer | 2026-08-30 | PR | [#24 Fix playback speed, time display, and error handling issues](https://github.com/YanTKYS/quotaplayer/pull/24) |
 | signage | 2026-08-25 | PR | [#37 Simplify README and remove unused database methods](https://github.com/YanTKYS/signage/pull/37) |
