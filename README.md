@@ -1,260 +1,30 @@
 # devlog
 
-複数の GitHub リポジトリにまたがる開発記録を一箇所に集約するためのリポジトリです。
+複数の GitHub リポジトリにまたがる開発記録と、人が残す知見を集約するリポジトリです。
 
-- 「何が起きたか」（merged PR / Release / デフォルトブランチへの直接コミット）は
-  GitHub Actions が GitHub API から自動収集し、`logs/` に Markdown として蓄積します
-- 「なぜそうしたか」（設計判断、技術的な気付きなど、人間が残すべき内容）は
-  `projects/` と `notes/` に、人が手で書きます
+- merged PR・Release・デフォルトブランチへの直接コミットを GitHub Actions で自動収集し、Markdown として蓄積します。
+- 設計判断や技術的な気付きは、プロジェクト別のメモや横断的なノートに手で記録します。
 
-自動生成ログと人間のメモを混在させないことで、後から読み返しやすい状態を保ちます。
+## 開発ログ・ノートを見る
 
-## 構成
+[GitHub Pages の閲覧UI](https://yantkys.github.io/devlog/) で、公開対象の開発ログとノートを読めます。
+ログは月・リポジトリ・種別で絞り込めます。「今日・昨日」は最後の収集時点の記録です。
 
-```text
-devlog/
-├─ README.md
-├─ config/
-│  ├─ repositories.yml   # 収集対象リポジトリの一覧
-│  └─ pages.yml          # GitHub Pages に掲載するリポジトリの許可リスト
-├─ logs/
-│  ├─ YYYY/YYYY-MM.md    # 自動収集ログ（月単位・正本）
-│  ├─ today.md           # 今日の記録だけを抜き出した閲覧用（自動生成）
-│  ├─ yesterday.md       # 昨日の記録だけを抜き出した閲覧用（自動生成）
-│  └─ latest.md          # 全リポジトリの最新1件を一覧化した閲覧用（自動生成）
-├─ projects/              # プロジェクトごとの判断・メモ（人間が記録）
-├─ notes/                 # プロジェクト横断の知見（人間が記録）
-├─ scripts/
-│  ├─ collect.py          # 収集スクリプト本体
-│  └─ build_site.py       # Pages 用データ生成・サイト組み立て
-├─ site/                  # GitHub Pages 閲覧UI（静的 HTML / CSS / JavaScript）
-├─ tests/                 # build_site.py と閲覧UIのテスト
-└─ .github/workflows/
-   ├─ collect.yml         # 定期実行・手動実行ワークフロー（収集）
-   └─ pages.yml           # GitHub Pages のデプロイ
-```
+## ファイルの案内
 
-### logs/
+| 場所 | 内容 |
+| --- | --- |
+| [logs/](logs/README.md) | 自動収集したログと閲覧用の一覧 |
+| [projects/](projects/README.md) | プロジェクトごとの判断・メモ |
+| [notes/](notes/README.md) | プロジェクト横断の知見・比較資料 |
+| [data/deepresearch/](data/deepresearch/) | 調査原文 |
+| [config/](config/) | 収集対象と Pages 公開対象の設定 |
+| [scripts/](scripts/) | ログ収集・サイト生成 |
+| [site/](site/) | 閲覧UIの HTML・CSS・JavaScript |
+| [tests/](tests/) | データ生成・閲覧UIのテスト |
 
-`logs/YYYY/YYYY-MM.md` に、日付 → リポジトリ単位で以下を記録します。
+## 設定・運用を調べる
 
-```markdown
-# 2026-08
-
-## 2026-08-19
-
-### markdownutil
-
-- PR #27 UI調整
-  - merged
-  - https://github.com/YanTKYS/markdownutil/pull/27
-```
-
-- 記録単位は PR です。PR 内の個々のコミットは展開しません
-- 同じ変更が PR 経由で既に記録されている場合、直接コミットとしては重複記録しません
-- Release・直接コミットも、それぞれ `release` / `direct commit` として区別できる形で記録します
-- 内容は GitHub API から取得できる事実のみです。AI による要約・推測は行いません
-- devlog 自身の収集では、このワークフローが push する `chore(logs): update devlog entries`
-  は direct commit として記録しません（自動 commit を再収集する自己循環を避けるため。
-  他リポジトリの同名 commit は通常どおり記録します）
-- 日付は GitHub API が返す UTC 時刻を JST（UTC+9 固定オフセット、DST なし）に変換して
-  決定します。例えば JST 8/20 01:00 にマージされた PR は `2026-08-20` に記録されます
-  （UTC のまま `.date()` を取ると `2026-08-19` になってしまうため、開発日誌として
-  不自然にならないよう JST 変換してから日付を確定させています）。日本は DST がないため
-  固定オフセットで十分と判断し、実装は `zoneinfo`（IANA タイムゾーンデータが必要で、
-  実行環境によっては存在しない場合がある）ではなく、Python 標準ライブラリの
-  `datetime.timezone(timedelta(hours=9))` のみを使っています
-- `logs/` は自動生成物です。人間が残したい内容は `projects/` `notes/` に書いてください（詳細は各ディレクトリの README を参照）
-
-#### `today.md` / `yesterday.md` / `latest.md`
-
-`logs/YYYY/YYYY-MM.md` が正本です。`logs/today.md` `logs/yesterday.md` `logs/latest.md` は、
-そこから抜き出して毎回作り直す閲覧用の自動生成ファイルで、手で編集しても次回実行時に
-上書きされます。
-
-- `today.md` / `yesterday.md`: JST 基準の今日・昨日の記録だけを表示します
-  （該当する記録がない日でも生成されます）
-- `latest.md`: `config/repositories.yml` の全リポジトリについて、devlog に収集済みの
-  最新イベント（merged PR / Release / direct commit のいずれか）1件を一覧にします。
-  記録が一度もないリポジトリも `記録なし` として必ず表示します
-
-いずれも内容は最後に自動収集が走った時点までのものです。収集は1日1回（JST 06:00）なので、
-`today.md` は「たった今」ではなく「最後の収集時点までの今日」を表し、`latest.md` も
-GitHub 上の最終更新をその場で問い合わせた結果ではありません。
-
-## GitHub Pages（閲覧UI）
-
-`logs/` の記録を、ブラウザで「いつ・どのリポジトリで・何をしたか」として見られる軽量な
-ログビューアです。収集の仕組みとは独立しており、`logs/` の形式や収集処理は変えていません。
-
-- **最近の記録**: 最新月を初期表示。月・リポジトリ・種別（PR / Release / direct commit）で
-  絞り込み、新しい順・古い順を切り替えられます。日付ごとにカード表示し、
-  各カードから元の PR・Release・Commit の GitHub ページを開けます
-- **今日・昨日**: 最後の収集時点の「今日」「昨日」の記録です。リアルタイムの GitHub 活動
-  ではありません。「今日」の基準は閲覧者の時計ではなく、最後の収集日（`logs/today.md` の
-  見出し、JST）です
-- **リポジトリ一覧**: `latest.md` 相当です。公開対象の全リポジトリについて、devlog に
-  収集済みの最新記録（日付・種別・タイトル・リンク）を表示します。記録がないリポジトリは
-  `記録なし` と表示し、名前で絞り込めます
-- **ノート**: `notes/` の比較資料を読めます。一覧から選ぶと本文を整形表示し、
-  `#notes/<id>` で直接開けます。見出しへのリンクは `#notes/<id>/<見出し>` になり、
-  タブの切り替えとは衝突しません
-
-外部 CDN・ライブラリは使わず、表示時に GitHub API も呼びません。データは Pages のビルド時に
-`logs/YYYY/YYYY-MM.md`（正本）から生成する `data/devlog.json` だけを、相対パスで読みます。
-
-### 公開するノート
-
-公開されるノートは、`scripts/build_site.py` の `PUBLIC_NOTES` に列挙したファイルだけです
-（現在は `notes/free-apis.md` と `notes/ai-coding-tools.md`）。`notes/` や
-`data/deepresearch/` を丸ごと公開することはありません。ノートを追加する場合は次の2か所に
-追記します。
-
-- `PUBLIC_NOTES` に `id`（URL に使う英小文字とハイフン）・`source`・`description` を追加する
-- `.github/workflows/pages.yml` の `paths` にそのファイルを追加する（変更時に Pages を更新するため）
-
-ビルド時にノート内の相対リンクを書き換えます。公開対象のノートへのリンクは閲覧UI内の
-リンクに、それ以外のファイル（調査原文など）へのリンクは GitHub 上の元ファイルへの
-リンクになります。Markdown は `site/markdown-lib.js` が構文木に変換し、`site/app.js` が
-DOM を組み立てます。HTML 文字列は一切使わないため、ノート内の HTML はそのまま文字として
-表示され、`http(s)`・`mailto` 以外のリンク（`javascript:` など）はリンクになりません。
-Python 3 標準ライブラリのみで動き、サブパス（`https://<user>.github.io/devlog/`）配下でも
-動作します。
-
-### 公開対象の指定（重要）
-
-GitHub Pages は公開サイトです。`config/repositories.yml` には private リポジトリが含まれる
-ため、**`config/pages.yml` の `public_repositories` に書いたリポジトリだけ**を掲載します。
-書かれていないリポジトリは、記録もリポジトリ名も Pages 用データに出力されません
-（未指定の private リポジトリはデフォルトで非公開です）。
-
-```yaml
-public_repositories:
-  - YanTKYS/pdfengine
-  - YanTKYS/news-watch
-```
-
-- 掲載したいリポジトリを `owner/repo` で1行追記します（`repositories.yml` に登録済みであること）
-- **private リポジトリは追加しないでください**。追加するとそのタイトル・URL が公開されます
-- 絞り込みは Pages 用データの生成時（`scripts/build_site.py`）にだけ行います。`logs/` の
-  収集対象・記録内容は変わりません
-
-### Pages の有効化（初回のみ）
-
-リポジトリの Settings → Pages → Build and deployment → **Source** を
-**GitHub Actions** に設定してください。トークン（PAT）は不要です。
-
-### デプロイ
-
-`.github/workflows/pages.yml` が、テスト → `python3 scripts/build_site.py` →
-GitHub 公式の Pages Actions でのデプロイを行います（収集は行いません）。次のタイミングで
-実行され、同時に走らないよう直列化されます。
-
-- `Collect devlog` の成功後（`collect.yml` は `GITHUB_TOKEN` で push するため、その push では
-  他のワークフローが起動しません。そのため `workflow_run` で収集完了を受けます）
-- `main` に `logs/**` `site/**` `config/pages.yml` 等の変更が push されたとき
-- Actions タブからの手動実行（`Run workflow`）
-
-### ローカルで確認する
-
-```bash
-python3 scripts/build_site.py          # _site/ に生成（.gitignore 済み）
-python3 -m http.server -d _site 8000   # http://localhost:8000/ を開く
-python3 -m unittest discover -s tests  # データ生成のテスト
-node --test tests/site_lib.test.js tests/markdown_lib.test.js  # 閲覧UIとMarkdown表示のテスト
-```
-
-`file://` で直接開くと `data/devlog.json` を読めないため、上のように HTTP で配信してください。
-
-## 自動収集の仕組み
-
-`.github/workflows/collect.yml` が `scripts/collect.py` を実行し、
-`config/repositories.yml` に列挙されたリポジトリから
-
-- マージ済み Pull Request
-- Release（draft を除く）
-- Pull Request を経由せずデフォルトブランチへ直接入ったコミット
-  （コミットに紐づく merged PR がある場合はそちらとして記録済みとみなし、スキップします）
-
-を取得し、対象月の `logs/YYYY/YYYY-MM.md` に追記します。
-
-一覧の取得（PR・Release・コミット）は REST API です。コミットが merged PR に属するかの
-判定だけは、コミット1件ごとに1リクエストを要する REST の代わりに GraphQL API へ
-まとめて（既定 30 件ずつ）問い合わせます。認証には同じ `DEVLOG_READ_TOKEN` を使います。
-
-**重複防止**: 別途の状態ファイルは持たず、各イベントの GitHub URL をそのまま重複判定の
-キーとして使います。追記前に、対象月のファイル内に同じ URL が既に含まれていないかを
-確認し、含まれていれば追記をスキップします。`logs/` 自体が唯一の正とするデータになる
-ため、実行が数日飛んでも（`LOOKBACK_DAYS` 日分を毎回見直すので）取りこぼしにくく、
-手動編集した行が消えたり増えたりしにくい、壊れにくい方式です。
-
-## `config/repositories.yml` への対象追加方法
-
-`repositories:` の下に `owner/repo` の形式で1行追記するだけです。
-
-```yaml
-repositories:
-  - YanTKYS/nestsuite
-  - YanTKYS/your-new-repo
-```
-
-private リポジトリを追加する場合は、下記の Secret 設定も必要です。
-
-## GitHub Actions の実行方法
-
-- **定期実行**: 毎日 1 回（UTC 21:00 = JST 06:00）自動実行されます。この場合、取得対象は
-  直近 7 日分（`LOOKBACK_DAYS`）です。毎日走る前提での重複分を含んだ日数で、Actions が
-  数日止まっても取りこぼしません。それ以上長く止まった場合は、下記の手動実行で
-  `lookback_days` に任意の日数を指定して取り込めます
-- **手動実行**: GitHub の Actions タブから `Collect devlog` ワークフローを選び、
-  `Run workflow` を押すことで即時実行できます（`workflow_dispatch`）
-- 収集結果に変更があった場合のみ `logs/` の変更を commit・push します。
-  変更がない場合は commit を作成しません
-
-### 過去分のバックフィル（初回導入時など）
-
-手動実行時のみ、`lookback_days`（取得対象日数）を指定できます。空欄なら通常運用と同じ
-7日です。導入初回に過去の履歴をまとめて取り込みたい場合や、Actions が長期間止まって
-いた場合は、`Run workflow` 実行時に `lookback_days` へ `35` `365` `730` など必要な日数を
-指定してください。一度に全履歴を取り込む必要はなく、必要な範囲だけ何度でも指定し直せます
-（`logs/` への重複記録は発生しません）。
-
-ページネーションは指定した `lookback_days` の範囲を実際に走査し終えるまで続く実装なので、
-`730` 日のように長い期間を指定しても、途中で黙って取得を打ち切ることはありません
-（暴走防止の安全上限のみ設けてあり、万一到達した場合はワークフローのログに warning が
-出ます。通常の運用では発生しません）。
-
-## private リポジトリ取得用 Secret の設定
-
-対象リポジトリに private が含まれる場合、`devlog` リポジトリの
-Settings → Secrets and variables → Actions に、以下の Secret を登録してください。
-
-- **Secret 名**: `DEVLOG_READ_TOKEN`
-- **値**: GitHub の Fine-grained personal access token
-  - 対象は収集したいリポジトリのみに限定してください（Only select repositories）
-  - Permissions は以下の read-only 権限のみで十分です
-    - Contents: Read-only（コミット・Release の取得に使用）
-    - Pull requests: Read-only（PR の取得に使用）
-    - Metadata: Read-only（必須項目として自動付与されます）
-  - 書き込み権限は不要です
-
-`DEVLOG_READ_TOKEN` が未設定の場合、ワークフローが自動的に持つ `GITHUB_TOKEN` で
-取得を試みますが、これは public リポジトリの読み取りにしか使えません。
-
-## ローカルで試す方法
-
-Python 3.8 以降があれば、依存ライブラリのインストールなしでそのまま実行できます
-（OS のタイムゾーンデータベースにも依存しません）。
-
-```bash
-export DEVLOG_READ_TOKEN=ghp_xxxxxxxx   # 必須。GraphQL は未認証だと使えないため
-export DEVLOG_LOOKBACK_DAYS=365          # 省略可。省略時は7日(通常運用と同じ)
-python3 scripts/collect.py
-```
-
-`config/repositories.yml` を読み込み、`logs/YYYY/YYYY-MM.md` を生成・更新します。
-再実行しても、既に記録済みの内容は重複追加されません。
-
-トークンなしでも PR・Release は public リポジトリから取得できますが、direct commit の
-判定に使う GraphQL は未認証では利用できないため、その分は warning を出してスキップします
-（GitHub Actions 上では `GITHUB_TOKEN` があるため常に認証されます）。
+[運用ガイド](docs/operations.md) に、収集対象・認証の設定、定期／手動実行、バックフィル、
+Pages の公開範囲・デプロイ、ローカル開発の手順をまとめています。
+ログの形式と正本・派生ファイルの関係は [logs/README.md](logs/README.md) を参照してください。

@@ -6,6 +6,9 @@
 - 記録単位は PR（PR内の個々のコミットは展開しません）
 - 同じ変更が PR 経由で既に記録済みの場合、直接コミットとしては重複記録しません
 - 内容は GitHub API から取得できる事実のみで、要約や推測は含みません
+- イベントの日付は JST（UTC+9）基準です
+- 各イベントの GitHub URL をキーに重複追加を防ぎます。devlog 自身の自動収集コミット
+  `chore(logs): update devlog entries` は再収集しません
 - ファイルは `python3 scripts/collect.py`（または GitHub Actions）が生成・更新します。手で編集しても構いませんが、見出しの形式（`# YYYY-MM` / `## YYYY-MM-DD` / `### repo`）を崩すと次回実行時のマージに影響します
 
 `today.md` / `yesterday.md` / `latest.md` は、正本である `YYYY/YYYY-MM.md` から作る閲覧用
@@ -14,4 +17,6 @@
 表示します。毎回全体を作り直すため（追記ではありません）、手で編集しても次回実行時に
 上書きされます。内容は最後に自動収集が走った時点までのものです。
 
-設計判断や技術的な気付きなど、人が書き残したい内容は `projects/` や `notes/` に記録してください。
+収集の設定・実行手順は [運用ガイド](../docs/operations.md) を参照してください。
+設計判断や技術的な気付きなど、人が書き残したい内容は
+[projects/](../projects/README.md) や [notes/](../notes/README.md) に記録してください。
