@@ -22,7 +22,7 @@
 | markdownutil | 2026-10-12 | PR | [#34 Fluent 2に基づくUI/UX改善（編集・プレビュー・出力操作の統一）](https://github.com/YanTKYS/markdownutil/pull/34) |
 | markdown-library | 2026-10-12 | PR | [#9 UI/UXを行政系の実用サイト向けに見直し（DADSの設計思想を参考）](https://github.com/YanTKYS/markdown-library/pull/9) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
-| news-watch | 2026-10-29 | PR | [#25 feat: Sarashina更新後の疎通を再検証する手動PoCを追加](https://github.com/YanTKYS/news-watch/pull/25) |
+| news-watch | 2026-10-30 | direct commit | [`ff065f0` chore: collect news 2026-10-30](https://github.com/YanTKYS/news-watch/commit/ff065f0c81dd9b58b6dbb963393fd11fb2ad3e6b) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
 | pdfengine | 2026-10-29 | PR | [#106 複数行を描くテキストオブジェクトから後続の行を分離し、実PDFの長文化を広げる](https://github.com/YanTKYS/pdfengine/pull/106) |
 | proxypac | 2026-10-12 | PR | [#7 UI/UXの再設計（デジタル庁デザインシステムの考え方を参考に、落ち着いた業務UIへ）](https://github.com/YanTKYS/proxypac/pull/7) |
