@@ -1,19 +1,25 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-10-31
+# Yesterday - 2026-11-01
+
+### devlog
+
+- Commit `5094583` Create ai-development-workflow.md
+  - direct commit
+  - https://github.com/YanTKYS/devlog/commit/509458391dbdb4e8d66fa1a7596f9a79899ea24e
 
 ### news-watch
 
-- Commit `65e0c22` chore: collect news 2026-10-31
+- Commit `074d067` chore: monthly review 2026-11-01
   - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/65e0c2202d88f8129da3bd0ce02b6fe011da930b
+  - https://github.com/YanTKYS/news-watch/commit/074d067a7318ee14c7fb8e206551c49f30bf8d31
+
+- PR #28 fix: 月刊レビューの定期起動を毎月1〜3日に補完
+  - merged
+  - https://github.com/YanTKYS/news-watch/pull/28
 
 ### pdfengine
 
-- PR #111 段落・行構造の推定：移動した行の再open（R13）と脚注のぶら下げ字下げ（S2）
+- PR #113 明示承認付きレイアウト調整の第1段階：背景パネルの縦方向の伸長
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/111
-
-- PR #109 開発判断ルールの明文化、評価の共通基盤（3段階・1つの基準）、承認変更を区別する監査、実PDFスモーク
-  - merged
-  - https://github.com/YanTKYS/pdfengine/pull/109
+  - https://github.com/YanTKYS/pdfengine/pull/113

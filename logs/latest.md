@@ -10,7 +10,7 @@
 | chouseisan | 2026-08-30 | PR | [#29 Fix UI bugs and improve event loading/display logic](https://github.com/YanTKYS/chouseisan/pull/29) |
 | clock | 2026-08-25 | PR | [#33 Refactor README and improve code documentation](https://github.com/YanTKYS/clock/pull/33) |
 | desknets_noticer | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/desknets_noticer/pull/6) |
-| devlog | 2026-10-29 | PR | [#18 docs: READMEを概要と導線に絞り、運用手順を集約](https://github.com/YanTKYS/devlog/pull/18) |
+| devlog | 2026-11-01 | direct commit | [`5094583` Create ai-development-workflow.md](https://github.com/YanTKYS/devlog/commit/509458391dbdb4e8d66fa1a7596f9a79899ea24e) |
 | fusen | 2026-08-25 | PR | [#11 Improve code comments and README documentation](https://github.com/YanTKYS/fusen/pull/11) |
 | giin_iinkai | 2026-08-30 | PR | [#5 Implement operation queuing to prevent concurrent save conflicts](https://github.com/YanTKYS/giin_iinkai/pull/5) |
 | giin_zaiseki | 2026-08-30 | PR | [#4 Improve multi-device sync and offline handling in input screen](https://github.com/YanTKYS/giin_zaiseki/pull/4) |
@@ -22,9 +22,9 @@
 | markdownutil | 2026-10-12 | PR | [#34 Fluent 2に基づくUI/UX改善（編集・プレビュー・出力操作の統一）](https://github.com/YanTKYS/markdownutil/pull/34) |
 | markdown-library | 2026-10-12 | PR | [#9 UI/UXを行政系の実用サイト向けに見直し（DADSの設計思想を参考）](https://github.com/YanTKYS/markdown-library/pull/9) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
-| news-watch | 2026-10-31 | direct commit | [`65e0c22` chore: collect news 2026-10-31](https://github.com/YanTKYS/news-watch/commit/65e0c2202d88f8129da3bd0ce02b6fe011da930b) |
+| news-watch | 2026-11-01 | PR | [#28 fix: 月刊レビューの定期起動を毎月1〜3日に補完](https://github.com/YanTKYS/news-watch/pull/28) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
-| pdfengine | 2026-10-31 | PR | [#109 開発判断ルールの明文化、評価の共通基盤（3段階・1つの基準）、承認変更を区別する監査、実PDFスモーク](https://github.com/YanTKYS/pdfengine/pull/109) |
+| pdfengine | 2026-11-01 | PR | [#113 明示承認付きレイアウト調整の第1段階：背景パネルの縦方向の伸長](https://github.com/YanTKYS/pdfengine/pull/113) |
 | proxypac | 2026-10-12 | PR | [#7 UI/UXの再設計（デジタル庁デザインシステムの考え方を参考に、落ち着いた業務UIへ）](https://github.com/YanTKYS/proxypac/pull/7) |
 | quotaplayer | 2026-08-30 | PR | [#24 Fix playback speed, time display, and error handling issues](https://github.com/YanTKYS/quotaplayer/pull/24) |
 | signage | 2026-08-25 | PR | [#37 Simplify README and remove unused database methods](https://github.com/YanTKYS/signage/pull/37) |
