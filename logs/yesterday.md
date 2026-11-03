@@ -1,25 +1,27 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-11-01
-
-### devlog
-
-- Commit `5094583` Create ai-development-workflow.md
-  - direct commit
-  - https://github.com/YanTKYS/devlog/commit/509458391dbdb4e8d66fa1a7596f9a79899ea24e
+# Yesterday - 2026-11-02
 
 ### news-watch
 
-- Commit `074d067` chore: monthly review 2026-11-01
+- Commit `91a20f2` chore: collect news 2026-11-02
   - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/074d067a7318ee14c7fb8e206551c49f30bf8d31
+  - https://github.com/YanTKYS/news-watch/commit/91a20f242e85e7a4d8a9f48ca570747c21e66e46
 
-- PR #28 fix: 月刊レビューの定期起動を毎月1〜3日に補完
+- PR #32 feat: W43比較を1回のActionsで両モデル実行・集計
   - merged
-  - https://github.com/YanTKYS/news-watch/pull/28
+  - https://github.com/YanTKYS/news-watch/pull/32
+
+- PR #30 feat: W43をGemini 3.6とPLaMoで比較する独立PoCを追加
+  - merged
+  - https://github.com/YanTKYS/news-watch/pull/30
 
 ### pdfengine
 
-- PR #113 明示承認付きレイアウト調整の第1段階：背景パネルの縦方向の伸長
+- PR #117 実用成功の検索・コピー判定を新指標へ統合し、旧検索監査の誤判定を修正する
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/113
+  - https://github.com/YanTKYS/pdfengine/pull/117
+
+- PR #115 折り返した編集文字列の検索・コピーを実PDFで実測する
+  - merged
+  - https://github.com/YanTKYS/pdfengine/pull/115
