@@ -1,35 +1,35 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-11-03
+# Yesterday - 2026-11-04
+
+### benri
+
+- PR #164 UI改善：Fluent 2を部分参考に、狭幅ナビの開閉メニュー化と操作パネルの整理
+  - merged
+  - https://github.com/YanTKYS/benri/pull/164
+
+- PR #162 公示送達用PDF：画像化方式に斜線網掛けオプションと0.75倍を追加
+  - merged
+  - https://github.com/YanTKYS/benri/pull/162
+
+### devlog
+
+- PR #20 docs: pdfengine開発休止の総括と長期AI開発への教訓を記録する
+  - merged
+  - https://github.com/YanTKYS/devlog/pull/20
 
 ### news-watch
 
-- Commit `ed9e8d5` chore: weekly review 2026-11-03
+- Commit `b70deaf` chore: collect news 2026-11-04
   - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/ed9e8d5215722696abda17df89a590fd8e991b6d
-
-- Commit `24767a8` chore: weekly review 2026-11-03
-  - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/24767a8ed54542bfee10a7e8d31ea40a998a03ae
-
-- PR #35 docs: W43比較の実測・PLaMo採用・本番反映を記録
-  - merged
-  - https://github.com/YanTKYS/news-watch/pull/35
-
-- PR #34 feat: 本番の週刊レビュー生成をPLaMo 3.1 Primeへ切替
-  - merged
-  - https://github.com/YanTKYS/news-watch/pull/34
-
-- Commit `114b4b3` chore: collect news 2026-11-03
-  - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/114b4b32f18d42cde2206b318f3fc7c9d9c1f729
+  - https://github.com/YanTKYS/news-watch/commit/b70deaf0e90e7df978455c75d260c3599681daae
 
 ### pdfengine
 
-- PR #121 実PDFの残存拒否を減らす（第1弾）：段の横に立つ画像・枠を次の行の内容と取り違えない
+- PR #125 編集モデル中心（ParagraphIR）の最終技術検証：実PDF 6件の実測と判断（Issue #124）
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/121
+  - https://github.com/YanTKYS/pdfengine/pull/125
 
-- PR #119 Wordテキストボックスの長文化：クリップ範囲と背景・輪郭を明示承認で安全に伸長する
+- PR #123 編集の方式の比較PoC：stateless redaction＋段落再描画の実測（Issue #122）
   - merged
-  - https://github.com/YanTKYS/pdfengine/pull/119
+  - https://github.com/YanTKYS/pdfengine/pull/123

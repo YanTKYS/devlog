@@ -6,11 +6,11 @@
 
 | Repository | 最新記録 | 種別 | 内容 |
 | --- | --- | --- | --- |
-| benri | 2026-10-23 | PR | [#160 fix: トリミング済みPDFの通し番号の位置ずれ・非表示を修正](https://github.com/YanTKYS/benri/pull/160) |
+| benri | 2026-11-04 | PR | [#162 公示送達用PDF：画像化方式に斜線網掛けオプションと0.75倍を追加](https://github.com/YanTKYS/benri/pull/162) |
 | chouseisan | 2026-08-30 | PR | [#29 Fix UI bugs and improve event loading/display logic](https://github.com/YanTKYS/chouseisan/pull/29) |
 | clock | 2026-08-25 | PR | [#33 Refactor README and improve code documentation](https://github.com/YanTKYS/clock/pull/33) |
 | desknets_noticer | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/desknets_noticer/pull/6) |
-| devlog | 2026-11-01 | direct commit | [`5094583` Create ai-development-workflow.md](https://github.com/YanTKYS/devlog/commit/509458391dbdb4e8d66fa1a7596f9a79899ea24e) |
+| devlog | 2026-11-04 | PR | [#20 docs: pdfengine開発休止の総括と長期AI開発への教訓を記録する](https://github.com/YanTKYS/devlog/pull/20) |
 | fusen | 2026-08-25 | PR | [#11 Improve code comments and README documentation](https://github.com/YanTKYS/fusen/pull/11) |
 | giin_iinkai | 2026-08-30 | PR | [#5 Implement operation queuing to prevent concurrent save conflicts](https://github.com/YanTKYS/giin_iinkai/pull/5) |
 | giin_zaiseki | 2026-08-30 | PR | [#4 Improve multi-device sync and offline handling in input screen](https://github.com/YanTKYS/giin_zaiseki/pull/4) |
@@ -22,9 +22,9 @@
 | markdownutil | 2026-10-12 | PR | [#34 Fluent 2に基づくUI/UX改善（編集・プレビュー・出力操作の統一）](https://github.com/YanTKYS/markdownutil/pull/34) |
 | markdown-library | 2026-10-12 | PR | [#9 UI/UXを行政系の実用サイト向けに見直し（DADSの設計思想を参考）](https://github.com/YanTKYS/markdown-library/pull/9) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
-| news-watch | 2026-11-03 | direct commit | [`114b4b3` chore: collect news 2026-11-03](https://github.com/YanTKYS/news-watch/commit/114b4b32f18d42cde2206b318f3fc7c9d9c1f729) |
+| news-watch | 2026-11-04 | direct commit | [`b70deaf` chore: collect news 2026-11-04](https://github.com/YanTKYS/news-watch/commit/b70deaf0e90e7df978455c75d260c3599681daae) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
-| pdfengine | 2026-11-03 | PR | [#119 Wordテキストボックスの長文化：クリップ範囲と背景・輪郭を明示承認で安全に伸長する](https://github.com/YanTKYS/pdfengine/pull/119) |
+| pdfengine | 2026-11-04 | PR | [#123 編集の方式の比較PoC：stateless redaction＋段落再描画の実測（Issue #122）](https://github.com/YanTKYS/pdfengine/pull/123) |
 | proxypac | 2026-10-12 | PR | [#7 UI/UXの再設計（デジタル庁デザインシステムの考え方を参考に、落ち着いた業務UIへ）](https://github.com/YanTKYS/proxypac/pull/7) |
 | quotaplayer | 2026-08-30 | PR | [#24 Fix playback speed, time display, and error handling issues](https://github.com/YanTKYS/quotaplayer/pull/24) |
 | signage | 2026-08-25 | PR | [#37 Simplify README and remove unused database methods](https://github.com/YanTKYS/signage/pull/37) |
