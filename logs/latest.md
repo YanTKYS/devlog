@@ -17,12 +17,12 @@
 | idontlovepdf | 2026-09-05 | PR | [#11 Update to idontlovepdf-engine v0.5.1 with inline FontDescriptor support](https://github.com/YanTKYS/idontlovepdf/pull/11) |
 | idontlovepdf-engine | 2026-09-06 | PR | [#32 Implement sparse TrueType font subsetting for fallback fonts](https://github.com/YanTKYS/idontlovepdf-engine/pull/32) |
 | kanban | 2026-10-12 | PR | [#16 v0.3.0: IBM Carbonを参考にした列・カード・操作ツールバーのUI/UX再設計](https://github.com/YanTKYS/kanban/pull/16) |
-| lgpwmng | 2026-08-27 | PR | [#24 v0.6.0: Chrome ウェブストア公開準備](https://github.com/YanTKYS/lgpwmng/pull/24) |
+| lgpwmng | 2026-11-06 | Release | [v0.6.0 (lgpwmng v0.6.0)](https://github.com/YanTKYS/lgpwmng/releases/tag/v0.6.0) |
 | mailexporter | - | - | 記録なし |
 | markdownutil | 2026-10-12 | PR | [#34 Fluent 2に基づくUI/UX改善（編集・プレビュー・出力操作の統一）](https://github.com/YanTKYS/markdownutil/pull/34) |
 | markdown-library | 2026-10-12 | PR | [#9 UI/UXを行政系の実用サイト向けに見直し（DADSの設計思想を参考）](https://github.com/YanTKYS/markdown-library/pull/9) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
-| news-watch | 2026-11-05 | direct commit | [`7c631fb` chore: collect news 2026-11-05](https://github.com/YanTKYS/news-watch/commit/7c631fb2adc53d389642851234fa039912e6aaa7) |
+| news-watch | 2026-11-06 | direct commit | [`87cbff5` chore: collect news 2026-11-06](https://github.com/YanTKYS/news-watch/commit/87cbff5956a5e4aede8f968e50b4434fde65ae44) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
 | pdfengine | 2026-11-04 | PR | [#123 編集の方式の比較PoC：stateless redaction＋段落再描画の実測（Issue #122）](https://github.com/YanTKYS/pdfengine/pull/123) |
 | proxypac | 2026-10-12 | PR | [#7 UI/UXの再設計（デジタル庁デザインシステムの考え方を参考に、落ち着いた業務UIへ）](https://github.com/YanTKYS/proxypac/pull/7) |
