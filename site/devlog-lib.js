@@ -115,7 +115,7 @@
    */
   function parseRoute(hash) {
     var parts = String(hash || "").replace(/^#/, "").split("/");
-    var tab = decodePart(parts[0]);
+    var tab = decodePart(parts[0].split("?")[0]);
     if (tab !== "notes") {
       return { tab: TABS.indexOf(tab) === -1 ? "recent" : tab, note: null, anchor: null };
     }
@@ -126,8 +126,36 @@
     };
   }
 
+  /**
+   * List conditions of a tab, kept after "?" in the hash: "#recent?month=2026-10&repo=devlog".
+   * Note routes carry none (their path already names the note and heading).
+   */
+  function routeParams(hash) {
+    var body = String(hash || "").replace(/^#/, "");
+    var q = body.indexOf("?");
+    var out = {};
+    if (q === -1 || body.slice(0, q).split("/")[0] === "notes") return out;
+    body.slice(q + 1).split("&").forEach(function (pair) {
+      if (!pair) return;
+      var i = pair.indexOf("=");
+      var key = decodePart(i === -1 ? pair : pair.slice(0, i));
+      var value = i === -1 ? "" : decodePart(pair.slice(i + 1).replace(/\+/g, " "));
+      if (!Object.prototype.hasOwnProperty.call(out, key)) out[key] = value;
+    });
+    return out;
+  }
+
+  /** Inverse of parseRoute + routeParams for a list tab; empty values are left out. */
+  function routeHash(tab, params) {
+    var p = params || {};
+    var query = Object.keys(p).filter(function (k) { return p[k]; }).map(function (k) {
+      return encodeURIComponent(k) + "=" + encodeURIComponent(p[k]);
+    }).join("&");
+    return "#" + tab + (query ? "?" + query : "");
+  }
+
   return {
-    TABS: TABS, parseRoute: parseRoute,
+    TABS: TABS, parseRoute: parseRoute, routeParams: routeParams, routeHash: routeHash,
     typeLabel: typeLabel, typeShort: typeShort, identifier: identifier, safeUrl: safeUrl,
     monthOf: monthOf, formatMonth: formatMonth, formatDay: formatDay, formatFullDay: formatFullDay,
     filterRecords: filterRecords, sortByDate: sortByDate, groupByDate: groupByDate,
