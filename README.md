@@ -9,6 +9,7 @@
 
 [GitHub Pages の閲覧UI](https://yantkys.github.io/devlog/) で、公開対象の開発ログとノートを読めます。
 ログは月・リポジトリ・種別で絞り込めます。「今日・昨日」は最後の収集時点の記録です。
+絞り込み条件はURL（例：`#recent?month=2026-10&repo=devlog&type=pr`）に含まれ、再読み込み・共有・戻る/進むで同じ一覧を開けます。
 
 ## ファイルの案内
 

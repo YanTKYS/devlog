@@ -114,3 +114,18 @@ test("parseRoute: a heading named like a tab stays inside its note", () => {
   assert.deepEqual(L.parseRoute("#notes/free-apis/notes"), { tab: "notes", note: "free-apis", anchor: "notes" });
   assert.ok(L.TABS.includes("notes") && L.TABS.length === 4);
 });
+
+test("routeParams / routeHash: list conditions round-trip and never touch note routes", () => {
+  const r = (tab) => ({ tab, note: null, anchor: null });
+  assert.deepEqual(L.parseRoute("#recent?month=2026-10&repo=devlog"), r("recent"));
+  assert.deepEqual(L.parseRoute("#daily?day=yesterday"), r("daily"));
+  assert.deepEqual(L.routeParams("#recent?month=2026-10&repo=devlog&type=pr"), { month: "2026-10", repo: "devlog", type: "pr" });
+  assert.deepEqual(L.routeParams("#recent"), {});
+  assert.deepEqual(L.routeParams("#notes/free-apis?x=1"), {});
+  const hash = L.routeHash("repos", { q: "ai watch/日本" });
+  assert.equal(hash, "#repos?q=ai%20watch%2F%E6%97%A5%E6%9C%AC");
+  assert.deepEqual(L.routeParams(hash), { q: "ai watch/日本" });
+  assert.equal(L.routeHash("recent", { month: "", repo: "devlog", type: "", order: "" }), "#recent?repo=devlog");
+  assert.equal(L.routeHash("daily", {}), "#daily");
+  assert.deepEqual(L.routeParams("#recent?repo=a&repo=b"), { repo: "a" });  // the first value wins
+});

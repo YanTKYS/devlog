@@ -156,6 +156,9 @@ a.card .title, .card:not(.card-empty) .title {
 .ext:focus-visible { outline: 0; box-shadow: none; }
 .ext:focus-visible::after { outline: 4px solid var(--focus-ring); outline-offset: 2px; box-shadow: 0 0 0 2px var(--focus-gap); }
 span.ext::after { content: none; }  /* record cards are links themselves */
+/* In-site link to the repository's records; sits above the stretched GitHub link. */
+.repo-log { position: relative; z-index: 1; align-self: flex-start; font-size: .875rem; color: var(--link); text-underline-offset: .2em; }
+.repo-log:hover { color: var(--link-hover); }
 a.card:focus-visible { border-radius: var(--radius-sm); }
 
 /* States */
