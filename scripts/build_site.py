@@ -63,6 +63,11 @@ PUBLIC_NOTES = (
         "source": "notes/ai-coding-tools.md",
         "description": "主要 AI コーディングツール10製品の料金・利用制限・開発機能と、用途別の選び方",
     },
+    {
+        "id": "personal-agents",
+        "source": "notes/personal-agents.md",
+        "description": "継続型パーソナル AI エージェント（dots・Grok Bot・Claude Duet・Cue・Muse・Teammates 等）の比較と、権限を絞った試し方",
+    },
 )
 # Where links to unpublished repository files point (the file on GitHub).
 SOURCE_REPOSITORY = os.environ.get("GITHUB_REPOSITORY") or "YanTKYS/devlog"

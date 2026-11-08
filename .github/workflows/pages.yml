@@ -25,6 +25,7 @@ on:
       # Published notes (keep in sync with PUBLIC_NOTES in scripts/build_site.py).
       - "notes/free-apis.md"
       - "notes/ai-coding-tools.md"
+      - "notes/personal-agents.md"
   workflow_dispatch:
 
 permissions:
