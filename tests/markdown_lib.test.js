@@ -119,7 +119,7 @@ test("resolveLink: only http(s), mailto and #notes routes become links", () => {
 });
 
 test("published notes: every in-document link resolves to a heading", () => {
-  for (const name of ["free-apis.md", "ai-coding-tools.md"]) {
+  for (const name of ["free-apis.md", "ai-coding-tools.md", "personal-agents.md"]) {
     const src = fs.readFileSync(path.join(__dirname, "..", "notes", name), "utf8");
     const doc = M.parse(src);
     const slugs = new Set(doc.headings.map((h) => h.slug));

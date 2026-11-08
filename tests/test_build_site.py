@@ -316,8 +316,8 @@ class NoteLinkTests(unittest.TestCase):
 class NotesBuildTests(unittest.TestCase):
     def test_only_listed_notes_are_published(self):
         manifest, files = bs.build_notes()
-        self.assertEqual([n["id"] for n in manifest], ["free-apis", "ai-coding-tools"])
-        self.assertEqual(sorted(files), ["notes/ai-coding-tools.md", "notes/free-apis.md"])
+        self.assertEqual([n["id"] for n in manifest], ["free-apis", "ai-coding-tools", "personal-agents"])
+        self.assertEqual(sorted(files), ["notes/ai-coding-tools.md", "notes/free-apis.md", "notes/personal-agents.md"])
         for note in manifest:
             self.assertTrue(note["description"])
             self.assertEqual(note["path"], f"notes/{note['id']}.md")
@@ -359,10 +359,10 @@ class NotesBuildTests(unittest.TestCase):
             out = Path(tmp) / "out"
             bs.build_site(out, data, notes=bs.build_notes())
             md = sorted(str(p.relative_to(out)) for p in out.rglob("*.md"))
-            self.assertEqual(md, ["notes/ai-coding-tools.md", "notes/free-apis.md"])
+            self.assertEqual(md, ["notes/ai-coding-tools.md", "notes/free-apis.md", "notes/personal-agents.md"])
             self.assertFalse(any("deepresearch" in str(p) for p in out.rglob("*")))
             manifest = json.loads((out / bs.NOTES_DATA_FILE).read_text(encoding="utf-8"))
-            self.assertEqual([n["id"] for n in manifest["notes"]], ["free-apis", "ai-coding-tools"])
+            self.assertEqual([n["id"] for n in manifest["notes"]], ["free-apis", "ai-coding-tools", "personal-agents"])
             for note in manifest["notes"]:
                 self.assertTrue((out / note["path"]).is_file())
 
