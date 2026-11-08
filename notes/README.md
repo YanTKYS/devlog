@@ -13,3 +13,5 @@
 - [ai-coding-tools.md](ai-coding-tools.md): 主要AIコーディングツール10製品の料金・利用制限・機能の比較（2026年10月）
 - [ai-development-workflow.md](ai-development-workflow.md): AI開発体制（ツールの役割分担・代替候補）の検討と運用評価
 - [long-term-ai-development.md](long-term-ai-development.md): 長期・高難度のAI開発で、利用価値から逆算し、継続・転換・休止を判断するための教訓
+
+- [test-suite-maintenance-audit.md](test-suite-maintenance-audit.md): 継続開発リポジトリのテスト保守調査と、低価値・重複検査の整理候補
