@@ -6,11 +6,11 @@
 
 | Repository | 最新記録 | 種別 | 内容 |
 | --- | --- | --- | --- |
-| benri | 2026-11-04 | PR | [#162 公示送達用PDF：画像化方式に斜線網掛けオプションと0.75倍を追加](https://github.com/YanTKYS/benri/pull/162) |
+| benri | 2026-11-07 | PR | [#166 feat: A-33 リスト突合・差分抽出を文章・文字ツールへ追加](https://github.com/YanTKYS/benri/pull/166) |
 | chouseisan | 2026-08-30 | PR | [#29 Fix UI bugs and improve event loading/display logic](https://github.com/YanTKYS/chouseisan/pull/29) |
 | clock | 2026-08-25 | PR | [#33 Refactor README and improve code documentation](https://github.com/YanTKYS/clock/pull/33) |
 | desknets_noticer | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/desknets_noticer/pull/6) |
-| devlog | 2026-11-04 | PR | [#20 docs: pdfengine開発休止の総括と長期AI開発への教訓を記録する](https://github.com/YanTKYS/devlog/pull/20) |
+| devlog | 2026-11-08 | PR | [#22 タブ間の履歴・一覧条件のURL復元・リポジトリカードからログへの導線（#21 Phase 2）](https://github.com/YanTKYS/devlog/pull/22) |
 | fusen | 2026-08-25 | PR | [#11 Improve code comments and README documentation](https://github.com/YanTKYS/fusen/pull/11) |
 | giin_iinkai | 2026-08-30 | PR | [#5 Implement operation queuing to prevent concurrent save conflicts](https://github.com/YanTKYS/giin_iinkai/pull/5) |
 | giin_zaiseki | 2026-08-30 | PR | [#4 Improve multi-device sync and offline handling in input screen](https://github.com/YanTKYS/giin_zaiseki/pull/4) |
@@ -22,7 +22,7 @@
 | markdownutil | 2026-10-12 | PR | [#34 Fluent 2に基づくUI/UX改善（編集・プレビュー・出力操作の統一）](https://github.com/YanTKYS/markdownutil/pull/34) |
 | markdown-library | 2026-10-12 | PR | [#9 UI/UXを行政系の実用サイト向けに見直し（DADSの設計思想を参考）](https://github.com/YanTKYS/markdown-library/pull/9) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
-| news-watch | 2026-11-06 | direct commit | [`87cbff5` chore: collect news 2026-11-06](https://github.com/YanTKYS/news-watch/commit/87cbff5956a5e4aede8f968e50b4434fde65ae44) |
+| news-watch | 2026-11-08 | PR | [#37 閲覧状態のURL・履歴復元、追加表示後のフォーカス、再試行、説明展開、日付ラベル（#36 Phase 2）](https://github.com/YanTKYS/news-watch/pull/37) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
 | pdfengine | 2026-11-04 | PR | [#123 編集の方式の比較PoC：stateless redaction＋段落再描画の実測（Issue #122）](https://github.com/YanTKYS/pdfengine/pull/123) |
 | proxypac | 2026-10-12 | PR | [#7 UI/UXの再設計（デジタル庁デザインシステムの考え方を参考に、落ち着いた業務UIへ）](https://github.com/YanTKYS/proxypac/pull/7) |
