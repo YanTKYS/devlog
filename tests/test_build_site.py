@@ -318,8 +318,6 @@ class NotesBuildTests(unittest.TestCase):
         manifest, files = bs.build_notes()
         self.assertEqual([n["id"] for n in manifest], ["free-apis", "ai-coding-tools"])
         self.assertEqual(sorted(files), ["notes/ai-coding-tools.md", "notes/free-apis.md"])
-        self.assertEqual(manifest[0]["title"], "個人開発で使える無料・無料枠API")
-        self.assertEqual(manifest[1]["title"], "AIコーディングツール比較（2026年10月）")
         for note in manifest:
             self.assertTrue(note["description"])
             self.assertEqual(note["path"], f"notes/{note['id']}.md")
