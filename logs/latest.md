@@ -10,19 +10,19 @@
 | chouseisan | 2026-08-30 | PR | [#29 Fix UI bugs and improve event loading/display logic](https://github.com/YanTKYS/chouseisan/pull/29) |
 | clock | 2026-08-25 | PR | [#33 Refactor README and improve code documentation](https://github.com/YanTKYS/clock/pull/33) |
 | desknets_noticer | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/desknets_noticer/pull/6) |
-| devlog | 2026-11-08 | PR | [#22 タブ間の履歴・一覧条件のURL復元・リポジトリカードからログへの導線（#21 Phase 2）](https://github.com/YanTKYS/devlog/pull/22) |
+| devlog | 2026-11-08 | PR | [#24 docs: 継続開発リポジトリのテスト保守調査（#23）](https://github.com/YanTKYS/devlog/pull/24) |
 | fusen | 2026-08-25 | PR | [#11 Improve code comments and README documentation](https://github.com/YanTKYS/fusen/pull/11) |
 | giin_iinkai | 2026-08-30 | PR | [#5 Implement operation queuing to prevent concurrent save conflicts](https://github.com/YanTKYS/giin_iinkai/pull/5) |
 | giin_zaiseki | 2026-08-30 | PR | [#4 Improve multi-device sync and offline handling in input screen](https://github.com/YanTKYS/giin_zaiseki/pull/4) |
 | idontlovepdf | 2026-09-05 | PR | [#11 Update to idontlovepdf-engine v0.5.1 with inline FontDescriptor support](https://github.com/YanTKYS/idontlovepdf/pull/11) |
 | idontlovepdf-engine | 2026-09-06 | PR | [#32 Implement sparse TrueType font subsetting for fallback fonts](https://github.com/YanTKYS/idontlovepdf-engine/pull/32) |
 | kanban | 2026-10-12 | PR | [#16 v0.3.0: IBM Carbonを参考にした列・カード・操作ツールバーのUI/UX再設計](https://github.com/YanTKYS/kanban/pull/16) |
-| lgpwmng | 2026-11-06 | Release | [v0.6.0 (lgpwmng v0.6.0)](https://github.com/YanTKYS/lgpwmng/releases/tag/v0.6.0) |
+| lgpwmng | 2026-11-08 | PR | [#30 test: ストア掲載資料の文言固定テストを整理（#29）](https://github.com/YanTKYS/lgpwmng/pull/30) |
 | mailexporter | - | - | 記録なし |
 | markdownutil | 2026-10-12 | PR | [#34 Fluent 2に基づくUI/UX改善（編集・プレビュー・出力操作の統一）](https://github.com/YanTKYS/markdownutil/pull/34) |
 | markdown-library | 2026-10-12 | PR | [#9 UI/UXを行政系の実用サイト向けに見直し（DADSの設計思想を参考）](https://github.com/YanTKYS/markdown-library/pull/9) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
-| news-watch | 2026-11-08 | PR | [#37 閲覧状態のURL・履歴復元、追加表示後のフォーカス、再試行、説明展開、日付ラベル（#36 Phase 2）](https://github.com/YanTKYS/news-watch/pull/37) |
+| news-watch | 2026-11-08 | direct commit | [`d86aa54` chore: collect news 2026-11-08](https://github.com/YanTKYS/news-watch/commit/d86aa54a55f27f38140fb554123bb71be916d238) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
 | pdfengine | 2026-11-04 | PR | [#123 編集の方式の比較PoC：stateless redaction＋段落再描画の実測（Issue #122）](https://github.com/YanTKYS/pdfengine/pull/123) |
 | proxypac | 2026-10-12 | PR | [#7 UI/UXの再設計（デジタル庁デザインシステムの考え方を参考に、落ち着いた業務UIへ）](https://github.com/YanTKYS/proxypac/pull/7) |
