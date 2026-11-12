@@ -1,15 +1,15 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-11-10
+# Yesterday - 2026-11-11
 
 ### benri
 
-- PR #167 ソース全体の確認：不具合4件の修正とタブ切替の共通化
+- PR #168 docs: 開発文書5件の棚卸しとUI/UX提案の追加
   - merged
-  - https://github.com/YanTKYS/benri/pull/167
+  - https://github.com/YanTKYS/benri/pull/168
 
 ### news-watch
 
-- Commit `f8b6206` chore: collect news 2026-11-10
+- Commit `bf55b63` chore: collect news 2026-11-11
   - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/f8b6206b9f5f80339a273573508fa1d8853ad323
+  - https://github.com/YanTKYS/news-watch/commit/bf55b638721b95210a878de0fda8629d5f5752a8
