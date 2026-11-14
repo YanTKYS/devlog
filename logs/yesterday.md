@@ -1,9 +1,9 @@
 <!-- このファイルは自動生成されます。手で編集しないでください。 -->
 
-# Yesterday - 2026-11-12
+# Yesterday - 2026-11-13
 
 ### news-watch
 
-- Commit `07dfd30` chore: collect news 2026-11-12
+- Commit `5ea6ee3` chore: collect news 2026-11-13
   - direct commit
-  - https://github.com/YanTKYS/news-watch/commit/07dfd303d0ede05eaa6f77e0c5c8c51645ae1d9e
+  - https://github.com/YanTKYS/news-watch/commit/5ea6ee3dc02661dabb82ee892ad66a573a5a7832
