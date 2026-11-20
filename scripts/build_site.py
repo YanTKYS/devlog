@@ -68,6 +68,11 @@ PUBLIC_NOTES = (
         "source": "notes/personal-agents.md",
         "description": "継続型パーソナル AI エージェント（dots・Grok Bot・Claude Duet・Cue・Muse・Teammates 等）の比較と、権限を絞った試し方",
     },
+    {
+        "id": "design-skill-reuse",
+        "source": "notes/design-skill-reuse.md",
+        "description": "独自デザイン「糸の交点」を Agent Skill にし、別の AI が別リポジトリへ適用した PoC の振り返りと次回の手順",
+    },
 )
 # Where links to unpublished repository files point (the file on GitHub).
 SOURCE_REPOSITORY = os.environ.get("GITHUB_REPOSITORY") or "YanTKYS/devlog"
