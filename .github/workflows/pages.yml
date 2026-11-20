@@ -26,6 +26,7 @@ on:
       - "notes/free-apis.md"
       - "notes/ai-coding-tools.md"
       - "notes/personal-agents.md"
+      - "notes/design-skill-reuse.md"
   workflow_dispatch:
 
 permissions:
