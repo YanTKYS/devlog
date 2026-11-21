@@ -10,7 +10,7 @@
 | chouseisan | 2026-08-30 | PR | [#29 Fix UI bugs and improve event loading/display logic](https://github.com/YanTKYS/chouseisan/pull/29) |
 | clock | 2026-08-25 | PR | [#33 Refactor README and improve code documentation](https://github.com/YanTKYS/clock/pull/33) |
 | desknets_noticer | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/desknets_noticer/pull/6) |
-| devlog | 2026-11-08 | PR | [#24 docs: 継続開発リポジトリのテスト保守調査（#23）](https://github.com/YanTKYS/devlog/pull/24) |
+| devlog | 2026-11-20 | PR | [#30 docs: 独自デザイン「糸の交点」のAgent Skill化と別AIへの移植の振り返りを追加](https://github.com/YanTKYS/devlog/pull/30) |
 | fusen | 2026-08-25 | PR | [#11 Improve code comments and README documentation](https://github.com/YanTKYS/fusen/pull/11) |
 | giin_iinkai | 2026-08-30 | PR | [#5 Implement operation queuing to prevent concurrent save conflicts](https://github.com/YanTKYS/giin_iinkai/pull/5) |
 | giin_zaiseki | 2026-08-30 | PR | [#4 Improve multi-device sync and offline handling in input screen](https://github.com/YanTKYS/giin_zaiseki/pull/4) |
@@ -20,9 +20,9 @@
 | lgpwmng | 2026-11-08 | PR | [#30 test: ストア掲載資料の文言固定テストを整理（#29）](https://github.com/YanTKYS/lgpwmng/pull/30) |
 | mailexporter | - | - | 記録なし |
 | markdownutil | 2026-10-12 | PR | [#34 Fluent 2に基づくUI/UX改善（編集・プレビュー・出力操作の統一）](https://github.com/YanTKYS/markdownutil/pull/34) |
-| markdown-library | 2026-10-12 | PR | [#9 UI/UXを行政系の実用サイト向けに見直し（DADSの設計思想を参考）](https://github.com/YanTKYS/markdown-library/pull/9) |
+| markdown-library | 2026-11-20 | PR | [#11 「糸の交点」を Markdown Library に適用する](https://github.com/YanTKYS/markdown-library/pull/11) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
-| news-watch | 2026-11-19 | direct commit | [`04edcaf` chore: collect news 2026-11-19](https://github.com/YanTKYS/news-watch/commit/04edcaf53f472bffa45a7e540c540ed32d1f10d4) |
+| news-watch | 2026-11-20 | direct commit | [`720e4ad` chore: collect news 2026-11-20](https://github.com/YanTKYS/news-watch/commit/720e4adc4e1333c51f242191f687db2dca275a35) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
 | pdfengine | 2026-11-04 | PR | [#123 編集の方式の比較PoC：stateless redaction＋段落再描画の実測（Issue #122）](https://github.com/YanTKYS/pdfengine/pull/123) |
 | proxypac | 2026-10-12 | PR | [#7 UI/UXの再設計（デジタル庁デザインシステムの考え方を参考に、落ち着いた業務UIへ）](https://github.com/YanTKYS/proxypac/pull/7) |
