@@ -16,13 +16,13 @@
 | giin_zaiseki | 2026-08-30 | PR | [#4 Improve multi-device sync and offline handling in input screen](https://github.com/YanTKYS/giin_zaiseki/pull/4) |
 | idontlovepdf | 2026-09-05 | PR | [#11 Update to idontlovepdf-engine v0.5.1 with inline FontDescriptor support](https://github.com/YanTKYS/idontlovepdf/pull/11) |
 | idontlovepdf-engine | 2026-09-06 | PR | [#32 Implement sparse TrueType font subsetting for fallback fonts](https://github.com/YanTKYS/idontlovepdf-engine/pull/32) |
-| kanban | 2026-10-12 | PR | [#16 v0.3.0: IBM Carbonを参考にした列・カード・操作ツールバーのUI/UX再設計](https://github.com/YanTKYS/kanban/pull/16) |
+| kanban | 2026-11-23 | PR | [#18 PoC: 二色刷り(j-risograph-ui)テーマを iKanbanPilot に追加](https://github.com/YanTKYS/kanban/pull/18) |
 | lgpwmng | 2026-11-08 | PR | [#30 test: ストア掲載資料の文言固定テストを整理（#29）](https://github.com/YanTKYS/lgpwmng/pull/30) |
 | mailexporter | - | - | 記録なし |
 | markdownutil | 2026-10-12 | PR | [#34 Fluent 2に基づくUI/UX改善（編集・プレビュー・出力操作の統一）](https://github.com/YanTKYS/markdownutil/pull/34) |
 | markdown-library | 2026-11-20 | PR | [#11 「糸の交点」を Markdown Library に適用する](https://github.com/YanTKYS/markdown-library/pull/11) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
-| news-watch | 2026-11-22 | direct commit | [`f5ae397` chore: collect news 2026-11-22](https://github.com/YanTKYS/news-watch/commit/f5ae397d10095977654fe1553ac1de8ff6d98b32) |
+| news-watch | 2026-11-23 | direct commit | [`dda1ac5` chore: collect news 2026-11-23](https://github.com/YanTKYS/news-watch/commit/dda1ac5a14e068a4dbd9182d7cb195b5b44cf1c4) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
 | pdfengine | 2026-11-04 | PR | [#123 編集の方式の比較PoC：stateless redaction＋段落再描画の実測（Issue #122）](https://github.com/YanTKYS/pdfengine/pull/123) |
 | proxypac | 2026-10-12 | PR | [#7 UI/UXの再設計（デジタル庁デザインシステムの考え方を参考に、落ち着いた業務UIへ）](https://github.com/YanTKYS/proxypac/pull/7) |
