@@ -19,6 +19,7 @@
   var renderSeq = 0;         // drops stale async renders after navigation
   var shownNote = null;      // id of the note currently on screen
   var BASE_TITLE = document.title;
+  var THEME_KEY = "devlog.theme";
   var TYPES = ["pr", "release", "commit"];
   var appliedHash = null;    // hash the screen currently shows (popstate and hashchange both fire)
   var pendingScroll = null;  // reading position to restore after Back / Forward / reload
@@ -582,7 +583,27 @@
     render();
   }
 
+  /* Theme select: applies the choice to <html> at once and keeps it in a
+   * dedicated localStorage key. It never enters the URL, and an unusable
+   * stored value simply stays on the standard theme. */
+  function initThemeSelect() {
+    var themeSelect = document.getElementById("theme-select");
+    if (!themeSelect) return;
+    try { themeSelect.value = localStorage.getItem(THEME_KEY) === "shore" ? "shore" : ""; }
+    catch (e) { themeSelect.value = ""; }
+    themeSelect.addEventListener("change", function () {
+      var on = themeSelect.value === "shore";
+      if (on) document.documentElement.setAttribute("data-theme", "shore");
+      else document.documentElement.removeAttribute("data-theme");
+      try {
+        if (on) localStorage.setItem(THEME_KEY, "shore");
+        else localStorage.removeItem(THEME_KEY);
+      } catch (e) { /* saving is best effort; the screen still switches */ }
+    });
+  }
+
   function init() {
+    initThemeSelect();
     var tabs = document.getElementById("tabs");
     tabs.addEventListener("click", function (e) {
       var t = e.target.closest("[role=tab]");
