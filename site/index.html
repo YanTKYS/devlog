@@ -8,11 +8,20 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>devlog</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script src="theme.js"></script>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="k-shoreline.css">
 </head>
 <body>
   <header class="site-header">
     <div class="wrap">
+      <div class="theme-pick">
+        <label for="theme-select">テーマ</label>
+        <select id="theme-select">
+          <option value="">標準テーマ</option>
+          <option value="shore">汀線テーマ</option>
+        </select>
+      </div>
       <h1>devlog <span class="subtitle">GitHub 開発記録</span></h1>
       <div role="tablist" aria-label="表示切り替え" class="tabs" id="tabs">
         <button role="tab" id="tab-recent" aria-controls="panel" data-tab="recent">最近の記録</button>

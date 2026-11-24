@@ -1,0 +1,162 @@
+/* 汀線（K案）テーマ — viewer theme applied to the same screens as the
+ * standard DADS theme, switched by the header's "テーマ" select
+ * (<html data-theme="shore">). Light only: it never mixes with the OS dark
+ * values of style.css, and switching back to the standard theme restores the
+ * OS light/dark behavior.
+ *
+ * Design tokens and rules are the work "汀線（仮称・K案）" by YanTKYS,
+ * taken from k-shoreline-ui v0.1.0 (source: YanTKYS/design-lab k-shoreline).
+ * https://github.com/YanTKYS/design-skills — MIT License.
+ *
+ * The pale green faces mark two related regions only (day heading and its log
+ * cards, repository name and its records, the selected tab / day). Curves are
+ * decorative shorelines at the seams between those faces, never the only
+ * state indicator, and never over text or controls.
+ *
+ * MIT License
+ *
+ * Copyright (c) 2026 YanTKYS
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. */
+
+:root[data-theme="shore"] {
+  color-scheme: light;
+
+  /* Standard-theme variables, retargeted to the shoreline palette. */
+  --bg: #f8f9f1;              /* --k-ground: the page ground */
+  --text: #193f3c;            /* --k-ink */
+  --text-sub: #4d6762;        /* --k-muted: 4.5:1 on every face */
+  --border: #b7c9bd;          /* --k-sep: dividers and card outlines */
+  --border-control: #6e8880;  /* --k-control-line: 3:1+ on every face */
+  --hover-bg: #e3eee6;        /* --k-sea */
+  --link: #1f5e52;            /* --k-green */
+  --link-hover: #143f36;
+  --on-key: #fff;             /* --k-on-green */
+  --focus-ring: #1f5e52;
+  --focus-gap: rgba(31, 94, 82, 0.25);
+  --radius-sm: 2px;           /* almost-square corners */
+  --radius-md: 2px;
+  --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M3 6l5 5 5-5' fill='none' stroke='%23193f3c' stroke-width='2'/%3E%3C/svg%3E");
+
+  /* Shoreline tokens (assets/tokens.css of k-shoreline-ui v0.1.0). */
+  --k-hero: #f5f4eb;          /* title band (same color as k-shore.svg) */
+  --k-land: #d6e7da;          /* land: selected tab, day heading, card head */
+  --k-area: #f3f6ee;          /* inner face: code blocks */
+  --k-sea: #e3eee6;           /* sea: the card area a heading owns */
+  --k-field: #fffefa;         /* cards and form controls */
+  --k-deep: #1d4a44;          /* titles */
+  --k-green: #1f5e52;         /* selection line, key color */
+  --k-line: #9fb7ab;          /* decorative borders */
+  --k-shore: #a9cdb9;         /* the shoreline curve */
+  --k-error: #a5361f;
+  --k-mincho: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif CJK JP", "Noto Serif JP", serif;
+}
+
+/* Title band: k-shore.svg sits at its right edge, under the title and tabs.
+ * It is a background image, so it is never read out and never overlaps text. */
+:root[data-theme="shore"] .site-header {
+  background: var(--k-hero) url("k-shore.svg") right bottom / auto 100% no-repeat;
+  border-bottom-color: var(--k-line);
+}
+:root[data-theme="shore"] h1 { font-family: var(--k-mincho); font-weight: 700; color: var(--k-deep); }
+
+/* Selected tab: a land face plus the thick green line (with aria-selected). */
+:root[data-theme="shore"] .tabs button[aria-selected="true"] {
+  background: var(--k-land);
+  border-bottom-color: var(--k-green);
+  color: var(--k-deep);
+}
+:root[data-theme="shore"] .tabs button:hover { background: var(--k-sea); }
+:root[data-theme="shore"] .tabs button[aria-selected="true"]:hover { background: var(--k-land); }
+
+/* Form fields and the day switch sit on the field face. */
+:root[data-theme="shore"] .controls select,
+:root[data-theme="shore"] .controls input,
+:root[data-theme="shore"] .segment button { background-color: var(--k-field); }
+:root[data-theme="shore"] .controls input::placeholder { color: var(--text-sub); }
+
+/* Today / yesterday: the pressed side keeps aria-pressed, plus the land face
+ * and a thick green underline instead of a filled key color. */
+:root[data-theme="shore"] .segment button[aria-pressed="true"] {
+  background: var(--k-land);
+  border-color: var(--k-green);
+  color: var(--k-deep);
+  font-weight: 700;
+  box-shadow: inset 0 -3px 0 var(--k-green);
+}
+
+/* Day heading (land) and the log cards it owns (sea). The shoreline curve is
+ * drawn on the heading's right edge, inside the heading box: it marks the seam
+ * but carries no meaning, hides nothing and stays clear of the count text. */
+:root[data-theme="shore"] .day-title {
+  position: relative;
+  margin-bottom: 0;
+  padding: var(--space-2) var(--space-2);
+  padding-right: 220px;
+  background-color: var(--k-land);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 44' preserveAspectRatio='none'%3E%3Cpath d='M0 0H200V24C170 24 160 22 148 28C136 34 124 30 112 32C100 34 88 28 76 30C64 32 52 26 40 28C28 30 14 26 0 28Z' fill='%23d6e7da'/%3E%3Cpath d='M200 24C170 24 160 22 148 28C136 34 124 30 112 32C100 34 88 28 76 30C64 32 52 26 40 28C28 30 14 26 0 28' fill='none' stroke='%23a9cdb9' stroke-width='1.2'/%3E%3Cpath d='M200 31C170 31 160 29 148 35C136 41 124 37 112 39C100 41 88 35 76 37C64 39 52 33 40 35C28 37 14 33 0 35' fill='none' stroke='%23a9cdb9' stroke-width='1.2'/%3E%3C/svg%3E") right bottom / 200px 100% no-repeat;
+  border-bottom: 0;
+  font-family: var(--k-mincho);
+  color: var(--k-deep);
+}
+:root[data-theme="shore"] .day-title .day-count { font-family: var(--font-mono); }
+:root[data-theme="shore"] .results > .day { background: var(--k-sea); padding: 0 var(--space-2) var(--space-2); }
+:root[data-theme="shore"] .day-title + .grid { background: var(--k-sea); padding: var(--space-2) var(--space-2) 0; }
+
+/* Cards read as the fields on the sea face; the repository name (or record
+ * head) is the land strip tying the card to its group. */
+:root[data-theme="shore"] .card { background: var(--k-field); }
+:root[data-theme="shore"] .card-head {
+  margin: calc(-1 * var(--space-3)) calc(-1 * var(--space-3)) 0;
+  padding: var(--space-2) var(--space-3);
+  background: var(--k-land);
+  border-bottom: 1px solid var(--k-sep);
+}
+:root[data-theme="shore"] .ident,
+:root[data-theme="shore"] .card-date { font-family: var(--font-mono); }
+
+/* Notes: Mincho headings over the gothic body; tables and code get the pale
+ * areas of the theme. Document headings without a land face keep long-form
+ * reading calm. */
+:root[data-theme="shore"] .doc h2,
+:root[data-theme="shore"] .doc h3,
+:root[data-theme="shore"] .doc h4,
+:root[data-theme="shore"] .doc h5,
+:root[data-theme="shore"] .doc h6 { font-family: var(--k-mincho); color: var(--k-deep); }
+:root[data-theme="shore"] .doc .md-h2 { border-bottom-color: var(--k-line); }
+:root[data-theme="shore"] .doc code { background: var(--k-area); }
+:root[data-theme="shore"] .doc pre { background: var(--k-area); border-color: var(--k-line); }
+:root[data-theme="shore"] .doc thead th { background: var(--k-land); }
+:root[data-theme="shore"] .doc blockquote { border-left-color: var(--k-line); }
+
+@media (max-width: 759px) {
+  /* The title decoration would crowd the small header; the theme keeps its
+   * faces and lines instead. */
+  :root[data-theme="shore"] .site-header { background-image: none; }
+  :root[data-theme="shore"] .day-title { padding-right: var(--space-2); }
+}
+
+@media (forced-colors: active) {
+  :root[data-theme="shore"] .day-title { border: 1px solid CanvasText; }
+  :root[data-theme="shore"] .day-title .day-count { color: CanvasText; }
+  :root[data-theme="shore"] .tabs button[aria-selected="true"] { border-bottom-color: Highlight; }
+  :root[data-theme="shore"] .segment button[aria-pressed="true"] { border-color: Highlight; }
+  :root[data-theme="shore"] .card-head { border-bottom: 1px solid CanvasText; }
+  :root[data-theme="shore"] .doc thead th { border: 1px solid CanvasText; }
+}
