@@ -8,9 +8,9 @@
 | --- | --- | --- | --- |
 | benri | 2026-11-11 | PR | [#168 docs: 開発文書5件の棚卸しとUI/UX提案の追加](https://github.com/YanTKYS/benri/pull/168) |
 | chouseisan | 2026-08-30 | PR | [#29 Fix UI bugs and improve event loading/display logic](https://github.com/YanTKYS/chouseisan/pull/29) |
-| clock | 2026-08-25 | PR | [#33 Refactor README and improve code documentation](https://github.com/YanTKYS/clock/pull/33) |
+| clock | 2026-11-24 | PR | [#35 標示板テーマ（l-signage-ui v0.1.0）の独立適用検証：標準テーマとの切り替え・視認性の維持](https://github.com/YanTKYS/clock/pull/35) |
 | desknets_noticer | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/desknets_noticer/pull/6) |
-| devlog | 2026-11-20 | PR | [#30 docs: 独自デザイン「糸の交点」のAgent Skill化と別AIへの移植の振り返りを追加](https://github.com/YanTKYS/devlog/pull/30) |
+| devlog | 2026-11-24 | PR | [#32 汀線テーマ（k-shoreline-ui v0.1.0）の独立適用検証：標準テーマとの切り替え・閲覧性の維持](https://github.com/YanTKYS/devlog/pull/32) |
 | fusen | 2026-08-25 | PR | [#11 Improve code comments and README documentation](https://github.com/YanTKYS/fusen/pull/11) |
 | giin_iinkai | 2026-08-30 | PR | [#5 Implement operation queuing to prevent concurrent save conflicts](https://github.com/YanTKYS/giin_iinkai/pull/5) |
 | giin_zaiseki | 2026-08-30 | PR | [#4 Improve multi-device sync and offline handling in input screen](https://github.com/YanTKYS/giin_zaiseki/pull/4) |
@@ -22,13 +22,13 @@
 | markdownutil | 2026-10-12 | PR | [#34 Fluent 2に基づくUI/UX改善（編集・プレビュー・出力操作の統一）](https://github.com/YanTKYS/markdownutil/pull/34) |
 | markdown-library | 2026-11-20 | PR | [#11 「糸の交点」を Markdown Library に適用する](https://github.com/YanTKYS/markdown-library/pull/11) |
 | nestsuite | 2026-08-25 | PR | [#611 v2.26.1: Consolidate documentation and remove version-specific comments](https://github.com/YanTKYS/nestsuite/pull/611) |
-| news-watch | 2026-11-23 | direct commit | [`dda1ac5` chore: collect news 2026-11-23](https://github.com/YanTKYS/news-watch/commit/dda1ac5a14e068a4dbd9182d7cb195b5b44cf1c4) |
+| news-watch | 2026-11-24 | direct commit | [`ae31a8d` chore: collect news 2026-11-24](https://github.com/YanTKYS/news-watch/commit/ae31a8d97a73d84ca771e867ca3c769332173b00) |
 | nonpaper | 2026-08-25 | PR | [#20 Clean up code review documentation and finalize v0.1.2](https://github.com/YanTKYS/nonpaper/pull/20) |
 | pdfengine | 2026-11-04 | PR | [#123 編集の方式の比較PoC：stateless redaction＋段落再描画の実測（Issue #122）](https://github.com/YanTKYS/pdfengine/pull/123) |
 | proxypac | 2026-10-12 | PR | [#7 UI/UXの再設計（デジタル庁デザインシステムの考え方を参考に、落ち着いた業務UIへ）](https://github.com/YanTKYS/proxypac/pull/7) |
 | quotaplayer | 2026-08-30 | PR | [#24 Fix playback speed, time display, and error handling issues](https://github.com/YanTKYS/quotaplayer/pull/24) |
 | signage | 2026-08-25 | PR | [#37 Simplify README and remove unused database methods](https://github.com/YanTKYS/signage/pull/37) |
-| since | 2026-10-12 | PR | [#7 Fluent 2の原則を部分採用したUI/UX改善（カード情報設計・記録導線・キーボード操作）](https://github.com/YanTKYS/since/pull/7) |
+| since | 2026-11-24 | PR | [#9 折本テーマ（h-prime-ui Skill v0.1.0）を独立実装として追加](https://github.com/YanTKYS/since/pull/9) |
 | sheltermatch | 2026-10-12 | PR | [#58 レビュー画面のデザイン改訂（Carbon＋デジタル庁を参考に、地図を最優先にした配置へ）](https://github.com/YanTKYS/sheltermatch/pull/58) |
 | slide | 2026-08-25 | PR | [#6 Refactor documentation and code comments for clarity](https://github.com/YanTKYS/slide/pull/6) |
 | whiteboard | 2026-08-30 | PR | [#10 Migrate admin password to external PBKDF2 config file](https://github.com/YanTKYS/whiteboard/pull/10) |
